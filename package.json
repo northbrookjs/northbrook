@@ -35,17 +35,12 @@
     }
   },
   "scripts": {
-    "test:lint": "eslint src/*/",
+    "test:lint": "eslint src/*.js",
     "test:unit": "echo 'terrible developer with no tests'",
     "test": "npm run test:lint && npm run test:unit",
-    "commit": "git-cz",
-    "changelog": "conventional-changelog --infile CHANGELOG.md --same-file --release-count 0 --preset angular",
-    "postchangelog": "git add CHANGELOG.md && git commit -m 'chore(CHANGELOG): append to changelog' && git push origin master",
-    "postpublish": "npm run changelog && greenkeeper-postpublish",
-    "release": "np --",
-    "release:patch": "np patch",
-    "release:minor": "np minor",
-    "release:major": "np major"
+    "commit": "node ./lib/cli.js commit",
+    "postpublish": "greenkeeper-postpublish",
+    "release": "node ./lib/cli.js release"
   },
   "dependencies": {
     "add-stream": "^1.0.0",
@@ -63,13 +58,9 @@
     "validate-commit-msg": "^2.7.0"
   },
   "devDependencies": {
-    "conventional-changelog-cli": "^1.2.0",
-    "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.1",
-    "eslint-plugin-standard": "^2.0.0",
-    "greenkeeper-postpublish": "^1.0.1",
-    "np": "^2.9.0"
+    "eslint-plugin-standard": "^2.0.0"
   }
 }
