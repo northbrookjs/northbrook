@@ -1,3 +1,14 @@
+<a name="1.0.2"></a>
+## [1.0.2](https://github.com/northbrookjs/northbrook/compare/v1.0.0...v1.0.2) (2016-08-19)
+
+
+### Bug Fixes
+
+* **northbrook:** fix incorrect wording ([6ec2b95](https://github.com/northbrookjs/northbrook/commit/6ec2b95))
+* **northbrook:** fix resolving of local plugins ([5b00aa9](https://github.com/northbrookjs/northbrook/commit/5b00aa9))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/TylorS/northbrook/compare/v1.0.0...v1.0.1) (2016-08-19)
 

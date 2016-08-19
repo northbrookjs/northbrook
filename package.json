@@ -1,6 +1,6 @@
 {
   "name": "northbrook",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A configurable tool for managing projects with NPM",
   "main": "lib/cli.js",
   "bin": {
@@ -32,6 +32,20 @@
     },
     "ghooks": {
       "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert",
+        "release"
+      ]
     }
   },
   "scripts": {
@@ -39,7 +53,6 @@
     "test:unit": "echo 'terrible developer with no tests'",
     "test": "npm run test:lint && npm run test:unit",
     "commit": "node ./lib/cli.js commit",
-    "postpublish": "greenkeeper-postpublish",
     "release": "node ./lib/cli.js release"
   },
   "dependencies": {
