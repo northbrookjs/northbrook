@@ -30,7 +30,7 @@ projects? Update your plugin and all of them share the same configuration.
 That is all there is to it.
 
 When combined with something like greenkeeper, you'll never have out-dated
-configurations for your build|test|linting|code-coverage ever again!
+configurations for your build|test|lint|anything ever again!
 
 
 # Let me have it!
