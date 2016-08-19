@@ -5,7 +5,7 @@
 # Features and Design Goals
 ---
 
-- [x] Manage many interlinks or closely related packages with ease
+- [x] Manage many interlinked or closely related packages with ease
 - [x] Useful out-of-box without configuration
 - [x] Manage commit messages
 - [x] Automatic Semantic Versioning
@@ -52,13 +52,13 @@ nb init
 
 ### **northbrook init**
 
-Initialized your new `northbrook` managed project with default configurations. Will
-generate the following files for you.
+Initializes your new `northbrook` managed project with default
+configurations. Will generate the following files for you.
 
 - northbrook.json
 - package.json
 - LICENSE.md (MIT)
-- .gitignore
+- .npmignore
 
 #### **northbrook commit**
 
@@ -70,16 +70,15 @@ generate your awesome commit messages in a nice and easy manner.
 #### **northbrook release**
 
 Publishes all modified packages to NPM following semantic versioning.
-Recursively updates packages that depend upon them as long as there are no
-breaking changes included. Generates changelogs and updates documentation.
+Generates changelogs and updates documentation.
 
-### **northbrook exec [command...]**
+#### **northbrook exec [command...]**
 
 > $ nb exec -- cat package.json
 
 Runs a command inside of all managed packages.
 
-### **northbrook link**
+#### **northbrook link**
 
 Symlinks all managed packages if they depend upon each other.
 Useful for monorepo development, if required.
@@ -88,6 +87,7 @@ Useful for monorepo development, if required.
 -----
 
 The configuration for all of your needs. These 4 fields are the only options
+used by the defaul plugins.
 
 ```js
 {
@@ -139,13 +139,15 @@ exports.plugin = function (program) {
 }
 ```
 
+Run `northbrook travis` and your plugin will execute.
+
 #### **northbrookConfig**
 
 The `northbrook.json` file contents as a JavaScript object. Plugins can use
 this to retrieve configurations stored inside of it, whether they are the   
 core fields documented above, or plugin specific configurations.
 
-### **workingDirectory**
+#### **workingDirectory**
 
 The `workingDirectory` a string of the absolute path to the directory that
 contains the `northbrook.json` file. Useful for finding other configuration
