@@ -1,3 +1,13 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/TylorS/northbrook/compare/v1.0.0...v1.0.1) (2016-08-19)
+
+
+### Bug Fixes
+
+* **northbrook:** fix resolving of local plugins ([5b00aa9](https://github.com/TylorS/northbrook/commit/5b00aa9))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/TylorS/northbrook/compare/v0.0.2...v1.0.0) (2016-08-19)
 

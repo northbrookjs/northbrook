@@ -1,6 +1,6 @@
 {
   "name": "northbrook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A configurable tool for managing projects with NPM",
   "main": "lib/cli.js",
   "bin": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TylorS/northbrook.git"
+    "url": "git+https://github.com/northbrookjs/northbrook.git"
   },
   "keywords": [
     "reproducible",
@@ -23,9 +23,9 @@
   "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TylorS/northbrook/issues"
+    "url": "https://github.com/northbrookjs/northbrook/issues"
   },
-  "homepage": "https://github.com/TylorS/northbrook#readme",
+  "homepage": "https://github.com/northbrookjs/northbrook#readme",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
