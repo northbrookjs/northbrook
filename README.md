@@ -58,7 +58,6 @@ generate the following files for you.
 - northbrook.json
 - package.json
 - LICENSE.md (MIT)
-- .gitignore
 
 #### **northbrook commit**
 
