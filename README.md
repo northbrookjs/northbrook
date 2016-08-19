@@ -182,3 +182,32 @@ thing with joy going forward.
 
 Because installing things globally isn't really that great of an idea, so
 northbrook will use a locally installed version if it can find one.
+
+# Recommendations
+
+Though not required, adding this to your `package.json` will allow you to enjoy
+further git commit checking in case you use `git commit`.
+If you are using `northbrook init` it will generate these for you, however if
+you are integrating into an existing project, you may wish to add these configurations.
+
+```js
+"config": {
+  "ghooks": {
+    "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
+  },
+  "validate-commit-msg": {
+    "types": [
+      "feat",
+      "fix",
+      "docs",
+      "style",
+      "refactor",
+      "perf",
+      "test",
+      "chore",
+      "revert",
+      "release" // required for doing releases if you're using validate-commit-msg
+    ]
+  }
+}
+```
