@@ -36,8 +36,10 @@ configurations for your build|test|linting|code-coverage ever again!
 # Let me have it!
 
 ```sh
-npm install --save-dev northbrook
+# Install
+npm install -g northbrook
 
+# Usage
 mkdir myNewThingy
 cd myNewThingy
 
@@ -163,7 +165,7 @@ exports.plugin = function (program, northbrookConfig, workingDir) {
 ```
 
 
-## Caveats
+## Caveats && FAQ
 
 
 ##### Supports only Node 6 and NPM 3 +
@@ -173,3 +175,8 @@ to find plugins in a way that doesn't require searching all over the place
 for where they might be located. Node 6 is only supported because of lots of
 ES2015 features are used in the codebase, because I want to maintain this
 thing with joy going forward.
+
+##### Why is it running a different version than what I have installed globally?
+
+Because installing things globally isn't really that great of an idea, so
+northbrook will use a locally installed version if it can find one.
