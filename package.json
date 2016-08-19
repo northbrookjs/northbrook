@@ -27,9 +27,6 @@
   },
   "homepage": "https://github.com/northbrookjs/northbrook#readme",
   "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    },
     "ghooks": {
       "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
     },
@@ -49,7 +46,7 @@
     }
   },
   "scripts": {
-    "test:lint": "eslint src/*.js",
+    "test:lint": "eslint lib/*.js",
     "test:unit": "echo 'terrible developer with no tests'",
     "test": "npm run test:lint && npm run test:unit",
     "commit": "node ./lib/cli.js commit",
