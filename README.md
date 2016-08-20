@@ -1,4 +1,10 @@
 # Northbrook
+![](https://img.shields.io/badge/license-MIT-blue.svg)
+[![Build Status](https://travis-ci.org/northbrookjs/northbrook.svg?branch=master)](https://travis-ci.org/northbrookjs/northbrook)
+[![dependencies Status](https://david-dm.org/northbrookjs/northbrook/status.svg)](https://david-dm.org/northbrookjs/northbrook)
+[![devDependencies Status](https://david-dm.org/northbrookjs/northbrook/dev-status.svg)](https://david-dm.org/northbrookjs/northbrook?type=dev)
+[![GitHub issues](https://img.shields.io/github/issues/northbrookjs/northbrook.svg)](https://github.com/northbrookjs/northbrook/issues)
+
 
 > A configurable tool for managing projects with NPM
 
