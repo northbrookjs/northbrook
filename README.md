@@ -16,7 +16,6 @@
 - [x] Manage commit messages
 - [x] Automatic Semantic Versioning
 - [x] Automated Deployment to NPM
-- [x] Automated Changelog generation
 - [x] Powerful plugin system
 
 # Why another thing?
@@ -82,7 +81,6 @@ generate your awesome commit messages in a nice and easy manner.
 #### **northbrook release**
 
 Publishes all modified packages to NPM following semantic versioning.
-Generates changelogs and updates documentation.
 
 #### **northbrook exec [command...]**
 
