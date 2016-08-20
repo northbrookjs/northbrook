@@ -16,6 +16,12 @@
 # Why another thing?
 ---
 
+Northbrook was originally designed to be a [lerna.js](https://github.com/lerna/lerna)
+alternative focusing upon managing monorepos using TypeScript 2.x in a very strict
+and absolute way. However, while doing my first refactor, when I was hoping to publish,
+I realized I had created an internal plugin system and could easily be exposed to external
+plugins as well. I realized that in doing so, it opens up a lot of interesting opportunities.
+
 NPM is powerful. Why not use it to create reusable and reproducible tooling?
 Your configurations are shareable via NPM, and most importantly it can be **versioned**.
 
