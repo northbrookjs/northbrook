@@ -108,6 +108,7 @@ used by the defaul plugins.
     "package1", // can be used to manage projects as a monorepo!
     "nested/package2", // but I only need it for a single directory!
     "." // manage the root dir, if you don't need monorepo capabilities
+    "packages/**" // special ** will load all directories inside containing a package.json file
   ],
   "plugins": [ // array of plugins to be used
    // names are to be either NPM require()-able name
