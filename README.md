@@ -97,7 +97,9 @@ used by the defaul plugins.
     "nested/package2", // but I only need it for a single directory!
     "." // manage the root dir, if you don't need monorepo capabilities
   ],
-  "plugins": [ // array of plugins to be used - NPM require()-able name  
+  "plugins": [ // array of plugins to be used
+   // names are to be either NPM require()-able name
+   // or a relative path to a local plugin
   ],
   "ignoreDefaults": [ // array of default plugins to ignore
     "link", // names are that of the CLI commands above
