@@ -61,6 +61,7 @@
     "concat-stream": "^1.5.1",
     "conventional-commits-filter": "^1.0.0",
     "conventional-commits-parser": "^1.2.3",
+    "conventional-commit-types": "^2.0.0",
     "find-config": "^1.0.0",
     "git-latest-semver-tag": "^1.0.2",
     "git-raw-commits": "^1.1.2",
@@ -74,7 +75,6 @@
   "devDependencies": {
     "babel-preset-power-assert": "^1.0.0",
     "buba": "^2.0.2",
-    "conventional-commit-types": "^2.0.0",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.1",
