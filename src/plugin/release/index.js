@@ -115,7 +115,7 @@ function action (config, directory, options) {
           .then(() => {
             execute(
               'git add CHANGELOG.md',
-              'git commit -m docs(CHANGELOG): append to changelog',
+              'git commit -m "docs(CHANGELOG): append to changelog"',
               `git push origin ${releaseBranch}`,
               'git push origin --tags'
             )
