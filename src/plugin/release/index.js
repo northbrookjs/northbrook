@@ -70,7 +70,7 @@ function action (config, directory, options) {
         previousFile = readFileSync(changelog, 'utf8')
       }
 
-      if (isDirectoryClean() || execSync('git branch').stdout.indexOf(releaseBranch) > -1) {
+      if (isDirectoryClean()) {
         if (!method || check || pkg.private) {
           console.log(separator(packageName))
           if (pkg.private) {
