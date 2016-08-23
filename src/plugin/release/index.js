@@ -104,11 +104,9 @@ function action (config, directory, options) {
         // preform release
         chdir(packageDirectory)
 
-        execute(
-          'git add CHANGELOG.md',
-          'git commit -m "docs(CHANGELOG): append to changelog"',
-          `git push origin ${releaseBranch}`
-        )
+        execSync('git add CHANGELOG.md')
+        execSync('git commit -m "docs(CHANGELOG): append to changelog"')
+        execSync('git push origin ' + releaseBranch)
 
         console.log(separator(packageName))
         process.stdout.write('    Running your tests')
