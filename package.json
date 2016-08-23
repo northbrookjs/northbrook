@@ -1,11 +1,12 @@
 {
+  "private": true,
   "name": "northbrook",
   "version": "1.2.0",
   "description": "A configurable tool for managing projects with NPM",
-  "main": "lib/cli.js",
+  "main": "lib/api.js",
   "bin": {
-    "northbrook": "lib/cli.js",
-    "nb": "lib/cli.js"
+    "northbrook": "cli.js",
+    "nb": "cli.js"
   },
   "repository": {
     "type": "git",
@@ -46,33 +47,43 @@
     }
   },
   "scripts": {
-    "test:lint": "eslint lib/*.js",
-    "test:unit": "echo 'terrible developer with no tests'",
+    "test:lint": "eslint src/*.js",
+    "test:unit": "mocha -r buba/register src/*.test.js src/**/*.test.js src/plugin/**/*.test.js",
     "test": "npm run test:lint && npm run test:unit",
-    "commit": "node ./lib/cli.js commit",
-    "release": "node ./lib/cli.js release",
+    "build": "rimraf lib && buba -i src -o lib",
+    "commit": "node cli.js commit",
+    "preversion": "npm run build",
+    "release": "node cli.js release",
     "postpublish": "greenkeeper-postpublish"
   },
   "dependencies": {
-    "add-stream": "^1.0.0",
     "commander": "^2.9.0",
-    "commitizen": "^2.8.6",
-    "conventional-changelog": "^1.1.0",
+    "concat-stream": "^1.5.1",
+    "conventional-commits-filter": "^1.0.0",
+    "conventional-commits-parser": "^1.2.3",
     "find-config": "^1.0.0",
-    "ghooks": "^1.3.2",
+    "git-latest-semver-tag": "^1.0.2",
+    "git-raw-commits": "^1.1.2",
+    "inquirer": "^1.1.2",
     "khaos": "^0.9.3",
     "mkdirp": "^0.5.1",
-    "prompt-for": "^1.1.2",
     "shelljs": "^0.7.3",
-    "symlink-or-copy": "^1.1.6",
-    "tempfile": "^1.1.1",
-    "validate-commit-msg": "^2.7.0"
+    "simple-spinner": "0.0.5",
+    "symlink-or-copy": "^1.1.6"
   },
   "devDependencies": {
+    "babel-preset-power-assert": "^1.0.0",
+    "buba": "^2.0.2",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
-    "greenkeeper-postpublish": "^1.0.1"
+    "ghooks": "^1.3.2",
+    "greenkeeper-postpublish": "^1.0.1",
+    "mocha": "^3.0.2",
+    "power-assert": "^1.4.1",
+    "rimraf": "^2.5.4",
+    "sinon": "^1.17.5",
+    "validate-commit-msg": "^2.7.0"
   }
 }
