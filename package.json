@@ -57,6 +57,7 @@
     "commit": "node cli.js commit",
     "preversion": "npm run build",
     "release": "node cli.js release",
+    "publish": "npm run release",
     "postpublish": "greenkeeper-postpublish"
   },
   "dependencies": {
