@@ -111,6 +111,8 @@ function action (config, directory, options) {
           .then(handleVersionOutput(method))
           .then(handlePublishOutput(releaseBranch))
           .then(() => {
+            console.log(separator())
+
             // generateChangelog
             generateChangelog({
               commits: status[packageName].commits,
@@ -203,8 +205,7 @@ function handlePublishOutput (releaseBranch) {
     stop()
     if (code === 0) {
       log(out)
-      exec(`git push origin ${releaseBranch}`)
-      console.log(separator())
+      return exec(`git push origin ${releaseBranch}`)
     } else {
       log('Publishing your package has failed: \n')
       log(err)
