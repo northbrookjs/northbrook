@@ -3,7 +3,7 @@
 if [[ $TRAVIS_BRANCH == "master" ]]; then
   # setup git stuff
   git config --global user.name 'Tylor Steinberger';
-  gitconfig -- global user.email 'tlsteinberger167@gmail.com';
+  git config -- global user.email 'tlsteinberger167@gmail.com';
   git remote set-url origin https://$GH_TOKEN@github.com/northbrookjs/northbrook;
 
   git branch --set-upstream-to=origin/master master
