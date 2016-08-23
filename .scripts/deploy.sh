@@ -6,7 +6,7 @@ if [[ $TRAVIS_BRANCH == "master" ]]; then
   git config --global user.email 'tlsteinberger167@gmail.com';
   git remote set-url origin https://$GH_TOKEN@github.com/northbrookjs/northbrook;
   git fetch origin
-  git checkout origin master
+  git checkout master
   git branch --set-upstream-to=origin/master master
 
   bash .scripts/npm-login.sh

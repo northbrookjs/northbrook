@@ -83,7 +83,7 @@ function action (config, directory, options) {
           commits: status[packageName].commits,
           file: check ? process.stdout : createFileStream(changelog),
           version: newVersion,
-          url: pkg.repository.url || pkg.repository,
+          url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
           bugs: pkg.bugs,
           previousFile
         })
