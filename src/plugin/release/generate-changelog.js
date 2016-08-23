@@ -38,9 +38,9 @@ export function generateChangelog ({ commits, file, version, url, bugs, previous
       file.write(`    - ${commit.header} ${linkToCommit(commit.hash, url)}`)
       file.write(`\n`)
     })
-
-    file.write(previousFile)
   })
+
+  file.write(previousFile)
 }
 
 function linkToCommit (hash, url) {

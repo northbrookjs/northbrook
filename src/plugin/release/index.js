@@ -78,17 +78,15 @@ function action (config, directory, options) {
           }
         }
 
-        // generateChangelog
-        generateChangelog({
-          commits: status[packageName].commits,
-          file: check ? process.stdout : createFileStream(changelog),
-          version: newVersion,
-          url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
-          bugs: pkg.bugs,
-          previousFile
-        })
-
         if (!method || check || pkg.private) {
+          generateChangelog({
+            commits: status[packageName].commits,
+            file: check === true ? process.stdout : createFileStream(changelog),
+            version: newVersion,
+            url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
+            bugs: pkg.bugs,
+            previousFile
+          })
           if (!check) {
             execute(
               'git add CHANGELOG.md',
@@ -104,10 +102,6 @@ function action (config, directory, options) {
         // preform release
         chdir(packageDirectory)
 
-        execSync('git add CHANGELOG.md')
-        execSync('git commit -m "docs(CHANGELOG): append to changelog"')
-        execSync('git push origin ' + releaseBranch)
-
         console.log(separator(packageName))
         process.stdout.write('    Running your tests')
         start()
@@ -117,7 +111,19 @@ function action (config, directory, options) {
           .then(handleVersionOutput(method))
           .then(handlePublishOutput(releaseBranch))
           .then(() => {
+            // generateChangelog
+            generateChangelog({
+              commits: status[packageName].commits,
+              file: createFileStream(changelog),
+              version: newVersion,
+              url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
+              bugs: pkg.bugs,
+              previousFile
+            })
+
             execute(
+              'git add CHANGELOG.md',
+              'git commit -m "docs(CHANGELOG): append to changelog"',
               `git push origin ${releaseBranch}`,
               'git push origin --tags'
             )
