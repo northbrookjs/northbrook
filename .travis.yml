@@ -1,13 +1,14 @@
 language: node_js
 node_js:
-  - 6
-after_success:
-  - npm run set-username && npm run set-email && npm run set-upstream
+- 6
+before_deploy:
+- npm run set-username && npm run set-email && npm run set-upstream
 deploy:
+  skip_cleanup: true
   provider: npm
   email: tlsteinberger167@gmail.com
   api_key:
-    secure: BaLm446zy5EfC2zNp2+g/lxE8/C0G26GJm7H6hXDBJCaAarNd5ZGtD1MyuTb4Z6958u5NVYtHRGXQtaIiVgzYYLfwxpAtLKjcAZPeRvfu2/J7UbKTLr1p8/C+HgWlwiGO5ih0sRAYRp1BH4sZERmjjVknVe0le/sYU1//aEIcbNhL5QNUFUjrVCHX+idm6xfHdrzUQthHWGNWzJhe2XuQGgIi5zOyJIPoawwLf8yBu7qFpwiWc+IgD8cWGE4t/GGwNbuiSxD9s9djhI/OAiObMdWOCHiuAG8gEfcC57M9obgWb1ERPmKlcD7xamYWv15CAOinyOji965rziQ0SybFUNQqgW0cVf7he55DN9I/zil9XbWkQlvfEC3vOORR0wawvqJ75w3Swo7cIn1JzGKISwKM+Xpf78H6kk68oE993l/L01ENojF51wwAmXo+FmueFDADaV7fPBDXvkvPjBmnzmNKqByJpEgU/Av2vECliR5KBnxjMBkOnnpjMEfQwyLIwzBYqVvszHrWRZGPEKe/NN0ftyoANaIq7frcTA+KCgP5Vh4oJ2nwohwSscO+96PrtEBIXDKtqbp7pqarH88hFNLkfciUaTJ54zfXxJjrBR5DdUJm4JEYOODy7OaCxiRO2WIqfzol8zvRp8easYZBXs3DozUxRNR8s/g4gTGPYI=
+    secure: dANUga5CINMZZ1+d8lUZH5uLYzyMc7oPAHNgJCMJR11JgMHiIeXjNI/xr3EWkfKgohvTKRZaspTKCP6jegx20dIHfBLJctKk1lM66YZc/NgJO/iu5ye/s3dfOkGH5LJTg0+6EUVVXWt0LOzoKh7QdnTQ35Wz7JjT80k5kbdBwhA473k776DmwrPQj2mF3v+b96s9arx/nnoPLt2+kI7WsDXinqwAMUa0qvpmXfazmfm9P/9/3D7db1T8fnFAgNxKcExX8+eJRiwvx6Un7z2OYy8opwn1OD83QAMSRZW9UrmrnVc6L/knFcGLu2iurf3nIA6I27wlkSpqZqcdwYS9gn+BlrV07KzeHMqNo0I9nJRF/S34xRU3tb20qEsMKezrjU0OMPZ7s+nAkt0lshLbdO8qReoCGvpJoZIHXkQXOIR995oP14xAig/sO3RyJVmQS9Lsuk6QVJx1WuRlWec6MJ0fMFlEKjRITHCNFiZDv0QNvMKJJQcjTpAiYAEmEWQax6ZuTlY3Jw2g7H019F61uGE6n4f/v07Gqt9wW5SrTAbyLVtFsE8lRtwgpasRgOsulIuP0SNtLg5GDEEd7Gh+o46geKTp9PuLVZDxU6qINYpmP26nEf1csICCaKDaImY7qj4Q4mZ9TAY1vmTLgz7LFqoXG/3rza6+HnZiBEocMLQ=
   on:
     repo: northbrookjs/northbrook
     branch: master
