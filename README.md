@@ -15,6 +15,7 @@
 - [x] Useful out-of-box without configuration
 - [x] Manage commit messages
 - [x] Automatic Semantic Versioning
+- [x] Automated Changelog Generation
 - [x] Automated Deployment to NPM
 - [x] Powerful plugin system
 
@@ -80,13 +81,21 @@ generate your awesome commit messages in a nice and easy manner.
 
 #### **northbrook release**
 
-Publishes all modified packages to NPM following semantic versioning.
+Publishes all modified packages to NPM following semantic versioning and generates
+a changelog for each package.
+
+##### options
+`--check` - Checks what needs to be releases and generates the changelog, but only
+outputs to the console.
 
 #### **northbrook exec [command...]**
 
 > $ nb exec -- cat package.json
 
 Runs a command inside of all managed packages.
+
+##### options
+`--only <packageName>` - runs the command in only the specified package.
 
 #### **northbrook link**
 
@@ -96,12 +105,11 @@ Useful for monorepo development, if required.
 # **northbrook.json**
 -----
 
-The configuration for all of your needs. These 4 fields are the only options
-used by the defaul plugins.
+The configuration for all of your needs. These 3 fields are the only options
+used by the default plugins.
 
 ```js
 {
-  "version": "0.0.0", // version of northbrook being used
   "packages": [ // array of relative paths of packages to manage
     "package1", // can be used to manage projects as a monorepo!
     "nested/package2", // but I only need it for a single directory!
@@ -183,25 +191,27 @@ exports.plugin = function (program, northbrookConfig, workingDir) {
 ## Caveats && FAQ
 
 
-##### Supports only Node 6 and NPM 3 +
+##### Supports only NPM 3 +
 
 The approach relies heavily upon the flattening of that NPM 3 does in order
 to find plugins in a way that doesn't require searching all over the place
-for where they might be located. Node 6 is only supported because of lots of
-ES2015 features are used in the codebase, because I want to maintain this
-thing with joy going forward.
+for where they might be located.
 
 ##### Why is it running a different version than what I have installed globally?
 
-Because installing things globally isn't really that great of an idea, so
-northbrook will use a locally installed version if it can find one.
+Because installing things globally isn't really that great of an idea, its only
+meant to help with `northbrook init`, so northbrook will use a locally installed
+version if it can find one.
 
 # Recommendations
 
 Though not required, adding this to your `package.json` will allow you to enjoy
-further git commit checking in case you use `git commit`.
-If you are using `northbrook init` it will generate these for you, however if
-you are integrating into an existing project, you may wish to add these configurations.
+further git commit checking in case you use `git commit` out of habit. In order
+to make good use of this configuration you'll need to install `ghooks` and
+`validate-commit-msg` to your devDependencies.
+
+If you are using `northbrook init` it will generate these for you, but it does
+**not** install them for you.
 
 ```js
 "config": {
