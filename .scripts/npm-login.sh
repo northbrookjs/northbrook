@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # sign in to NPM to allow deployment
-npm adduser <<EOF
+npm adduser << EOF
 $NPM_USERNAME
 $NPM_PASSWORD
 $NPM_EMAIL
-EOF;
+EOF
