@@ -110,25 +110,28 @@ function action (config, directory, options) {
           .catch(handleTestError)
           .then(handleVersionOutput(method))
           .then(handlePublishOutput(releaseBranch))
-          .then(() => {
+          .then(({ code, err }) => {
+            if (code === 0) {
+              // generateChangelog
+              generateChangelog({
+                commits: status[packageName].commits,
+                file: createFileStream(changelog),
+                version: newVersion,
+                url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
+                bugs: pkg.bugs,
+                previousFile
+              })
+
+              execute(
+                'git add .',
+                `git commit -m "chore(release): release ${newVersion}"`,
+                `git push origin ${releaseBranch}`,
+                'git push origin --tags'
+              )
+            } else {
+              console.log(err)
+            }
             console.log(separator())
-
-            // generateChangelog
-            generateChangelog({
-              commits: status[packageName].commits,
-              file: createFileStream(changelog),
-              version: newVersion,
-              url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
-              bugs: pkg.bugs,
-              previousFile
-            })
-
-            execute(
-              'git add .',
-              `git commit -m "chore(release): release ${newVersion}"`,
-              `git push origin ${releaseBranch}`,
-              'git push origin --tags'
-            )
           })
 
         chdir(directory)
