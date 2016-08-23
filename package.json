@@ -1,0 +1,89 @@
+{
+  "name": "northbrook",
+  "version": "2.0.1",
+  "description": "A configurable tool for managing projects with NPM",
+  "main": "lib/api.js",
+  "jsnext:main": "src/api.js",
+  "bin": {
+    "northbrook": "cli.js",
+    "nb": "cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/northbrookjs/northbrook.git"
+  },
+  "keywords": [
+    "reproducible",
+    "versionable",
+    "pluggable",
+    "monorepo",
+    "lerna",
+    "project",
+    "management"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/northbrookjs/northbrook/issues"
+  },
+  "homepage": "https://github.com/northbrookjs/northbrook#readme",
+  "config": {
+    "ghooks": {
+      "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert",
+        "release"
+      ]
+    }
+  },
+  "scripts": {
+    "test:lint": "eslint src/*.js",
+    "test:unit": "mocha -r buba/register src/*.test.js src/**/*.test.js src/plugin/**/*.test.js",
+    "test": "npm run test:lint && npm run test:unit",
+    "build": "rimraf lib && buba -i src -o lib",
+    "commit": "node cli.js commit",
+    "release": "node cli.js release",
+    "postpublish": "greenkeeper-postpublish"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "concat-stream": "^1.5.1",
+    "conventional-commits-filter": "^1.0.0",
+    "conventional-commits-parser": "^1.2.3",
+    "conventional-commit-types": "^2.0.0",
+    "find-config": "^1.0.0",
+    "git-latest-semver-tag": "^1.0.2",
+    "git-raw-commits": "^1.1.2",
+    "inquirer": "^1.1.2",
+    "khaos": "^0.9.3",
+    "mkdirp": "^0.5.1",
+    "shelljs": "^0.7.3",
+    "simple-spinner": "0.0.5",
+    "symlink-or-copy": "^1.1.6"
+  },
+  "devDependencies": {
+    "babel-preset-power-assert": "^1.0.0",
+    "buba": "^2.0.2",
+    "eslint": "^3.3.1",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^2.0.0",
+    "ghooks": "^1.3.2",
+    "greenkeeper-postpublish": "^1.0.1",
+    "mocha": "^3.0.2",
+    "power-assert": "^1.4.1",
+    "rimraf": "^2.5.4",
+    "sinon": "^1.17.5",
+    "validate-commit-msg": "^2.7.0"
+  }
+}
