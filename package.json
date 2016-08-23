@@ -46,16 +46,12 @@
     }
   },
   "scripts": {
-    "set-username": "git config user.name 'Tylor Steinberger'",
-    "set-email": "git config user.email 'tlsteinberger167@gmail.com'",
-    "set-upstream": "git remote set-url origin https://$GH_TOKEN@github.com/northbrookjs/northbrook",
     "test:lint": "eslint src/*.js",
     "test:unit": "mocha -r buba/register src/*.test.js src/**/*.test.js src/plugin/**/*.test.js",
     "test": "npm run test:lint && npm run test:unit",
     "build": "rimraf lib && buba -i src -o lib",
     "commit": "node cli.js commit",
     "release": "node cli.js release",
-    "prepublish": "npm run build && npm run release",
     "postpublish": "greenkeeper-postpublish"
   },
   "dependencies": {
