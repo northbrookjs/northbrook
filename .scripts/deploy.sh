@@ -6,12 +6,7 @@ if [[ $TRAVIS_BRANCH == "master" ]]; then
   gitconfig user.email 'tlsteinberger167@gmail.com';
   git remote set-url origin https://$GH_TOKEN@github.com/northbrookjs/northbrook;
 
-  # sign in to NPM to allow deployment
-  npm adduser <<!
-  $NPM_USERNAME
-  $NPM_PASSWORD
-  $NPM_EMAIL
-  !;
+  bash ./npm-login.sh
 
   # build library
   npm run build;
