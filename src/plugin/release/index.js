@@ -70,7 +70,7 @@ function action (config, directory, options) {
         previousFile = readFileSync(changelog, 'utf8')
       }
 
-      if (check || isDirectoryClean()) {
+      if (isDirectoryClean()) {
         if (!method || check || pkg.private) {
           console.log(separator(packageName))
           if (pkg.private) {
