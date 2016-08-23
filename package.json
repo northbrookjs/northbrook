@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "northbrook",
   "version": "1.2.0",
   "description": "A configurable tool for managing projects with NPM",
