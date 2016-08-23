@@ -101,6 +101,11 @@ function action (config, directory, options) {
           return console.log(separator())
         }
 
+        execute(
+          'git add CHANGELOG.md',
+          'git commit -m "docs(CHANGELOG): append to changelog"'
+        )
+
         // preform release
         chdir(packageDirectory)
 
@@ -114,8 +119,6 @@ function action (config, directory, options) {
           .then(handlePublishOutput(releaseBranch))
           .then(() => {
             execute(
-              'git add CHANGELOG.md',
-              'git commit -m "docs(CHANGELOG): append to changelog"',
               `git push origin ${releaseBranch}`,
               'git push origin --tags'
             )
