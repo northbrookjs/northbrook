@@ -122,8 +122,8 @@ function action (config, directory, options) {
             })
 
             execute(
-              'git add CHANGELOG.md',
-              'git commit -m "docs(CHANGELOG): append to changelog"',
+              'git add .',
+              `git commit -m "chore(release): release ${newVersion}"`,
               `git push origin ${releaseBranch}`,
               'git push origin --tags'
             )
