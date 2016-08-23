@@ -61,7 +61,7 @@ function action (config, directory, options) {
       const method = incrementName(status[packageName].increment)
       const newVersion = getNewVersion(currentVersion, status[packageName].increment)
 
-      const check = options && options.check
+      const check = options && options.check || false
 
       const changelog = join(packageDirectory, 'CHANGELOG.md')
       let previousFile = '\n'
@@ -101,13 +101,14 @@ function action (config, directory, options) {
           return console.log(separator())
         }
 
-        execute(
-          'git add CHANGELOG.md',
-          'git commit -m "docs(CHANGELOG): append to changelog"'
-        )
-
         // preform release
         chdir(packageDirectory)
+
+        execute(
+          'git add CHANGELOG.md',
+          'git commit -m "docs(CHANGELOG): append to changelog"',
+          `git push origin ${releaseBranch}`
+        )
 
         console.log(separator(packageName))
         process.stdout.write('    Running your tests')
