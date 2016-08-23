@@ -1,34 +1,28 @@
-const { join } = require('path')
+import { join } from 'path'
+import { sync as symlinkSync } from 'symlink-or-copy'
+import mkdirp from 'mkdirp'
 
-const mkdirp = require('mkdirp')
-const symlinkSync = require('symlink-or-copy').sync
+import { isInitialized, filter, map, forEach, isFile, pluck, log, separator, isLink } from '../util'
 
-const { isInitialized, isFile, logSeparator } = require('../../util')
-
-exports.plugin = link
-
-function link (program, config, workingDir) {
-  program
-    .command('link')
-    .description('Link managed packages that depend upon each other')
-    .action(() => linkLikeABoss(config, workingDir))
+export const plugin = function link (program, config, directory) {
+  program.command('link')
+    .description('Link packages that depend upon each other')
+    .action(() => action(config, directory))
 }
 
-function linkLikeABoss (config, workingDir) {
-  isInitialized(config)
+function action (config, directory) {
+  isInitialized(config, 'link')
 
   if (config.packages.length === 0) {
-    console.log('No packages are configured!')
-    return
+    return console.log('no managed packages to symlink')
   }
 
-  const packages = config.packages.map(getPackage(workingDir)).filter(Boolean)
-
-  const packageNames = packages.map(prop('name'))
+  const packages = filter(map(config.packages, getPackage(directory)), Boolean)
+  const packageNames = map(packages, pluck('name'))
 
   const findPackagesToSymlink = getPackagesToSymlink(packageNames)
 
-  packages.forEach(function (pkg, index) {
+  forEach(packages, function (pkg, index) {
     const { name, dependencies = false, devDependencies = false } = pkg
 
     // exit early if there are not dependencies to analyze
@@ -38,17 +32,18 @@ function linkLikeABoss (config, workingDir) {
       .concat(findPackagesToSymlink(devDependencies))
       .map(toManagedNames(packageNames, config.packages))
 
-    logSeparator(name)
+    console.log(separator(name))
 
     if (packageNamesToSymlink.length === 0) {
-      console.log(modOutput('no packages to link to'))
-      return logSeparator()
+      log('nothing to symlink to')
+      return console.log(separator())
     }
 
-    console.log('symlinking packages for ' + name)
-    symlink(packageNamesToSymlink, config.packages[index], workingDir)
+    log('symlinking packages for ' + name, '...')
 
-    logSeparator()
+    symlink(packageNamesToSymlink, config.packages[index], directory)
+
+    console.log(separator())
   })
 }
 
@@ -60,18 +55,18 @@ function symlink (packagesToSymlink, symlinkToName, workingDir) {
     const srcName = require(join(srcDir, 'package.json')).name
     const destinationDir = join(nodeDir, pkg)
 
+    if (isLink(destinationDir)) {
+      return log(symlinkToName, 'already exists...')
+    }
+
     mkdirp(nodeDir, function (err) {
       if (err) throw err
 
-      console.log(modOutput('Symlinking ' + srcName + '...'))
+      log('Symlinking ' + srcName + '...')
 
       symlinkSync(srcDir, destinationDir)
     })
   })
-}
-
-function modOutput (output) {
-  return '    ' + output.replace('\n', '\n    ')
 }
 
 function toManagedNames (packageNames, packages) {
@@ -79,13 +74,6 @@ function toManagedNames (packageNames, packages) {
     return packages[packageNames.indexOf(npmName)]
   }
 }
-
-const getPackagesToSymlink = packageNames => dependencies =>
-  dependencies
-  ? Object.keys(dependencies).filter(name => packageNames.indexOf(name) > -1)
-  : []
-
-const prop = x => obj => obj[x]
 
 function getPackage (workingDir) {
   return function (packageName) {
@@ -98,3 +86,8 @@ function getPackage (workingDir) {
     return Object.assign({}, require(packagejson))
   }
 }
+
+const getPackagesToSymlink = packageNames => dependencies =>
+  dependencies
+  ? filter(Object.keys(dependencies), name => packageNames.indexOf(name) > -1)
+  : []
