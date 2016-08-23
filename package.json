@@ -74,6 +74,7 @@
   "devDependencies": {
     "babel-preset-power-assert": "^1.0.0",
     "buba": "^2.0.2",
+    "conventional-commit-types": "^2.0.0",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.1",
