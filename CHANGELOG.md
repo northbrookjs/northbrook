@@ -1,3 +1,12 @@
+# v2.0.14 (2016-08-24)
+---
+
+
+## Bug Fixes
+
+    - fix(northbrook): resolve promise when changelog is finished writing [6a99747f](https://github.com/northbrookjs/northbrook/commits/6a99747f9ec16326506a0f58e98c2f90e2b9528b)
+
+
 # v2.0.13 (2016-08-24)
 ---
 
