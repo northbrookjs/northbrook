@@ -69,6 +69,13 @@ function action (config, directory, options) {
 
       const check = options && options.check || false
 
+      const changelog = join(packageDirectory, 'CHANGELOG.md')
+      let previousFile = '\n'
+
+      if (isFile(changelog)) {
+        previousFile = readFileSync(changelog, 'utf8')
+      }
+
       const changelogOptions = {
         commits: status[packageName].commits,
         file: createFileStream(changelog),
@@ -76,13 +83,6 @@ function action (config, directory, options) {
         url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
         bugs: pkg.bugs,
         previousFile
-      }
-
-      const changelog = join(packageDirectory, 'CHANGELOG.md')
-      let previousFile = '\n'
-
-      if (isFile(changelog)) {
-        previousFile = readFileSync(changelog, 'utf8')
       }
 
       if (isDirectoryClean()) {
@@ -94,7 +94,7 @@ function action (config, directory, options) {
         }
 
         if (!method || check || pkg.private) {
-          generateChangelog(changelogOptions).then(() => {
+          return generateChangelog(changelogOptions).then(() => {
             if (!check) {
               execute(
                 'git add CHANGELOG.md',
@@ -106,7 +106,6 @@ function action (config, directory, options) {
             }
             console.log(separator())
           })
-          return
         }
 
         // preform release
