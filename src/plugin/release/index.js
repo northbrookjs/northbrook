@@ -119,11 +119,9 @@ function action (config, directory, options) {
           .catch(handleTestError)
           .then(handleVersionOutput(method, releaseBranch, newVersion, changelogOptions))
           .then(handleChangelogOutput)
-          .then(({ code, err, out }) => {
+          .then(({ code, err }) => {
             stop()
-            if (code === 0) {
-              console.log(out)
-            } else {
+            if (code !== 0) {
               console.log(err)
             }
             console.log(separator())
