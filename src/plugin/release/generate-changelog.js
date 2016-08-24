@@ -46,6 +46,7 @@ export function generateChangelog ({ commits, file, version, url, bugs, previous
     changelog.write('\n\n')
     changelog.write(previousFile)
 
+    changelog.end()
     resolve(changelog)
   })
 }
