@@ -2,10 +2,10 @@
 
 try {
   // try using a local version first
-  // use IIFE to keep `var`s for hoisting
+  // use IIFE to keep `var`s from hoisting
   (function () {
     var northbrook = require('northbrook')
-    var config = require('northbrook/lib/util').getConfig()
+    var config = northbrook.getConfig()
 
     northbrook.setup({
       config: config.config,
@@ -16,7 +16,7 @@ try {
 } catch (e) {
   (function () {
     var northbrook = require('./lib/api')
-    var config = require('./lib/util').getConfig()
+    var config = northbrook.getConfig()
 
     northbrook.setup({
       config: config.config,
