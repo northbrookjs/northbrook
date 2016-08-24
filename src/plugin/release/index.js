@@ -76,21 +76,21 @@ function action (config, directory, options) {
         previousFile = readFileSync(changelog, 'utf8')
       }
 
-      const changelogOptions = {
-        commits: status[packageName].commits,
-        file: check ? process.stdout : createFileStream(changelog),
-        version: newVersion,
-        url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
-        bugs: pkg.bugs,
-        previousFile
-      }
-
       if (isDirectoryClean()) {
         if (!method || check || pkg.private) {
           console.log(separator(packageName))
           if (pkg.private) {
             log('Package is private; only generating changelog')
           }
+        }
+
+        const changelogOptions = {
+          commits: status[packageName].commits,
+          file: check ? process.stdout : createFileStream(changelog),
+          version: newVersion,
+          url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
+          bugs: pkg.bugs,
+          previousFile
         }
 
         if (!method || check || pkg.private) {
