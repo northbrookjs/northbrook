@@ -1,6 +1,8 @@
-import { forEach } from '../../util'
+import { createWriteStream } from 'fs'
+import { forEach, isFile, exec } from '../../util'
 
 export function generateChangelog ({ commits, file, version, url, bugs, previousFile }) {
+  const changelog = typeof file === 'string' ? createFileStream(file) : file
   return new Promise((resolve) => {
     const sections = {
       breaks: [], // special section to highlight breaking changes
@@ -16,7 +18,7 @@ export function generateChangelog ({ commits, file, version, url, bugs, previous
       perf: 'Performance Improvements'
     }
 
-    file.write(`# ${version} (${currentDate()})\n---\n\n`)
+    changelog.write(`# ${version} (${currentDate()})\n---\n\n`)
 
     forEach(commits, function (commit) {
       if (isCommitBreakingChange(commit)) {
@@ -33,19 +35,26 @@ export function generateChangelog ({ commits, file, version, url, bugs, previous
 
       if (!sectionCommits.length) return
 
-      file.write(`\n## ${title}\n\n`)
+      changelog.write(`\n## ${title}\n\n`)
 
       forEach(sectionCommits, function (commit) {
-        file.write(`    - ${commit.header} ${linkToCommit(commit.hash, url)}`)
-        file.write(`\n`)
+        changelog.write(`    - ${commit.header} ${linkToCommit(commit.hash, url)}`)
+        changelog.write(`\n`)
       })
     })
 
-    file.write('\n\n')
-    file.write(previousFile)
+    changelog.write('\n\n')
+    changelog.write(previousFile)
 
-    resolve(file)
+    resolve(changelog)
   })
+}
+
+function createFileStream (file) {
+  if (!isFile(file)) {
+    exec(`touch ${file}`, { silent: true, async: false })
+  }
+  return createWriteStream(file)
 }
 
 function linkToCommit (hash, url) {

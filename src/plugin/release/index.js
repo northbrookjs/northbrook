@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { createWriteStream, readFileSync } from 'fs'
+import { readFileSync } from 'fs'
 import { exec as execSync } from 'shelljs'
 import {
   isInitialized,
@@ -86,7 +86,7 @@ function action (config, directory, options) {
 
         const changelogOptions = {
           commits: status[packageName].commits,
-          file: check ? process.stdout : createFileStream(changelog),
+          file: check ? process.stdout : changelog,
           version: newVersion,
           url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
           bugs: pkg.bugs,
@@ -150,13 +150,6 @@ function execute (...commands) {
   }
 
   return _exec(commands.shift())
-}
-
-function createFileStream (file) {
-  if (!isFile(file)) {
-    exec(`touch ${file}`, { silent: true, async: false })
-  }
-  return createWriteStream(file)
 }
 
 function handleTestOutput (method, packageName, newVersion) {
