@@ -1,3 +1,12 @@
+# v2.0.17 (2016-08-24)
+---
+
+
+## Bug Fixes
+
+    - fix(northbrook): execute commands inside of package directory (#23) [31f0c8e2](https://github.com/northbrookjs/northbrook/commits/31f0c8e2d77b9ddbef10347dc1a112a06e2be529)
+
+
 # v2.0.16 (2016-08-24)
 ---
 
