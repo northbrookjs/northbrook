@@ -43,7 +43,7 @@ export function handleAnswers (gitArgs) {
     if (answers.confirmCommit === 'yes') {
       return commit(buildCommit(answers), gitArgs)
     } else {
-      return console.info('Commit has been canceled.')
+      return console.info('\nCommit has been canceled.\n')
     }
   }
 }
@@ -52,7 +52,7 @@ function commit (commitMsg, gitArgs) {
   return exec(`git commit ${gitArgs} -m '${commitMsg}'`)
     .then(({ code, out }) => {
       if (code === 0) {
-        console.log('successfully built commit\n')
+        console.log('\nSuccessfully built commit.\n')
       } else {
         console.log(out)
       }
