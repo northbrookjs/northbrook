@@ -1,3 +1,12 @@
+# v2.0.19 (2016-08-24)
+---
+
+
+## Bug Fixes
+
+    - fix(northbrook): fix github tags for monorepos (#24) [40d7c37e](https://github.com/northbrookjs/northbrook/commits/40d7c37e58ccf8481fcd916883582a39b7498a88)
+
+
 # v2.0.18 (2016-08-24)
 ---
 
