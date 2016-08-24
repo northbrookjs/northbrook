@@ -99,7 +99,7 @@ function action (config, directory, options) {
               execute(
                 'git add CHANGELOG.md',
                 'git commit -m "docs(CHANGELOG): append to changelog [ci skip]"',
-                `git tag -f ${newVersion}`,
+                `git tag -f ${packageName}-${newVersion}`,
                 `git push origin ${releaseBranch}`,
                 'git push origin --tags'
               )
