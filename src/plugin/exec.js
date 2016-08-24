@@ -39,7 +39,7 @@ export function action (config, workingDir, command, options) {
     const packageDir = join(workingDir, packageName)
     const name = require(join(packageDir, 'package.json')).name
 
-    return execCmd(cmd, { silent: true })
+    return execCmd(cmd, { silent: true, cwd: packageDir })
       .then(({ cmd, code, err, out }) => {
         console.log(separator(name))
         log(cmd)
