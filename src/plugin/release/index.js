@@ -46,6 +46,12 @@ function action (config, directory, options) {
     ? config.releaseBranch
     : 'master'
 
+  const { code } = execSync('git checkout ' + releaseBranch)
+
+  if (code !== 0) {
+    throw new Error('Could not switch to ' + releaseBranch)
+  }
+
   const packages = config.packages.map(getPkg(directory))
 
   checkRelease(packages).then(function (status) {
