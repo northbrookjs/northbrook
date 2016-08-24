@@ -46,7 +46,7 @@ function action (config, directory, options) {
     ? config.releaseBranch
     : 'master'
 
-  const { code } = execSync('git checkout ' + releaseBranch)
+  const { code } = execSync('git checkout ' + releaseBranch, { silent: true })
 
   if (code !== 0) {
     throw new Error('Could not switch to ' + releaseBranch)

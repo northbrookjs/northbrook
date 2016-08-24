@@ -76,7 +76,9 @@ export function getStatus (packages, commits) {
     }
   })
 
-  forEach(commits, function (commit) {
+  for (let i = commits.length - 1; i >= 0; --i) {
+    const commit = commits[i]
+
     if (packages.indexOf(commit.scope) === -1) return
 
     const packageName = commit.scope
@@ -100,7 +102,7 @@ export function getStatus (packages, commits) {
       status[packageName].increment = 0
       status[packageName].commits = []
     }
-  })
+  }
 
   return status
 }
