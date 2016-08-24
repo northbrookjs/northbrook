@@ -157,6 +157,11 @@
 ---
 
 
+
+# v2.0.15 (2016-08-24)
+---
+
+
 ## Bug Fixes
 
     - fix(northbrook): turn back on auto-deployment [379a738a](https://github.com/northbrookjs/northbrook/commits/379a738ac46eb2d3dc71b7f88f1ad1c9d8d80228)
