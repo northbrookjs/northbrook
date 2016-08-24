@@ -1,46 +1,50 @@
 import { forEach } from '../../util'
 
 export function generateChangelog ({ commits, file, version, url, bugs, previousFile }) {
-  const sections = {
-    breaks: [], // special section to highlight breaking changes
-    feat: [],
-    fix: [],
-    perf: []
-  }
-
-  const titles = {
-    breaks: 'Breaking Changes',
-    feat: 'Features',
-    fix: 'Bug Fixes',
-    perf: 'Performance Improvements'
-  }
-
-  file.write(`# ${version} (${currentDate()})\n---\n\n`)
-
-  forEach(commits, function (commit) {
-    if (isCommitBreakingChange(commit)) {
-      sections.breaks.push(commit)
-    } else {
-      sections[commit.type] = sections[commit.type] || []
-      sections[commit.type].push(commit)
+  return new Promise((resolve) => {
+    const sections = {
+      breaks: [], // special section to highlight breaking changes
+      feat: [],
+      fix: [],
+      perf: []
     }
-  })
 
-  forEach(Object.keys(sections), function (section) {
-    const sectionCommits = sections[section]
-    const title = titles[section]
+    const titles = {
+      breaks: 'Breaking Changes',
+      feat: 'Features',
+      fix: 'Bug Fixes',
+      perf: 'Performance Improvements'
+    }
 
-    if (!sectionCommits.length) return
+    file.write(`# ${version} (${currentDate()})\n---\n\n`)
 
-    file.write(`\n## ${title}\n\n`)
-
-    forEach(sectionCommits, function (commit) {
-      file.write(`    - ${commit.header} ${linkToCommit(commit.hash, url)}`)
-      file.write(`\n`)
+    forEach(commits, function (commit) {
+      if (isCommitBreakingChange(commit)) {
+        sections.breaks.push(commit)
+      } else {
+        sections[commit.type] = sections[commit.type] || []
+        sections[commit.type].push(commit)
+      }
     })
-  })
 
-  file.write(previousFile)
+    forEach(Object.keys(sections), function (section) {
+      const sectionCommits = sections[section]
+      const title = titles[section]
+
+      if (!sectionCommits.length) return
+
+      file.write(`\n## ${title}\n\n`)
+
+      forEach(sectionCommits, function (commit) {
+        file.write(`    - ${commit.header} ${linkToCommit(commit.hash, url)}`)
+        file.write(`\n`)
+      })
+    })
+
+    file.write(previousFile)
+
+    resolve(file)
+  })
 }
 
 function linkToCommit (hash, url) {

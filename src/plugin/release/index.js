@@ -92,17 +92,18 @@ function action (config, directory, options) {
             url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
             bugs: pkg.bugs,
             previousFile
+          }).then(() => {
+            if (!check) {
+              execute(
+                'git add CHANGELOG.md',
+                'git commit -m "docs(CHANGELOG): append to changelog"',
+                `git tag -f ${newVersion}`,
+                `git push origin ${releaseBranch}`,
+                'git push origin --tags'
+              )
+            }
+            return console.log(separator())
           })
-          if (!check) {
-            execute(
-              'git add CHANGELOG.md',
-              'git commit -m "docs(CHANGELOG): append to changelog"',
-              `git tag -f ${newVersion}`,
-              `git push origin ${releaseBranch}`,
-              'git push origin --tags'
-            )
-          }
-          return console.log(separator())
         }
 
         // preform release
@@ -126,14 +127,14 @@ function action (config, directory, options) {
                 url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
                 bugs: pkg.bugs,
                 previousFile
+              }).then(() => {
+                execute(
+                  'git add .',
+                  `git commit -m "chore(release): release ${newVersion}"`,
+                  `git push origin ${releaseBranch}`,
+                  'git push origin --tags'
+                )
               })
-
-              execute(
-                'git add .',
-                `git commit -m "chore(release): release ${newVersion}"`,
-                `git push origin ${releaseBranch}`,
-                'git push origin --tags'
-              )
             } else {
               console.log(err)
             }
