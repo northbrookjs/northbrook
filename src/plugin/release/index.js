@@ -137,10 +137,12 @@ function action (config, directory, options) {
 
 function execute (...commands) {
   function _exec (cmd) {
-    const { code, stderr } = execSync(cmd, { silent: true })
+    const { code, stderr, stdout } = execSync(cmd, { silent: true })
     if (code === 0 && commands.length > 0) {
       const _cmd = commands.shift()
       return _exec(_cmd)
+    } else if (commands.length === 0) {
+      return { code, err: stderr, out: stdout }
     }
     if (code !== 0) {
       console.log('\n' + stderr + '\n')
