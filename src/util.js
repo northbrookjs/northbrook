@@ -220,6 +220,8 @@ export function resolvePlugins (config, workingDir) {
            false
   }
 
+  if (!config) return []
+
   const prefix = name => 'northbrook-' + name
 
   const plugins = pluck('plugins', config) && config.plugins.slice() // no mutation of original allowd

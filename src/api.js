@@ -7,6 +7,8 @@ import {
   chdir
 } from './util'
 
+export { getConfig } from './util'
+
 import { plugin as exec } from './plugin/exec'
 import { plugin as link } from './plugin/link'
 import { plugin as init } from './plugin/init'
