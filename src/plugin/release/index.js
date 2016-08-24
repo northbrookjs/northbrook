@@ -95,10 +95,10 @@ function action (config, directory, options) {
 
         if (!method || check || pkg.private) {
           return generateChangelog(changelogOptions).then(() => {
-            if (!check) {
+            if (!check && method || pkg.private) {
               execute(
                 'git add CHANGELOG.md',
-                'git commit -m "docs(CHANGELOG): append to changelog"',
+                'git commit -m "docs(CHANGELOG): append to changelog [ci skip]"',
                 `git tag -f ${newVersion}`,
                 `git push origin ${releaseBranch}`,
                 'git push origin --tags'
@@ -184,7 +184,7 @@ function handleVersionOutput (method, releaseBranch, newVersion, options) {
       return generateChangelog(options).then((file) => {
         return execute(
           'git add .',
-          `git commit -m "chore(release): ${newVersion}"`,
+          `git commit -m "chore(release): ${newVersion} [ci skip]"`,
           `git push origin ${releaseBranch}`,
           'git push origin --tags'
         )
