@@ -159,7 +159,7 @@ function handleTestOutput (method, packageName, newVersion) {
       log(out)
       process.stdout.write('    Running npm version')
       start()
-      return exec(`npm version ${method} -m 'release(${packageName}): ${newVersion}'`)
+      return exec(`npm version ${method} -m 'release(${packageName}): ${newVersion} [ci skip]'`)
     } else {
       throw out
     }
