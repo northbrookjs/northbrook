@@ -1,3 +1,13 @@
+# v2.0.18 (2016-08-24)
+---
+
+
+## Bug Fixes
+
+    - fix(northbrook): fix process.stdout errors [857e445d](https://github.com/northbrookjs/northbrook/commits/857e445d9470300d1f45fe0882a5a9f6d7f339f5)
+    - fix(northbrook): add [skip ci] to all commits [781a7453](https://github.com/northbrookjs/northbrook/commits/781a7453534b59382db5483d7788d8e90f52279e)
+
+
 # v2.0.17 (2016-08-24)
 ---
 
