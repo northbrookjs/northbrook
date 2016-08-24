@@ -69,6 +69,15 @@ function action (config, directory, options) {
 
       const check = options && options.check || false
 
+      const changelogOptions = {
+        commits: status[packageName].commits,
+        file: createFileStream(changelog),
+        version: newVersion,
+        url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
+        bugs: pkg.bugs,
+        previousFile
+      }
+
       const changelog = join(packageDirectory, 'CHANGELOG.md')
       let previousFile = '\n'
 
@@ -85,14 +94,7 @@ function action (config, directory, options) {
         }
 
         if (!method || check || pkg.private) {
-          generateChangelog({
-            commits: status[packageName].commits,
-            file: check === true ? process.stdout : createFileStream(changelog),
-            version: newVersion,
-            url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
-            bugs: pkg.bugs,
-            previousFile
-          }).then(() => {
+          generateChangelog(changelogOptions).then(() => {
             if (!check) {
               execute(
                 'git add CHANGELOG.md',
@@ -116,41 +118,19 @@ function action (config, directory, options) {
         exec('npm test')
           .then(handleTestOutput(method, packageName, newVersion))
           .catch(handleTestError)
-          .then(handleVersionOutput(method))
-          .then(({ code, err }) => {
+          .then(handleVersionOutput(method, releaseBranch, newVersion, changelogOptions))
+          .then(handleChangelogOutput)
+          .then(({ code, err, out }) => {
+            stop()
             if (code === 0) {
-              // generateChangelog
-              return generateChangelog({
-                commits: status[packageName].commits,
-                file: createFileStream(changelog),
-                version: newVersion,
-                url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
-                bugs: pkg.bugs,
-                previousFile
-              }).then((file) => {
-                return execute(
-                  'git add .',
-                  `git commit -m "chore(release): release ${newVersion}"`,
-                  `git push origin ${releaseBranch}`,
-                  'git push origin --tags'
-                )
-              })
-              .then(output => {
-                stop()
-                process.stdout.write('    Publishing package')
-                start()
-                handlePublishOutput(releaseBranch)(output)
-              })
-              .then(() => {
-                console.log(separator())
-              })
+              console.log(out)
             } else {
               console.log(err)
             }
             console.log(separator())
           })
-
-        chdir(directory)
+          .then(() => { chdir(directory) })
+          .catch(() => { chdir(directory) })
       } else {
         log('RELEASE ERROR: Working directory must be clean to push release!')
       }
@@ -202,14 +182,21 @@ function handleTestError (err) {
   console.log(separator())
 }
 
-function handleVersionOutput (method) {
+function handleVersionOutput (method, releaseBranch, newVersion, options) {
   return function ({code, out, err}) {
     if (code === 0) {
       stop()
       log(out)
       process.stdout.write('    Generating Changelog')
       start()
-      return exec('npm publish --access=public')
+      return generateChangelog(options).then((file) => {
+        return execute(
+          'git add .',
+          `git commit -m "chore(release): ${newVersion}"`,
+          `git push origin ${releaseBranch}`,
+          'git push origin --tags'
+        )
+      })
     } else {
       stop()
       log('\n')
@@ -222,12 +209,13 @@ function handleVersionOutput (method) {
   }
 }
 
-function handlePublishOutput (releaseBranch) {
+function handleChangelogOutput (method) {
   return function ({ code, out, err }) {
     stop()
     if (code === 0) {
-      log(out)
-      return exec(`git push origin ${releaseBranch}`)
+      process.stdout.write('   Publishing your package')
+      start()
+      return exec(`npm publish ${method}`)
     } else {
       log('Publishing your package has failed: \n')
       log(err)
