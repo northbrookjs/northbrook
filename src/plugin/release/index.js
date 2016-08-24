@@ -199,18 +199,16 @@ function handleVersionOutput (method, releaseBranch, newVersion, options) {
   }
 }
 
-function handleChangelogOutput (method) {
-  return function ({ code, out, err }) {
-    stop()
-    if (code === 0) {
-      process.stdout.write('   Publishing your package')
-      start()
-      return exec(`npm publish ${method}`)
-    } else {
-      log('Publishing your package has failed: \n')
-      log(err)
-      console.log(separator())
-    }
+function handleChangelogOutput ({ code, out, err }) {
+  stop()
+  if (code === 0) {
+    process.stdout.write('   Publishing your package')
+    start()
+    return exec('npm publish')
+  } else {
+    log('Publishing your package has failed: \n')
+    log(err)
+    console.log(separator())
   }
 }
 
