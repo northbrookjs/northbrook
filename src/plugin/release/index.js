@@ -120,14 +120,14 @@ function action (config, directory, options) {
           .then(({ code, err }) => {
             if (code === 0) {
               // generateChangelog
-              generateChangelog({
+              return generateChangelog({
                 commits: status[packageName].commits,
                 file: createFileStream(changelog),
                 version: newVersion,
                 url: pkg.repository.url.replace('.git', '').replace('git+', '') || pkg.repository,
                 bugs: pkg.bugs,
                 previousFile
-              }).then(() => {
+              }).then((file) => {
                 return execute(
                   'git add .',
                   `git commit -m "chore(release): release ${newVersion}"`,
@@ -135,7 +135,15 @@ function action (config, directory, options) {
                   'git push origin --tags'
                 )
               })
-              .then(handlePublishOutput(releaseBranch))
+              .then(output => {
+                stop()
+                process.stdout.write('    Publishing package')
+                start()
+                handlePublishOutput(releaseBranch)(output)
+              })
+              .then(() => {
+                console.log(separator())
+              })
             } else {
               console.log(err)
             }
@@ -152,11 +160,12 @@ function action (config, directory, options) {
 
 function execute (...commands) {
   function _exec (cmd) {
-    const { code, stderr } = execSync(cmd)
+    const { code, stderr } = execSync(cmd, { silent: true })
     if (code === 0 && commands.length > 0) {
       const _cmd = commands.shift()
-      return _exec(_cmd).code
-    } else {
+      return _exec(_cmd)
+    }
+    if (code !== 0) {
       console.log('\n' + stderr + '\n')
     }
   }
@@ -198,7 +207,7 @@ function handleVersionOutput (method) {
     if (code === 0) {
       stop()
       log(out)
-      process.stdout.write('    Publishing your package')
+      process.stdout.write('    Generating Changelog')
       start()
       return exec('npm publish --access=public')
     } else {
