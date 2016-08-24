@@ -102,8 +102,9 @@ function action (config, directory, options) {
                 'git push origin --tags'
               )
             }
-            return console.log(separator())
+            console.log(separator())
           })
+          return
         }
 
         // preform release
@@ -116,7 +117,6 @@ function action (config, directory, options) {
           .then(handleTestOutput(method, packageName, newVersion))
           .catch(handleTestError)
           .then(handleVersionOutput(method))
-          .then(handlePublishOutput(releaseBranch))
           .then(({ code, err }) => {
             if (code === 0) {
               // generateChangelog
@@ -128,13 +128,14 @@ function action (config, directory, options) {
                 bugs: pkg.bugs,
                 previousFile
               }).then(() => {
-                execute(
+                return execute(
                   'git add .',
                   `git commit -m "chore(release): release ${newVersion}"`,
                   `git push origin ${releaseBranch}`,
                   'git push origin --tags'
                 )
               })
+              .then(handlePublishOutput(releaseBranch))
             } else {
               console.log(err)
             }
