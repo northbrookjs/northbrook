@@ -51,8 +51,10 @@
     "test:unit": "mocha -r buba/register src/*.test.js src/**/*.test.js src/plugin/**/*.test.js",
     "test": "npm run test:lint && npm run test:unit",
     "build": "rimraf lib && buba -i src -o lib",
+    "precommit": "npm run build",
     "commit": "node cli.js commit",
     "preversion": "npm run build",
+    "prerelease": "npm run build",
     "release": "node cli.js release"
   },
   "dependencies": {
