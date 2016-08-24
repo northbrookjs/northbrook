@@ -2,6 +2,11 @@
 ---
 
 
+
+# v2.0.16 (2016-08-24)
+---
+
+
 ## Bug Fixes
 
     - fix(northbrook): fix publishing to npm [b20b7d7b](https://github.com/northbrookjs/northbrook/commits/b20b7d7bc9f4eee934a7a128a856ee2b364e02fe)
