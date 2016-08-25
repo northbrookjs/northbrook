@@ -9,6 +9,8 @@ import findConfig from 'find-config'
 // constants
 const CONFIG = 'northbrook.json'
 
+export const filterScopes = name => name.replace(/@[a-z]+\//g, '')
+
 export function isInitialized (config, commandName) {
   if (!config) {
     throw new Error(`${commandName}: a northbrook.json is required for this command`)

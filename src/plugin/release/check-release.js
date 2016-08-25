@@ -79,6 +79,8 @@ export function getStatus (packages, commits) {
   for (let i = commits.length - 1; i >= 0; --i) {
     const commit = commits[i]
 
+    console.log(commit)
+
     if (packages.indexOf(commit.scope) === -1) continue
 
     const packageName = commit.scope
@@ -104,6 +106,7 @@ export function getStatus (packages, commits) {
     }
   }
 
+  console.log(status)
   return status
 }
 
@@ -121,6 +124,7 @@ export function rawCommits (tag) {
     gitRawCommits({ format: '%B%n-hash-%n%H', from: tag })
       .pipe(commitsParser())
       .pipe(concat(function (data) {
+        console.log(data)
         const commits = commitsFilter(data)
         if (!commits || !commits.length) {
           reject(null)

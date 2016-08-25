@@ -3,6 +3,7 @@ import { join } from 'path'
 import assert from 'power-assert'
 
 import {
+  filterScopes,
   getConfig,
   splitVersion,
   exists,
@@ -21,6 +22,18 @@ import {
 } from './util'
 
 describe('util', () => {
+  describe('filterScopes', () => {
+    it('should remove scoped parts of package names', () => {
+      const str = '@northbrook/tslint'
+      assert(filterScopes(str) === 'tslint')
+    })
+
+    it('should leave a non-scoped package name alone', () => {
+      const str = 'tslint'
+      assert(filterScopes(str) === 'tslint')
+    })
+  })
+
   describe('splitVersion', () => {
     it('should split a semver correct version string into 3 parts', () => {
       const [major, minor, patch] = splitVersion('1.2.3')
