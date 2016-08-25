@@ -114,7 +114,7 @@ function extras ({ githubRepo, packageName }) {
     if (code === 0) {
       process.stdout.write('\n    Adding git remote origin')
       start(250, config)
-      return exec(`git remote add origin https://gitub.com/${githubRepo}.git`)
+      return exec(`git remote add origin https://github.com/${githubRepo}.git`)
     } else {
       throw err
     }
