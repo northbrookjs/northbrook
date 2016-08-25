@@ -88,6 +88,10 @@ a changelog for each package.
 `--check` - Checks what needs to be releases and generates the changelog, but only
 outputs to the console.
 
+`--skip-npm` - Useful if first time publishing scoped packages. Running release
+on a previously unrelease scoped package will fail since it is not run with
+`--access=public`
+
 #### **northbrook exec [command...]**
 
 > $ nb exec -- cat package.json
