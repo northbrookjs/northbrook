@@ -1,5 +1,6 @@
 import { createWriteStream } from 'fs'
-import { forEach, isFile, exec } from '../../util'
+import { forEach, isFile } from '../../util'
+import { exec } from 'shelljs'
 
 export function generateChangelog ({ commits, file, version, url, bugs, previousFile }) {
   const changelog = typeof file === 'string' ? createFileStream(file) : file
