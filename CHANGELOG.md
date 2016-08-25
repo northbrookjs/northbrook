@@ -1,3 +1,12 @@
+# v2.1.2 (2016-08-25)
+---
+
+
+## Bug Fixes
+
+    - fix(northbrook): delete unneeded console.log()s [2adf32dc](https://github.com/northbrookjs/northbrook/commits/2adf32dcd271a37fb4ce18e9c9316d752eea2a35)
+
+
 # v2.1.1 (2016-08-25)
 ---
 
