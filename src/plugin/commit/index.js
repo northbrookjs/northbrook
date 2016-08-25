@@ -60,8 +60,8 @@ function commit (commitMsg, gitArgs) {
 }
 
 function packageToScopeName (packageName, workingDir) {
-  const scope = require(join(workingDir, packageName, 'package.json')).name
-  return { name: scope, value: packageName === '.' ? scope : packageName }
+  const name = require(join(workingDir, packageName, 'package.json')).name
+  return { name, value: name }
 }
 
 function getScopes (config, workingDir) {
