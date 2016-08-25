@@ -1,3 +1,17 @@
+# v2.1.0 (2016-08-25)
+---
+
+
+## Features
+
+    - feat(northbrook): make yes the default for confirming commits [f45db15c](https://github.com/northbrookjs/northbrook/commits/f45db15cd96216cb9282ab45c7beeea6c1a04ddd)
+    - feat(northbrook): resolve @northbrook scoped plugins [fb1b36ff](https://github.com/northbrookjs/northbrook/commits/fb1b36ffc68c16ff6f3eaa2b4655bd2c1e58ec9f)
+
+## Bug Fixes
+
+    - fix(northbrook): ensure releases happen in proper directory and are synchronous [10fb42d1](https://github.com/northbrookjs/northbrook/commits/10fb42d1e387496f970df25a3810624ccb6c92ff)
+
+
 # v2.0.20 (2016-08-25)
 ---
 
