@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { readFileSync } from 'fs'
 import { exec as execSync } from 'shelljs'
-import { isInitialized, isFile, exec, chdir, separator, log, splitVersion } from '../../util'
+import { isInitialized, isFile, exec, chdir, separator, log, splitVersion, filterScopes } from '../../util'
 import { start, stop, change_sequence as changeSeq } from 'simple-spinner'
 import { checkRelease } from './check-release'
 import { generateChangelog } from './generate-changelog'
@@ -43,7 +43,7 @@ function action (config, directory, options) {
     throw new Error('Could not switch to ' + releaseBranch)
   }
 
-  const packages = config.packages.map(getPkg(directory))
+  const packages = config.packages.map(getPkg(directory)).map(filterScopes)
 
   checkRelease(packages).then(function (status) {
     const packageNames = Object.keys(status).filter((name) => status[name].increment > 0)
@@ -133,8 +133,7 @@ function action (config, directory, options) {
     function continueReleasing () {
       if (packageNames !== 0) {
         release(packageNames.shift())
-      }
-      if (packageNames.length === 0) {
+      } else if (packageNames.length === 0) {
         console.log('\n All releases complete!\n')
       }
     }

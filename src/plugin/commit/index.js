@@ -2,7 +2,7 @@ import { join } from 'path'
 import { types } from 'conventional-commit-types'
 import { prompt } from 'inquirer'
 
-import { isInitialized, exec, clear } from '../../util'
+import { isInitialized, exec, clear, filterScopes } from '../../util'
 
 import { getQuestions } from './getQuestions'
 import { buildCommit } from './buildCommit'
@@ -60,7 +60,7 @@ function commit (commitMsg, gitArgs) {
 }
 
 function packageToScopeName (packageName, workingDir) {
-  const name = require(join(workingDir, packageName, 'package.json')).name
+  const name = filterScopes(require(join(workingDir, packageName, 'package.json')).name)
   return { name, value: name }
 }
 
