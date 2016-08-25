@@ -1,3 +1,12 @@
+# v2.1.1 (2016-08-25)
+---
+
+
+## Bug Fixes
+
+    - fix(northbrook): fix commit and release for scoped packages [3f863905](https://github.com/northbrookjs/northbrook/commits/3f863905c34586849beb5fffa722e72867df933d)
+
+
 # v2.1.0 (2016-08-25)
 ---
 
