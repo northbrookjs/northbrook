@@ -1,3 +1,12 @@
+# v2.2.0 (2016-08-25)
+---
+
+
+## Features
+
+    - feat(northbrook): add --skip-npm option to release [ea5008c3](https://github.com/northbrookjs/northbrook/commits/ea5008c3747caa33fe2173d3ad4a7a912ebf993a)
+
+
 # v2.1.2 (2016-08-25)
 ---
 
