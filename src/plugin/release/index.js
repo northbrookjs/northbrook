@@ -11,6 +11,7 @@ changeSeq(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .'])
 export const plugin = function release (program, config, directory) {
   program.command('release')
     .option('--check', 'only checks what needs to be released')
+    .option('--skip-npm', 'do not automatically publish to npm')
     .description('Publishes updates')
     .action((options) => action(config, directory, options))
 }
@@ -36,6 +37,8 @@ function action (config, directory, options) {
   const releaseBranch = config && typeof config.releaseBranch === 'string'
     ? config.releaseBranch
     : 'master'
+
+  const skipNpm = options && options.skipNpm
 
   const { code } = execSync('git checkout ' + releaseBranch, { silent: true, cwd: directory })
 
@@ -114,7 +117,7 @@ function action (config, directory, options) {
           .then(handleTestOutput(method, packageName, newVersion, packageDirectory))
           .catch(handleTestError)
           .then(handleVersionOutput(method, releaseBranch, newVersion, packageName, changelogOptions, packageDirectory))
-          .then(handleChangelogOutput(packageDirectory))
+          .then(handleChangelogOutput(packageDirectory, skipNpm))
           .then(({ code, err }) => {
             stop()
             if (code !== 0) {
@@ -186,8 +189,8 @@ function handleTestError (err) {
 
 function handleVersionOutput (method, releaseBranch, newVersion, packageName, options, packageDirectory) {
   return function ({code, out, err}) {
+    stop()
     if (code === 0) {
-      stop()
       log(out)
       process.stdout.write('    Generating Changelog')
       start()
@@ -201,7 +204,6 @@ function handleVersionOutput (method, releaseBranch, newVersion, packageName, op
         )
       })
     } else {
-      stop()
       log('\n')
       log(`npm version ${method} has failed: \n`)
       log()
@@ -212,12 +214,15 @@ function handleVersionOutput (method, releaseBranch, newVersion, packageName, op
   }
 }
 
-function handleChangelogOutput (packageDirectory) {
+function handleChangelogOutput (packageDirectory, skipNpm) {
   return function ({ code, out, err }) {
     stop()
     if (code === 0) {
-      process.stdout.write('   Publishing your package')
+      process.stdout.write('\n    Publishing your package')
       start()
+      if (skipNpm) {
+        return Promise.resolve({ code: 0, err: '', out: '' })
+      }
       return exec('npm publish', { silent: true, cwd: packageDirectory })
     } else {
       log('Publishing your package has failed: \n')
