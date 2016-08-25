@@ -121,7 +121,6 @@ export function rawCommits (tag) {
     gitRawCommits({ format: '%B%n-hash-%n%H', from: tag })
       .pipe(commitsParser())
       .pipe(concat(function (data) {
-        console.log(data)
         const commits = commitsFilter(data)
         if (!commits || !commits.length) {
           reject(null)
