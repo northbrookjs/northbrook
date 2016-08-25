@@ -88,8 +88,8 @@ export function getQuestions (options) {
       type: 'expand',
       name: 'confirmCommit',
       choices: [
-        { key: 'n', name: 'Abort commit', value: 'no' },
-        { key: 'y', name: 'Yes', value: 'yes' }
+        { key: 'y', name: 'Yes', value: 'yes' },
+        { key: 'n', name: 'Abort commit', value: 'no' }
       ],
       message: function (answers) {
         const SEP = '###--------------------------------------------------------###'

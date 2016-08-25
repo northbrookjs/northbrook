@@ -1,16 +1,7 @@
 import { join } from 'path'
 import { readFileSync } from 'fs'
 import { exec as execSync } from 'shelljs'
-import {
-  isInitialized,
-  isFile,
-  forEach,
-  exec,
-  chdir,
-  separator,
-  log,
-  splitVersion
-} from '../../util'
+import { isInitialized, isFile, exec, chdir, separator, log, splitVersion } from '../../util'
 import { start, stop, change_sequence as changeSeq } from 'simple-spinner'
 import { checkRelease } from './check-release'
 import { generateChangelog } from './generate-changelog'
@@ -33,9 +24,9 @@ function incrementName (code) {
   }
 }
 
-function isDirectoryClean () {
-  const isUnstagedChanges = execSync('git diff --exit-code', {silent: true}).code
-  const isStagedChanged = execSync('git diff --cached --exit-code', {silent: true}).code
+function isDirectoryClean (workingDir) {
+  const isUnstagedChanges = execSync('git diff --exit-code', {silent: true, cwd: workingDir}).code
+  const isStagedChanged = execSync('git diff --cached --exit-code', {silent: true, cwd: workingDir}).code
   return !(isUnstagedChanges || isStagedChanged)
 }
 
@@ -46,7 +37,7 @@ function action (config, directory, options) {
     ? config.releaseBranch
     : 'master'
 
-  const { code } = execSync('git checkout ' + releaseBranch, { silent: true })
+  const { code } = execSync('git checkout ' + releaseBranch, { silent: true, cwd: directory })
 
   if (code !== 0) {
     throw new Error('Could not switch to ' + releaseBranch)
@@ -55,9 +46,9 @@ function action (config, directory, options) {
   const packages = config.packages.map(getPkg(directory))
 
   checkRelease(packages).then(function (status) {
-    const packageNames = Object.keys(status)
+    const packageNames = Object.keys(status).filter((name) => status[name].increment > 0)
 
-    forEach(packageNames, function (packageName) {
+    function release (packageName) {
       const index = packages.indexOf(packageName)
       const relativePath = config.packages[index]
 
@@ -76,7 +67,7 @@ function action (config, directory, options) {
         previousFile = readFileSync(changelog, 'utf8')
       }
 
-      if (isDirectoryClean()) {
+      if (isDirectoryClean(directory)) {
         if (!method || check || pkg.private) {
           console.log(separator(packageName))
           if (pkg.private) {
@@ -95,16 +86,21 @@ function action (config, directory, options) {
 
         if (!method || check || pkg.private) {
           return generateChangelog(changelogOptions).then(() => {
+            if (check) {
+              console.log(separator())
+              continueReleasing()
+            }
             if (!check && method || pkg.private) {
-              execute(
+              execute(packageDirectory,
                 'git add CHANGELOG.md',
                 'git commit -m "docs(CHANGELOG): append to changelog [ci skip]"',
-                `git tag -f ${packageName}-${newVersion}`,
+                `git tag -f ${newVersion}-${packageName}`,
                 `git push origin ${releaseBranch}`,
                 'git push origin --tags'
               )
+              console.log(separator())
+              continueReleasing()
             }
-            console.log(separator())
           })
         }
 
@@ -114,30 +110,44 @@ function action (config, directory, options) {
         console.log(separator(packageName))
         process.stdout.write('    Running your tests')
         start()
-        exec('npm test')
-          .then(handleTestOutput(method, packageName, newVersion))
+        exec('npm test', { silent: true, cwd: packageDirectory })
+          .then(handleTestOutput(method, packageName, newVersion, packageDirectory))
           .catch(handleTestError)
-          .then(handleVersionOutput(method, releaseBranch, newVersion, changelogOptions))
-          .then(handleChangelogOutput)
+          .then(handleVersionOutput(method, releaseBranch, newVersion, packageName, changelogOptions, packageDirectory))
+          .then(handleChangelogOutput(packageDirectory))
           .then(({ code, err }) => {
             stop()
             if (code !== 0) {
               console.log(err)
+              console.log(separator())
+            } else {
+              console.log(separator())
+              continueReleasing()
             }
-            console.log(separator())
           })
-          .then(() => { chdir(directory) })
-          .catch(() => { chdir(directory) })
       } else {
         log('RELEASE ERROR: Working directory must be clean to push release!')
       }
-    })
+    }
+
+    function continueReleasing () {
+      if (packageNames !== 0) {
+        release(packageNames.shift())
+      }
+      if (packageNames.length === 0) {
+        console.log('\n All releases complete!\n')
+      }
+    }
+
+    if (packageNames.length > 0) {
+      continueReleasing()
+    }
   })
 }
 
-function execute (...commands) {
+function execute (packageDirectory, ...commands) {
   function _exec (cmd) {
-    const { code, stderr, stdout } = execSync(cmd, { silent: true })
+    const { code, stderr, stdout } = execSync(cmd, { silent: true, cwd: packageDirectory })
     if (code === 0 && commands.length > 0) {
       const _cmd = commands.shift()
       return _exec(_cmd)
@@ -152,14 +162,15 @@ function execute (...commands) {
   return _exec(commands.shift())
 }
 
-function handleTestOutput (method, packageName, newVersion) {
+function handleTestOutput (method, packageName, newVersion, packageDirectory) {
   return function ({ code, out, err }) {
     if (code === 0) {
       stop()
       log(out)
       process.stdout.write('    Running npm version')
       start()
-      return exec(`npm version ${method} -m 'release(${packageName}): ${newVersion} [ci skip]'`)
+      return exec(`npm version --no-git-tag-version ${method} -m 'release(${packageName}): ${newVersion} [ci skip]'`,
+                  { silent: true, cwd: packageDirectory })
     } else {
       throw out
     }
@@ -174,7 +185,7 @@ function handleTestError (err) {
   console.log(separator())
 }
 
-function handleVersionOutput (method, releaseBranch, newVersion, options) {
+function handleVersionOutput (method, releaseBranch, newVersion, packageName, options, packageDirectory) {
   return function ({code, out, err}) {
     if (code === 0) {
       stop()
@@ -182,9 +193,10 @@ function handleVersionOutput (method, releaseBranch, newVersion, options) {
       process.stdout.write('    Generating Changelog')
       start()
       return generateChangelog(options).then((file) => {
-        return execute(
+        return execute(packageDirectory,
           'git add .',
           `git commit -m "chore(release): ${newVersion} [ci skip]"`,
+          `git tag -f ${newVersion}-${packageName}`,
           `git push origin ${releaseBranch}`,
           'git push origin --tags'
         )
@@ -201,16 +213,18 @@ function handleVersionOutput (method, releaseBranch, newVersion, options) {
   }
 }
 
-function handleChangelogOutput ({ code, out, err }) {
-  stop()
-  if (code === 0) {
-    process.stdout.write('   Publishing your package')
-    start()
-    return exec('npm publish')
-  } else {
-    log('Publishing your package has failed: \n')
-    log(err)
-    console.log(separator())
+function handleChangelogOutput (packageDirectory) {
+  return function ({ code, out, err }) {
+    stop()
+    if (code === 0) {
+      process.stdout.write('   Publishing your package')
+      start()
+      return exec('npm publish', { silent: true, cwd: packageDirectory })
+    } else {
+      log('Publishing your package has failed: \n')
+      log(err)
+      console.log(separator())
+    }
   }
 }
 
