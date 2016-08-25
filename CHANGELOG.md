@@ -1,3 +1,12 @@
+# v2.0.20 (2016-08-25)
+---
+
+
+## Bug Fixes
+
+    - fix(northbrook): fix commit msgs for monorepos [e3f44754](https://github.com/northbrookjs/northbrook/commits/e3f44754db868c4b1e9d0d807c28ae27314e97d0)
+
+
 # v2.0.19 (2016-08-24)
 ---
 
