@@ -1,3 +1,12 @@
+# v2.2.1 (2016-08-25)
+---
+
+
+## Bug Fixes
+
+    - fix(northbrook): move deploy script to user travis ci env vars [2932b913](https://github.com/northbrookjs/northbrook/commits/2932b9135482acd978e5b7bfd69c90e57064ea65)
+
+
 # v2.2.0 (2016-08-25)
 ---
 
