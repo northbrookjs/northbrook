@@ -54,7 +54,7 @@
     "precommit": "npm run build && git fetch origin",
     "commit": "node cli.js commit",
     "preversion": "npm run build",
-    "prerelease": "npm run build",
+    "prerelease": "npm run build && echo 'login as `northbrook`' && sleep 2 && npm login",
     "release": "node cli.js release"
   },
   "dependencies": {
