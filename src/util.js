@@ -223,10 +223,16 @@ export function resolvePlugins (config, workingDir) {
   if (!config) return []
 
   const prefix = name => 'northbrook-' + name
+  const scopePrefix = name => '@northbrook/' + name
 
   const plugins = pluck('plugins', config) && config.plugins.slice() // no mutation of original allowd
 
-  return plugins && filter(map(plugins, getPlugin).concat(map(map(plugins, prefix), getPlugin)), Boolean) || []
+  return plugins && filter(
+      map(plugins, getPlugin)
+        .concat(map(map(plugins, prefix), getPlugin))
+        .concat(map(map(plugins, scopePrefix), getPlugin))
+      , Boolean
+    ) || []
 }
 
 /**
