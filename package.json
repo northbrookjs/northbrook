@@ -69,7 +69,7 @@
     "inquirer": "^1.1.2",
     "khaos": "^0.9.3",
     "mkdirp": "^0.5.1",
-    "shelljs": "^0.7.3",
+    "shelljs": "^0.7.4",
     "simple-spinner": "0.0.5",
     "symlink-or-copy": "^1.1.6"
   },
