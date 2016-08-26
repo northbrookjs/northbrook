@@ -1,3 +1,13 @@
+# v2.2.4 (2016-08-26)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): fix deployment script [6d795277](https://github.com/northbrookjs/northbrook/commits/6d7952778d212cbc40c760be320973a23ab4b571)
+- fix(northbrook): single quotes are not supported by bash [90d32eab](https://github.com/northbrookjs/northbrook/commits/90d32eab6e2ba22bb74e7b4324b30843c155ad48)
+
+
 # v2.2.3 (2016-08-25)
 ---
 
