@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { types } from 'conventional-commit-types'
+import { types } from '@northbrook/commit-types'
 import { prompt } from 'inquirer'
 
 import { isInitialized, exec, clear, filterScopes } from '../../util'

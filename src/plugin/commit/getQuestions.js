@@ -16,8 +16,6 @@ export function getQuestions (options) {
     }
   })
 
-  choices.push({ name: rightPad('WIP:', length) + ' A Work In Progress', value: 'WIP' })
-
   return [
     {
       type: 'list',

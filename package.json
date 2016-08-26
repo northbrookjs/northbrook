@@ -32,18 +32,7 @@
       "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
     },
     "validate-commit-msg": {
-      "types": [
-        "feat",
-        "fix",
-        "docs",
-        "style",
-        "refactor",
-        "perf",
-        "test",
-        "chore",
-        "revert",
-        "release"
-      ]
+      "types": "@northbrook/commit-types"
     }
   },
   "scripts": {
@@ -58,11 +47,11 @@
     "release": "node cli.js release"
   },
   "dependencies": {
+    "@northbrook/commit-types": "^1.1.0",
     "commander": "^2.9.0",
     "concat-stream": "^1.5.1",
     "conventional-commits-filter": "^1.0.0",
     "conventional-commits-parser": "^1.2.3",
-    "conventional-commit-types": "^2.0.0",
     "find-config": "^1.0.0",
     "git-latest-semver-tag": "^1.0.2",
     "git-raw-commits": "^1.1.2",
