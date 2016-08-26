@@ -3,7 +3,7 @@ import assert from 'power-assert'
 
 import { buildCommit } from './buildCommit'
 import { getQuestions } from './getQuestions'
-import { types } from 'conventional-commit-types'
+import { types } from '@northbrook/commit-types'
 
 const scopes = [
   {name: 'test', value: 'test'}
