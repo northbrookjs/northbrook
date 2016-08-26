@@ -13,7 +13,7 @@
 
 ## Bug Fixes
 
-    - fix(northbrook): remove unneeded console.log [0cf0a188](https://github.com/northbrookjs/northbrook/commits/0cf0a1885d72b21b81cc5b1338902e149c750364)
+- fix(northbrook): remove unneeded console.log [0cf0a188](https://github.com/northbrookjs/northbrook/commits/0cf0a1885d72b21b81cc5b1338902e149c750364)
 
 
 # v2.2.1 (2016-08-25)
