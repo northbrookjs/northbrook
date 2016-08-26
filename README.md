@@ -241,18 +241,7 @@ If you are using `northbrook init` it will generate these for you, but it does
     "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
   },
   "validate-commit-msg": {
-    "types": [
-      "feat",
-      "fix",
-      "docs",
-      "style",
-      "refactor",
-      "perf",
-      "test",
-      "chore",
-      "revert",
-      "release" // required for doing releases if you're using validate-commit-msg
-    ]
+    "types": "@northbrook/commit-types"
   }
 }
 ```
