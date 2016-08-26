@@ -1,3 +1,12 @@
+# v2.2.6 (2016-08-26)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): use @northbrook/commit-types [6120e61e](https://github.com/northbrookjs/northbrook/commits/6120e61e90b754e09f0a165298e62129b25e51d0)
+
+
 # v2.2.5 (2016-08-26)
 ---
 
