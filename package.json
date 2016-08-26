@@ -1,6 +1,6 @@
 {
   "name": "northbrook",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "description": "A configurable tool for managing projects with NPM",
   "main": "lib/api.js",
   "jsnext:main": "src/api.js",
