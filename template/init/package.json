@@ -18,7 +18,7 @@
       "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
     },
     "validate-commit-msg": {
-      "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "revert", "release"]
+      "types": "@northbrook/commit-types"
     }
   },
   "scripts": {
