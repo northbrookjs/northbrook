@@ -39,7 +39,7 @@ export function generateChangelog ({ commits, file, version, url, bugs, previous
       changelog.write(`\n## ${title}\n\n`)
 
       forEach(sectionCommits, function (commit) {
-        changelog.write(`    - ${commit.header} ${linkToCommit(commit.hash, url)}`)
+        changelog.write(`- ${commit.header} ${linkToCommit(commit.hash, url)}`)
         changelog.write(`\n`)
       })
     })
