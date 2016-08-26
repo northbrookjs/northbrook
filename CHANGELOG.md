@@ -4,7 +4,7 @@
 
 ## Bug Fixes
 
-    - fix(northbrook): github hostname for origin typo fix (#30) [976153ea](https://github.com/northbrookjs/northbrook/commits/976153ea1ecc022a726577cbc337dfa68a8ed325)
+- fix(northbrook): github hostname for origin typo fix (#30) [976153ea](https://github.com/northbrookjs/northbrook/commits/976153ea1ecc022a726577cbc337dfa68a8ed325)
 
 
 # v2.2.2 (2016-08-25)
