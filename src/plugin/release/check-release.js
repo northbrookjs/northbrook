@@ -4,7 +4,7 @@ import gitLatestTag from 'git-latest-semver-tag'
 import commitsParser from 'conventional-commits-parser'
 import commitsFilter from 'conventional-commits-filter'
 import concat from 'concat-stream'
-import { forEach, separator, log, clear, modOutput } from '../../util'
+import { forEach, separator, log, clear } from '../../util'
 
 function incrementName (code) {
   switch (code) {

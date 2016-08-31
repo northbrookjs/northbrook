@@ -8,7 +8,7 @@ const version = require(join(__dirname, '../../package.json')).version
 const templateDirectory = join(__dirname, '../../template/init')
 const destinationDirectory = process.cwd()
 
-import { isFile, separator, log, exec, clear } from '../util'
+import { isFile, separator, log, execp as exec, clear } from '../util'
 
 changeSeq(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .'])
 

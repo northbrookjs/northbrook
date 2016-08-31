@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { readFileSync } from 'fs'
 import { exec as execSync } from 'shelljs'
-import { isInitialized, isFile, exec, chdir, separator, log, splitVersion, filterScopes } from '../../util'
+import { isInitialized, isFile, execp as exec, chdir, separator, log, splitVersion, filterScopes } from '../../util'
 import { start, stop, change_sequence as changeSeq } from 'simple-spinner'
 import { checkRelease } from './check-release'
 import { generateChangelog } from './generate-changelog'

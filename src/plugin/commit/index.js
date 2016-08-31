@@ -2,7 +2,7 @@ import { join } from 'path'
 import { types } from '@northbrook/commit-types'
 import { prompt } from 'inquirer'
 
-import { isInitialized, exec, clear, filterScopes, log } from '../../util'
+import { isInitialized, execp, clear, filterScopes, log } from '../../util'
 
 import { getQuestions } from './getQuestions'
 import { buildCommit } from './buildCommit'
@@ -15,12 +15,12 @@ export const plugin = function commit (program, config, directory) {
 
 function action (config, directory, gitArgs) {
   isInitialized(config)
-  exec('git commit --dry-run').then(({code, out, err}) => {
+  execp('git commit --dry-run').then(({code, out, err}) => {
     if (code === 0) {
       clear()
       return askQuestions(config, directory).then(handleAnswers(gitArgs.join(' ')))
     } else {
-      if (out.indexOf('nothing added to commit') > -1) {
+      if (out.indexOf('nothing added to commit') > -1 || out.indexOf('Changes not staged for commit') > -1) {
         log('\n\nNo files are added to commit.')
         log('\n')
         log('Did you forget git to run `git add`?\n')
@@ -53,7 +53,7 @@ export function handleAnswers (gitArgs) {
 }
 
 function commit (commitMsg, gitArgs) {
-  return exec(`git commit ${gitArgs} -m '${commitMsg}'`)
+  return execp(`git commit ${gitArgs} -m '${commitMsg}'`)
     .then(({ code, out }) => {
       if (code === 0) {
         log('\nSuccessfully built commit.')

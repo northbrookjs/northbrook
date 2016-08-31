@@ -3,7 +3,7 @@ import {
   isInitialized,
   map,
   onlyPackage,
-  exec as execCmd,
+  execp as execCmd,
   separator,
   log
 } from '../util'

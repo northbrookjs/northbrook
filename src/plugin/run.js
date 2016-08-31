@@ -1,7 +1,7 @@
 import 'colors'
 import { join, delimiter } from 'path'
 import { stop } from 'simple-spinner'
-import { exec, log } from '../util'
+import { execp as exec, log } from '../util'
 
 
 const flatten = l => l.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), [])
