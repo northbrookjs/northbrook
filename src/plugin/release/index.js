@@ -40,6 +40,7 @@ function action (config, directory, options) {
     : 'master'
 
   const skipNpm = options && options.skipNpm
+  const skipLogin = options && options.skipLogin
 
   const { code } = execSync('git checkout ' + releaseBranch, { silent: true, cwd: directory })
 
@@ -118,7 +119,7 @@ function action (config, directory, options) {
           .then(handleTestOutput(method, packageName, newVersion, packageDirectory))
           .catch(handleTestError)
           .then(handleVersionOutput(method, releaseBranch, newVersion, packageName, changelogOptions, packageDirectory))
-          .then(handleChangelogOutput(packageDirectory, skipNpm))
+          .then(handleChangelogOutput(packageDirectory, skipNpm, skipLogin))
           .then(({ code, err }) => {
             stop()
             if (code !== 0) {
@@ -221,7 +222,7 @@ function handleVersionOutput (method, releaseBranch, newVersion, packageName, op
   }
 }
 
-function handleChangelogOutput (packageDirectory, skipNpm) {
+function handleChangelogOutput (packageDirectory, skipNpm, skipLogin) {
   return function ({ code, out, err }) {
     stop()
     if (code === 0) {
@@ -230,7 +231,18 @@ function handleChangelogOutput (packageDirectory, skipNpm) {
       if (skipNpm) {
         return Promise.resolve({ code: 0, err: '', out: '' })
       }
-      return exec('npm', ['publish'], { stdio: 'inherit', cwd: packageDirectory })
+
+      if (skipLogin) {
+        return exec('npm', ['publish'], { stdio: 'inherit', cwd: packageDirectory })
+      }
+
+      return exec('npm', ['login'], {stdio: 'inherit', cwd: packageDirectory})
+        .then(({ code }) => {
+          if (code === 0) return exec('npm', ['publish'], { stdio: 'inherit', cwd: packageDirectory })
+          else {
+            log('Login has failed')
+          }
+        })
     } else {
       log('Publishing your package has failed: \n')
       log(err)
