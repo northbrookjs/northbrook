@@ -1,3 +1,10 @@
 {
-  "packages": ["."]
+  "packages": ["."],
+  "scripts": {
+    "build": "rimraf lib && buba -i src -o lib && exit 2",
+    "test:lint": "eslint src/*.js",
+    "test:unit": "mocha -r buba/register src/*.test.js src/**/*.test.js src/plugin/**/*.test.js",
+    "pretest": "node cli.js run build --silent",
+    "test": "nb run test:lint && nb run test:unit"
+  }
 }
