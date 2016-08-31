@@ -114,7 +114,7 @@ function action (config, directory, options) {
         console.log(separator(packageName))
         log('    Running your tests')
         start()
-        exec('npm test', { cwd: packageDirectory, stdio: 'inherit' })
+        exec('npm', ['test'], { cwd: packageDirectory, stdio: 'inherit' })
           .then(handleTestOutput(method, packageName, newVersion, packageDirectory))
           .catch(handleTestError)
           .then(handleVersionOutput(method, releaseBranch, newVersion, packageName, changelogOptions, packageDirectory))
@@ -172,8 +172,14 @@ function handleTestOutput (method, packageName, newVersion, packageDirectory) {
       log(out)
       log('    Running npm version')
       start()
-      return exec(`npm version --no-git-tag-version ${method} -m 'release(${packageName}): ${newVersion} [ci skip]'`,
-                  { stdio: 'inherit', cwd: packageDirectory })
+      const args = [
+        'version',
+        '--no-git-tag-version',
+        method,
+        '-m',
+        `'release(${packageName}): ${newVersion} [ci skip]'`
+      ]
+      return exec(`npm`, args, { stdio: 'inherit', cwd: packageDirectory })
     } else {
       throw out
     }
@@ -224,7 +230,7 @@ function handleChangelogOutput (packageDirectory, skipNpm) {
       if (skipNpm) {
         return Promise.resolve({ code: 0, err: '', out: '' })
       }
-      return exec('npm publish', { stdio: 'inherit', cwd: packageDirectory })
+      return exec('npm', ['publish'], { stdio: 'inherit', cwd: packageDirectory })
     } else {
       log('Publishing your package has failed: \n')
       log(err)
