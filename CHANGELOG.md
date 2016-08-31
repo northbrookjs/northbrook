@@ -1,3 +1,33 @@
+# v2.4.0 (2016-08-31)
+---
+
+
+## Features
+
+- feat(northbrook): add colors to separator [19527c68](https://github.com/northbrookjs/northbrook/commits/19527c68e5cb47ed9d1cd970a55801bf80022bbb)
+- feat(northbrook): colorize release output [9f478947](https://github.com/northbrookjs/northbrook/commits/9f4789479ab089468dc4250d5e17b4f955af8f13)
+- feat(northbrook): add core command run [af512714](https://github.com/northbrookjs/northbrook/commits/af51271458e1f8c214ea21c309b88c9b954f2483)
+- feat(northbrook): add run to default plugins [2b92cee3](https://github.com/northbrookjs/northbrook/commits/2b92cee3695a5c131972b82afec2a2ca69ba2376)
+- feat(northbrook): print changelog in check mode [skip ci] [b0efa08d](https://github.com/northbrookjs/northbrook/commits/b0efa08da055e28d7836507366a32226518877c1)
+- feat(northbrook): add --skip-login option [cd36e378](https://github.com/northbrookjs/northbrook/commits/cd36e37878bdcd1089523c5bdda6a2f29ecb2d3c)
+
+## Bug Fixes
+
+- fix(northbrook): git will usually log to stdout [0aff15e5](https://github.com/northbrookjs/northbrook/commits/0aff15e5a303f0df24720ff98fe91fa0904d2497)
+- fix(northbrook): adjust templates to new information [31e8f6de](https://github.com/northbrookjs/northbrook/commits/31e8f6de155d604152bc2bce881e793b3bd06c8c)
+- fix(northbrook): use working directory when no packages are defined [49d43e05](https://github.com/northbrookjs/northbrook/commits/49d43e05b682b807ebb0e5c97de2e243b1e5144e)
+- fix(northbrook): always assign packages [c26d42ec](https://github.com/northbrookjs/northbrook/commits/c26d42ecf746b9d301e47aeea7ca0faf9cfd01ab)
+- fix(northbrook): only show new stuff in check mode [bd23089f](https://github.com/northbrookjs/northbrook/commits/bd23089fca6422c61bbe6d617125fc995cea0ccf)
+- fix(northbrook): fix styling of separator output [d4b66f4f](https://github.com/northbrookjs/northbrook/commits/d4b66f4f8ff5509f99385bbc8a9809e4b2375ee6)
+- fix(northbrook): provide backwards compatible exec method [e33ae9f0](https://github.com/northbrookjs/northbrook/commits/e33ae9f0f0cdda4aff07655fab87eeed53b922e0)
+- fix(northbrook): use backwards compatible exec method [951e3a27](https://github.com/northbrookjs/northbrook/commits/951e3a2707b2f2aeb8293c286849db8d7a54ae50)
+- fix(northbrook): share the stdin/stdout in exec [909df8cd](https://github.com/northbrookjs/northbrook/commits/909df8cdcbec0e414a2c5f46912a41f9fe74c3f9)
+- fix(northbrook): allow executing commmands that require input [fad0c873](https://github.com/northbrookjs/northbrook/commits/fad0c87341d86baa85b77886f4195d2485b1590c)
+- fix(northbrook): should not show loader during interactive prompts [3f25afe3](https://github.com/northbrookjs/northbrook/commits/3f25afe32e10f0a4f2e75a004433563218bd2bc2)
+- fix(northbrook): build lib to run tests [873e5f02](https://github.com/northbrookjs/northbrook/commits/873e5f0276282f254d7adecf8baa2dfedb85d89e)
+- fix(northbrook): use new exec command correctly [ee735086](https://github.com/northbrookjs/northbrook/commits/ee735086c7896982fd9e88af54854a32819d6812)
+
+
 # v2.3.0 (2016-08-31)
 ---
 
