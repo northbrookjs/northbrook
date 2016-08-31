@@ -1,7 +1,7 @@
 {
   "packages": ["."],
   "scripts": {
-    "build": "rimraf lib && buba -i src -o lib && exit 2",
+    "build": "rimraf lib && buba -i src -o lib",
     "test:lint": "eslint src/*.js",
     "test:unit": "mocha -r buba/register src/*.test.js src/**/*.test.js src/plugin/**/*.test.js",
     "pretest": "node cli.js run build --silent",
