@@ -132,7 +132,7 @@ function runCommand (silent, cmd) {
   if (cmd) {
     if (!silent) {
       stop()
-      log(true, `\n-  $`.reset + ` ${cmd.replace('\n', '\\n').replace('\t', '\\t').replace('\r', '\\r')}`.white.italic)
+      log(`\n-  $`.reset + ` ${cmd.replace('\n', '\\n').replace('\t', '\\t').replace('\r', '\\r')}`.white.italic)
     }
 
     const args = cmd.split(' ').filter(x => x.length > 0)
