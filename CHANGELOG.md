@@ -1,3 +1,12 @@
+# v2.3.0 (2016-08-31)
+---
+
+
+## Features
+
+- feat(northbrook): add the ability to extend configurations [e328c636](https://github.com/northbrookjs/northbrook/commits/e328c636c706909d9ee2eafe56c751e776fdbee6)
+
+
 # v2.2.7 (2016-08-26)
 ---
 
