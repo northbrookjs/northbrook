@@ -56,7 +56,7 @@ function commit (commitMsg, gitArgs) {
   return exec(`git commit ${gitArgs} -m '${commitMsg}'`)
     .then(({ code, out }) => {
       if (code === 0) {
-        log('\nSuccessfully built commit.\n')
+        log('\nSuccessfully built commit.')
       } else {
         log(out)
       }
