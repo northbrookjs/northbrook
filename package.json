@@ -38,8 +38,7 @@
   "scripts": {
     "build": "node cli.js run build",
     "test": "node cli.js run test",
-    "precommit": "npm run build && git fetch origin",
-    "commit": "node cli.js commit",
+    "commit": "node cli.js run commit",
     "preversion": "npm run build",
     "prerelease": "npm run build && echo 'login as `northbrook`' && npm login",
     "release": "node cli.js release"

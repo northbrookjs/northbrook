@@ -4,6 +4,8 @@
     "test:lint": "eslint src/*.js",
     "test:unit": "mocha -r buba/register src/*.test.js src/**/*.test.js src/plugin/**/*.test.js",
     "pretest": "node cli.js run build --silent",
-    "test": "nb run test:lint && nb run test:unit"
+    "test": "nb run test:lint && nb run test:unit",
+    "precommit": "npm run build",
+    "commit": "node cli.js commit"
   }
 }
