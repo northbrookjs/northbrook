@@ -1,5 +1,4 @@
 {
-  "packages": ["."],
   "scripts": {
     "build": "rimraf lib && buba -i src -o lib",
     "test:lint": "eslint src/*.js",
