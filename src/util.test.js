@@ -232,13 +232,13 @@ describe('util', () => {
   describe('modOutput', () => {
     it('should shift a string over 4 spaces', () => {
       const str = 'hi'
-      const expected = '    ' + str
+      const expected = str
       assert(modOutput(str) === expected)
     })
 
     it('should shift all lines over 4 spaces', () => {
       const str = 'hello\nworld'
-      const expected = '    hello\n    world'
+      const expected = 'hello\n    world'
       assert(modOutput(str) === expected)
     })
   })

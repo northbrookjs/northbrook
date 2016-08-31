@@ -4,7 +4,7 @@ import gitLatestTag from 'git-latest-semver-tag'
 import commitsParser from 'conventional-commits-parser'
 import commitsFilter from 'conventional-commits-filter'
 import concat from 'concat-stream'
-import { forEach, separator, log, clear } from '../../util'
+import { forEach, separator, log, clear, modOutput } from '../../util'
 
 function incrementName (code) {
   switch (code) {
@@ -34,7 +34,7 @@ export const checkRelease = function (packages) {
   })
 
   return latestTag()
-    .catch(err => console.log(err))
+    .catch(err => log(err))
     .then(rawCommits)
     .catch(() => {
       showReportHeaderNegative()
@@ -143,16 +143,16 @@ export function rawCommits (tag) {
 function showReportHeaderPositive () {
   clear()
   console.log(separator())
-  log('RELEASES TO DO'.underline.bold + '\n\n' +
-      '    We checked all packages and recent commits, and discovered that' + '\n' +
-      '    according to semver.org you should release new versions for the' + '\n' +
-      '    following packages.\n')
+  log('                                '.reset + 'RELEASES TO DO'.underline.bold + '\n\n' +
+      'We checked all packages and recent commits, and discovered that' + '\n' +
+      'according to semver.org you should release new versions for the' + '\n' +
+      'following packages.\n')
 }
 
 function showReportHeaderNegative () {
   clear()
   console.log(separator())
   log('Nothing to release.\n\n' +
-      '    We checked all packages and recent commits, and discovered that\n' +
-      '    you do not need to release any new version, according to semver.org.')
+      'We checked all packages and recent commits, and discovered that\n' +
+      'you do not need to release any new version, according to semver.org.')
 }

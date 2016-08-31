@@ -1,9 +1,8 @@
 import 'colors'
 import { join, delimiter } from 'path'
-import { start, stop, change_sequence as changeSeq } from 'simple-spinner'
-import { exec, clear, separator, log } from '../util'
+import { stop } from 'simple-spinner'
+import { exec, separator, log } from '../util'
 
-changeSeq(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .'])
 
 const flatten = l => l.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), [])
 
@@ -12,9 +11,23 @@ export const plugin = run
 function run (program, config, workingDir) {
   program
     .command('run <scriptName> [args...]')
-    .option('-v, --verbose', 'Prints extra information to the console')
+    .option('-s, --silent', 'Print less stuff')
     .description('Like npm scripts, but NPM installable')
     .action((scriptName, args, options) => action(config, workingDir, scriptName, args, options))
+}
+
+function action (config, workingDir, scriptName, args, options) {
+  const { pre, cmd, post } = getScripts(config, scriptName, args)
+
+  log()
+
+  if (!cmd) {
+    log('Cannot find script: '.red + scriptName)
+    return log(separator() + '\n')
+  }
+
+  process.env.PATH = join(workingDir, 'node_modules/.bin') + delimiter + process.env.PATH
+  execute(workingDir, scriptName, pre, cmd, post, options && options.silent || false)
 }
 
 const trim = str => str.trim()
@@ -57,95 +70,87 @@ function getScripts (config, scriptName, args) {
   return { pre: null, cmd: null, post: null }
 }
 
-function action (config, workingDir, scriptName, args, options) {
-  clear()
-
-  const { pre, cmd, post } = getScripts(config, scriptName, args)
-
-  console.log(separator())
-  log()
-
-  if (!cmd) {
-    log('Cannot find script: '.red + scriptName)
-    return console.log(separator() + '\n')
-  }
-
-  process.env.PATH = join(workingDir, 'node_modules/.bin') + delimiter + process.env.PATH
-  execute(workingDir, scriptName, pre, cmd, post, options && options.verbose)
-}
-
 let number = 0
-function execute (packageDirectory, scriptName, pre, cmd, post, verbose) {
+function execute (packageDirectory, scriptName, pre, cmd, post, silent) {
   const pretext = (`northbrook run pre${scriptName}`.underline)
   const text = (`northbrook run ${scriptName}`.underline)
   const posttext = (`northbrook run post${scriptName}`.underline)
 
-  _exec(pretext, verbose, pre)
+  _exec(pretext, silent, pre)
     .then(({code}) => {
       if (code === 0) {
-        return _exec(text, verbose, cmd)
+        return _exec(text, silent, cmd)
       }
     })
     .then(({code}) => {
-      if (code === 0) return _exec(posttext, verbose, post)
-    })
-    .then(() => {
-      console.log(separator())
+      if (code === 0) return _exec(posttext, silent, post)
     })
     .catch((err) => {
-      console.log(err)
-      console.log(separator())
+      log(err)
+    })
+    .then(() => {
+      process.stdout.close()
     })
 }
 
 const toStr = x => (String(parseInt(x)) + '.').white
 
-function _exec (out, verbose, cmds) {
+function _exec (out, silent, cmds) {
   if (cmds && cmds.length > 0) {
-    process.stdout.write(toStr(++number))
-    process.stdout.write('  ' + out)
+    if (!silent) {
+      log(toStr(++number), ' ' + out)
+    }
 
-    let r = runCommand(verbose, cmds[0].trim())
+    let r = runCommand(silent, cmds[0].trim())
 
     for (let i = 1; i < cmds.length; ++i) {
       const cmd = cmds[i]
       r = r.then(({code, err}) => {
         if (code === 0) {
-          return runCommand(verbose, cmd)
+          return runCommand(silent, cmd)
         }
-        throw err
       })
     }
+
+    if (silent) {
+      return r.then(({ code }) => {
+        if (code === 0) {
+          log(toStr(++number), ' ' + out, '\u2713'.green.bold)
+        } else {
+          log(toStr(++number), ' ' + out, '\u2718'.red)
+        }
+      })
+    }
+
     return r
   }
 
   return Promise.resolve({ code: 0, out: '', err: '' })
 }
 
-function runCommand (verbose, cmd) {
+function runCommand (silent, cmd) {
   if (cmd) {
-    if (verbose) {
+    if (!silent) {
       stop()
-      process.stdout.write(`\n\n-  $`.reset + ` ${cmd.replace('\n', '\\n').replace('\t', '\\t').replace('\r', '\\r')}`.white.italic)
-      start()
+      log(true, `\n-  $`.reset + ` ${cmd.replace('\n', '\\n').replace('\t', '\\t').replace('\r', '\\r')}`.white.italic)
     }
-    return exec(cmd).then(logSuccess(verbose))
+    return exec(cmd).then(logSuccess(silent))
   }
 
   return Promise.resolve({ code: 0, out: '', err: '' })
 }
 
-function logSuccess (verbose) {
+function logSuccess (silent) {
   return function ({ code, out, err }) {
     stop()
     if (!code || code === 0) {
-      if (!verbose) { log(); log() }
-      if (out) {
+      if (out.length > 0) {
         log((out).green)
+      } else if (!silent) {
+        log()
       }
     }
     if (code && code !== 0) {
-      if (!verbose) { log(); log() }
       if (err) {
         log((err).red)
       } else if (out) {

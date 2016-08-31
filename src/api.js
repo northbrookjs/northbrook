@@ -63,6 +63,10 @@ export function setup ({ config, directory, defaultPlugins = [] }) {
 
   forEach(plugins, plugin => plugin(program, clone(configExtends, config), directory))
 
+  process.on('beforeExit', () => {
+    process.stdout.write('\n', { encoding: 'utf8' })
+  })
+
   return {
     plugins,
     packages,

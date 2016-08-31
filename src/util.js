@@ -1,6 +1,9 @@
 // node.js imports
 import { join, dirname, relative } from 'path'
 import { statSync, lstatSync, readdirSync } from 'fs'
+import { start, change_sequence as changeSeq } from 'simple-spinner'
+
+changeSeq(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .'])
 
 // third-party imports
 import 'colors'
@@ -266,15 +269,24 @@ export function onlyPackage (name, packages) {
   return filter(packages, packagename => packagename === name)
 }
 
-export function log (...args) {
-  return console.log(...args.map(modOutput))
+export function log (progress, ...args) {
+  if (progress) {
+    if (typeof progress === 'string') {
+      return process.stdout.write(`${[progress].concat(args || []).map(modOutput).join(' ')}\n`, { encoding: 'UTF-8' })
+    } else if (progress === true) {
+      process.stdout.write(`${args.map(modOutput).join(' ')}`, { encoding: 'UTF-8' })
+      start()
+    }
+    return
+  }
+  process.stdout.write('\n', { encoding: 'UTF-8' })
 }
 
 /**
  *  add 4 spaces to all lines
  */
 export function modOutput (output) {
-  return '    ' + output.replace('\n', '\n    ').replace('\r', '\r    ')
+  return output.replace('\n', '\n    ').replace('\r', '\r    ')
 }
 
 /**

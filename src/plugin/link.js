@@ -14,7 +14,7 @@ function action (config, directory) {
   isInitialized(config, 'link')
 
   if (config.packages.length === 0) {
-    return console.log('no managed packages to symlink')
+    return log('no managed packages to symlink')
   }
 
   const packages = filter(map(config.packages, getPackage(directory)), Boolean)
@@ -32,18 +32,18 @@ function action (config, directory) {
       .concat(findPackagesToSymlink(devDependencies))
       .map(toManagedNames(packageNames, config.packages))
 
-    console.log(separator(name))
+    log(separator(name))
 
     if (packageNamesToSymlink.length === 0) {
       log('nothing to symlink to')
-      return console.log(separator())
+      return log(separator())
     }
 
     log('symlinking packages for ' + name, '...')
 
     symlink(packageNamesToSymlink, config.packages[index], directory)
 
-    console.log(separator())
+    log(separator())
   })
 }
 

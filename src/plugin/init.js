@@ -20,7 +20,7 @@ export const plugin = function init (program, config, workingDir) {
 
 export function action (config, workingdir) {
   if (isFile(join(destinationDirectory, 'northbrook.json'))) {
-    return console.log('This directory is already initialized')
+    return log('This directory is already initialized')
   }
 
   const khaos = new Khaos(templateDirectory)
@@ -92,33 +92,33 @@ function writeFiles (khaos, destination, files, answers) {
 
 function extras ({ githubRepo, packageName }) {
   clear()
-  console.log(separator(packageName))
+  log(separator(packageName))
 
   const config = { hideCursor: true }
 
-  process.stdout.write('    Running npm install')
+  log('    Running npm install')
   start(250, config)
   exec('npm install').then(function ({ code, out, err }) {
     stop()
     if (code === 0) {
-      process.stdout.write('\n    Running git init')
+      log('\n    Running git init')
       start(250, config)
       return exec('git init')
     } else {
       throw err
     }
   })
-  .catch(err => { log('\n    failed to run npm install\n', err) && console.log(separator()) })
+  .catch(err => { log('\n    failed to run npm install\n', err) && log(separator()) })
   .then(({ code, out, err }) => {
     stop()
     if (code === 0) {
-      process.stdout.write('\n    Adding git remote origin')
+      log('\n    Adding git remote origin')
       start(250, config)
       return exec(`git remote add origin https://github.com/${githubRepo}.git`)
     } else {
       throw err
     }
   })
-  .then(() => stop() && console.log(separator()))
-  .catch(() => stop() && console.log(separator()))
+  .then(() => stop() && log(separator()))
+  .catch(() => stop() && log(separator()))
 }

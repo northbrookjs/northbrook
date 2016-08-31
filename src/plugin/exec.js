@@ -27,9 +27,9 @@ export function action (config, workingDir, command, options) {
 
   if (packages.length === 0) {
     if (options.only) {
-      return console.log('Cannot find package ' + options.parent.only)
+      return log('Cannot find package ' + options.parent.only)
     }
-    return console.log('Cannot find any packages to execute your command :(')
+    return log('Cannot find any packages to execute your command :(')
   }
 
   const cmd = command.join(' ')
@@ -41,10 +41,10 @@ export function action (config, workingDir, command, options) {
 
     return execCmd(cmd, { silent: true, cwd: packageDir })
       .then(({ cmd, code, err, out }) => {
-        console.log(separator(name))
+        log(separator(name))
         log(cmd)
         log(out)
-        console.log(separator())
+        log(separator())
         return { cmd, code, err, out }
       })
   }))

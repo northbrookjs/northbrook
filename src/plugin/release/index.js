@@ -72,7 +72,7 @@ function action (config, directory, options) {
 
       if (isDirectoryClean(directory)) {
         if (!method || check || pkg.private) {
-          console.log(separator(packageName))
+          log(separator(packageName))
           if (pkg.private) {
             log('Package is private; only generating changelog')
           }
@@ -90,7 +90,7 @@ function action (config, directory, options) {
         if (!method || check || pkg.private) {
           return generateChangelog(changelogOptions).then(() => {
             if (check) {
-              console.log(separator())
+              log(separator())
               continueReleasing()
             }
             if (!check && method || pkg.private) {
@@ -101,7 +101,7 @@ function action (config, directory, options) {
                 `git push origin ${releaseBranch}`,
                 'git push origin --tags'
               )
-              console.log(separator())
+              log(separator())
               continueReleasing()
             }
           })
@@ -110,8 +110,8 @@ function action (config, directory, options) {
         // preform release
         chdir(packageDirectory)
 
-        console.log(separator(packageName))
-        process.stdout.write('    Running your tests')
+        log(separator(packageName))
+        log('    Running your tests')
         start()
         exec('npm test', { silent: true, cwd: packageDirectory })
           .then(handleTestOutput(method, packageName, newVersion, packageDirectory))
@@ -121,10 +121,10 @@ function action (config, directory, options) {
           .then(({ code, err }) => {
             stop()
             if (code !== 0) {
-              console.log(err)
-              console.log(separator())
+              log(err)
+              log(separator())
             } else {
-              console.log(separator())
+              log(separator())
               continueReleasing()
             }
           })
@@ -137,7 +137,7 @@ function action (config, directory, options) {
       if (packageNames !== 0) {
         release(packageNames.shift())
       } else if (packageNames.length === 0) {
-        console.log('\n All releases complete!\n')
+        log('\n All releases complete!\n')
       }
     }
 
@@ -157,7 +157,7 @@ function execute (packageDirectory, ...commands) {
       return { code, err: stderr, out: stdout }
     }
     if (code !== 0) {
-      console.log('\n' + stderr + '\n')
+      log('\n' + stderr + '\n')
     }
   }
 
@@ -169,7 +169,7 @@ function handleTestOutput (method, packageName, newVersion, packageDirectory) {
     if (code === 0) {
       stop()
       log(out)
-      process.stdout.write('    Running npm version')
+      log('    Running npm version')
       start()
       return exec(`npm version --no-git-tag-version ${method} -m 'release(${packageName}): ${newVersion} [ci skip]'`,
                   { silent: true, cwd: packageDirectory })
@@ -184,7 +184,7 @@ function handleTestError (err) {
   log('\n')
   log('Running your tests have failed: \n')
   log('    ' + err)
-  console.log(separator())
+  log(separator())
 }
 
 function handleVersionOutput (method, releaseBranch, newVersion, packageName, options, packageDirectory) {
@@ -192,7 +192,7 @@ function handleVersionOutput (method, releaseBranch, newVersion, packageName, op
     stop()
     if (code === 0) {
       log(out)
-      process.stdout.write('    Generating Changelog')
+      log('    Generating Changelog')
       start()
       return generateChangelog(options).then((file) => {
         return execute(packageDirectory,
@@ -218,7 +218,7 @@ function handleChangelogOutput (packageDirectory, skipNpm) {
   return function ({ code, out, err }) {
     stop()
     if (code === 0) {
-      process.stdout.write('\n    Publishing your package')
+      log('\n    Publishing your package')
       start()
       if (skipNpm) {
         return Promise.resolve({ code: 0, err: '', out: '' })
@@ -227,7 +227,7 @@ function handleChangelogOutput (packageDirectory, skipNpm) {
     } else {
       log('Publishing your package has failed: \n')
       log(err)
-      console.log(separator())
+      log(separator())
     }
   }
 }
