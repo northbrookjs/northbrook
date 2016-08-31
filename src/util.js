@@ -1,7 +1,7 @@
 // node.js imports
 import { join, dirname, relative } from 'path'
 import { statSync, lstatSync, readdirSync } from 'fs'
-import { spawnSync } from 'child_process'
+import { spawn } from 'child_process'
 
 // third-party imports
 import 'colors'
@@ -307,19 +307,23 @@ export function chdir (path) {
 /**
  * executes a command asynchronously
  */
-export function exec (command, options = {}) {
+export function exec (command, args, options = { stdio: 'inherit' }) {
   return new Promise((resolve, reject) => {
-    const { stdout, stderr } = spawnSync(command)
+    const { stdout, stderr, stdin } = options ? spawn(command, args, options) : spawn(command, args)
 
     stdout.on('data', (data) => {
-      console.log(data)
+      process.stdout.write(data)
+    })
+
+    process.stdin.on('data', (data) => {
+      stdin.write(data)
     })
 
     stdout.on('end', (data) => {
-      resolve(data)
+      resolve(data.toString())
     })
 
-    stderr.on('data', reject)
+    stderr.on('data', data => reject(data.toString()))
   })
 }
 

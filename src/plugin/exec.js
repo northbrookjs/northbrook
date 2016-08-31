@@ -3,7 +3,7 @@ import {
   isInitialized,
   map,
   onlyPackage,
-  execp as execCmd,
+  exec as execCmd,
   separator,
   log
 } from '../util'
@@ -18,7 +18,7 @@ const command = 'exec [command...]'
 const description = 'Execute a command in all packages'
 
 // exported for testing
-export function action (config, workingDir, command, options) {
+export function action (config, workingDir, args, options) {
   isInitialized(config, 'exec')
 
   const packages = options.parent.only
@@ -32,19 +32,19 @@ export function action (config, workingDir, command, options) {
     return log('Cannot find any packages to execute your command :(')
   }
 
-  const cmd = command.join(' ')
+  const cmd = args.shift()
 
   // return promise for testing
   return Promise.all(map(packages, function (packageName) {
     const packageDir = join(workingDir, packageName)
     const name = require(join(packageDir, 'package.json')).name
 
-    return execCmd(cmd, { silent: true, cwd: packageDir })
-      .then(({ cmd, code, err, out }) => {
-        log(separator(name))
+    return execCmd(cmd, args, { cwd: packageDir, stdio: 'inherit' })
+      .then(({ code, err, out }) => {
+        console.log(separator(name))
         log(cmd)
         log(out)
-        log(separator())
+        console.log(separator())
         return { cmd, code, err, out }
       })
   }))
