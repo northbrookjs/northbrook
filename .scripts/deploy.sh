@@ -15,5 +15,5 @@ if [[ $TRAVIS_BRANCH == "master" ]]; then
   npm run build;
 
   # run deployment
-  node cli.js release;
+  node cli.js release --skip-login;
 fi
