@@ -36,8 +36,8 @@
     }
   },
   "scripts": {
-    "build": "node cli.js run build",
-    "test": "node cli.js run test",
+    "build": "rimraf lib && buba -i src -o lib",
+    "test": "npm run build && node cli.js run test",
     "commit": "node cli.js run commit",
     "preversion": "npm run build",
     "prerelease": "npm run build && echo 'login as `northbrook`' && npm login",
