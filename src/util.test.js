@@ -155,7 +155,10 @@ describe('util', () => {
 
   describe('tryRequirePlugin', () => {
     // TODO: add tests when we have plugins to test
-    it('should return a plugin function if it is a plugin')
+    it('should return a plugin function if it is a plugin', () => {
+      const plugin = tryRequirePlugin('./plugin/exec').plugin
+      assert(typeof plugin === 'function')
+    })
     it('should return {plugin: false} if it is not a plugin', () => {
       const { plugin } = tryRequirePlugin('path')
       assert(plugin === false)
@@ -199,7 +202,15 @@ describe('util', () => {
   })
 
   describe('resolvePlugins', () => {
-    it('should resolve plugins')
+    it('should resolve plugins', () => {
+      const config = {
+        plugins: ['./plugin/exec', './plugin/commit']
+      }
+
+      const plugins = resolvePlugins(config, __dirname)
+
+      assert(plugins.length === 2)
+    })
     it('should return empty array if none are found', () => {
       const config = {
         plugins: ['path', 'fs'] // not plugins
@@ -208,6 +219,10 @@ describe('util', () => {
 
       assert(plugins.length === 0)
     })
+  })
+
+  describe('resolveExtends', () => {
+    it('should resolve extends configurations')
   })
 
   describe('modOutput', () => {

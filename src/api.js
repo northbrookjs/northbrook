@@ -2,6 +2,7 @@ import commander from 'commander'
 import {
   resolvePlugins,
   resolvePackages,
+  resolveExtends,
   filterDefaultPlugins,
   forEach,
   chdir
@@ -17,7 +18,7 @@ import { plugin as release } from './plugin/release'
 
 export const defaultPlugins = [ init, commit, release, exec, link ]
 
-const clone = obj => Object.assign({}, obj)
+const clone = (...obj) => Object.assign({}, ...obj)
 
 /**
  * Utility function to create a basic plugin
@@ -50,6 +51,8 @@ export function setup ({ config, directory, defaultPlugins = [] }) {
     config.packages = packages
   }
 
+  const configExtends = resolveExtends(config, directory)
+
   const defaults = filterDefaultPlugins(config, defaultPlugins)
   const userPlugins = resolvePlugins(config, directory)
 
@@ -57,7 +60,7 @@ export function setup ({ config, directory, defaultPlugins = [] }) {
 
   const program = commander.version(version)
 
-  forEach(plugins, plugin => plugin(program, clone(config), directory))
+  forEach(plugins, plugin => plugin(program, clone(configExtends, config), directory))
 
   return {
     plugins,

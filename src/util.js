@@ -237,6 +237,27 @@ export function resolvePlugins (config, workingDir) {
     ) || []
 }
 
+export function resolveExtends (config, workingDir) {
+  function getExtends (extensionName) {
+    return tryRequirePlugin(extensionName).config || // try normal require
+           tryRequirePlugin(join(workingDir, extensionName)).config || // try relative require
+           tryRequirePlugin(join(workingDir, 'node_modules', extensionName)).config || // try manual require from node_modules
+           false
+  }
+
+  if (!config) return {}
+
+  const prefix = 'northbrook-'
+  const scopePrefix = '@northbrook/'
+
+  const extension = pluck('extends', config)
+
+  return extension &&
+        getExtends(extension) ||
+        getExtends(prefix + extension) ||
+        getExtends(scopePrefix + extension) || {}
+}
+
 /**
  *  filters all packages to match only a specific package
  */
