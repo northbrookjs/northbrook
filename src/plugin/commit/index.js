@@ -2,7 +2,7 @@ import { join } from 'path'
 import { types } from '@northbrook/commit-types'
 import { prompt } from 'inquirer'
 
-import { isInitialized, exec, clear, filterScopes } from '../../util'
+import { isInitialized, exec, clear, filterScopes, log } from '../../util'
 
 import { getQuestions } from './getQuestions'
 import { buildCommit } from './buildCommit'
@@ -21,11 +21,15 @@ function action (config, directory, gitArgs) {
       return askQuestions(config, directory).then(handleAnswers(gitArgs.join(' ')))
     } else {
       if (out.indexOf('nothing added to commit') > -1) {
-        console.log('\n\nNo files are added to commit.')
-        console.log()
-        console.log('Did you forget git to run `git add`?\n')
+        log('\n\nNo files are added to commit.')
+        log('\n')
+        log('Did you forget git to run `git add`?\n')
       } else {
-        console.log(err)
+        if (out) {
+          log(out)
+        } else {
+          log(err)
+        }
       }
     }
   })
@@ -52,9 +56,9 @@ function commit (commitMsg, gitArgs) {
   return exec(`git commit ${gitArgs} -m '${commitMsg}'`)
     .then(({ code, out }) => {
       if (code === 0) {
-        console.log('\nSuccessfully built commit.\n')
+        log('\nSuccessfully built commit.\n')
       } else {
-        console.log(out)
+        log(out)
       }
     })
 }
