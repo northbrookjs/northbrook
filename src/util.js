@@ -1,17 +1,18 @@
 // node.js imports
 import { join, dirname, relative } from 'path'
 import { statSync, lstatSync, readdirSync } from 'fs'
-import { start, change_sequence as changeSeq } from 'simple-spinner'
-
-changeSeq(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .'])
+import { spawnSync } from 'child_process'
 
 // third-party imports
 import 'colors'
 import { cd, exec as cmd } from 'shelljs'
 import findConfig from 'find-config'
+import { start, change_sequence as changeSeq } from 'simple-spinner'
 
 // constants
 const CONFIG = 'northbrook.json'
+
+changeSeq(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .'])
 
 export const filterScopes = name => name.replace(/@[a-z]+\//g, '')
 
@@ -306,10 +307,26 @@ export function chdir (path) {
 /**
  * executes a command asynchronously
  */
-export function exec (command, options = { silent: true }) {
+export function exec (command, options = {}) {
+  return new Promise((resolve, reject) => {
+    const { stdout, stderr } = spawnSync(command)
+
+    stdout.on('data', (data) => {
+      console.log(data)
+    })
+
+    stdout.on('end', (data) => {
+      resolve(data)
+    })
+
+    stderr.on('data', reject)
+  })
+}
+
+export function execp (command, options = { silent: true }) {
   return new Promise((resolve, reject) => {
     cmd(command, options, function (code, out, err) {
-      resolve({ cmd: command, code, out, err })
+      resolve({ code, err, out })
     })
   })
 }
