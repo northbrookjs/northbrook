@@ -3,6 +3,7 @@ import { join, dirname, relative } from 'path'
 import { statSync, lstatSync, readdirSync } from 'fs'
 
 // third-party imports
+import 'colors'
 import { cd, exec as cmd } from 'shelljs'
 import findConfig from 'find-config'
 
@@ -151,7 +152,7 @@ export function separator (packageName) {
   let output = packageName && packageName.length % 2 === 0 && packageName ||
                packageName && packageName + '-' || ''
 
-  return `\n##${dashes}${output}${dashes}##\n`
+  return (`\n##` + `${dashes}`.white + `${output}` + `${dashes}`.white + `##\n`)
 }
 
 /**
