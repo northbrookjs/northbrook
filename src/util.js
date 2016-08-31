@@ -119,15 +119,22 @@ const hasPkg = file => isFile(join(file, 'package.json'))
  */
 export function resolvePackages (config, workingDir) {
   const toRelative = name => relative(workingDir, name)
-  if (config && Array.isArray(config.packages)) {
-    return reduce(config.packages, [], (packages, packageName) => {
-      if (packageName.endsWith('**')) {
-        const packageDir = join(workingDir, packageName.replace('**', ''))
-        const files = map(filter(getAllInDirectory(packageDir), hasPkg), toRelative)
-        return packages.concat(files)
+  if (config) {
+    if (Array.isArray(config.packages)) {
+      if (config.packages.length === 0) {
+        return ['.']
       }
-      return packages.concat(packageName)
-    })
+      return reduce(config.packages, [], (packages, packageName) => {
+        if (packageName.endsWith('**')) {
+          const packageDir = join(workingDir, packageName.replace('**', ''))
+          const files = map(filter(getAllInDirectory(packageDir), hasPkg), toRelative)
+          return packages.concat(files)
+        }
+        return packages.concat(packageName)
+      })
+    } else {
+      return ['.']
+    }
   }
 
   return []
