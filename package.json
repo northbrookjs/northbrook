@@ -36,18 +36,17 @@
     }
   },
   "scripts": {
-    "test:lint": "eslint src/*.js",
-    "test:unit": "mocha -r buba/register src/*.test.js src/**/*.test.js src/plugin/**/*.test.js",
-    "test": "npm run test:lint && npm run test:unit",
-    "build": "rimraf lib && buba -i src -o lib",
+    "build": "node cli.js run build",
+    "test": "node cli.js run test",
     "precommit": "npm run build && git fetch origin",
     "commit": "node cli.js commit",
     "preversion": "npm run build",
-    "prerelease": "npm run build && echo 'login as `northbrook`' && sleep 2 && npm login",
+    "prerelease": "node run build && echo 'login as `northbrook`' && npm login",
     "release": "node cli.js release"
   },
   "dependencies": {
     "@northbrook/commit-types": "^1.1.0",
+    "colors": "^1.1.2",
     "commander": "^2.9.0",
     "concat-stream": "^1.5.1",
     "conventional-commits-filter": "^1.0.0",
