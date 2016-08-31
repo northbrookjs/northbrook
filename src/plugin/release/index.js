@@ -72,7 +72,7 @@ function action (config, directory, options) {
 
       if (isDirectoryClean(directory)) {
         if (!method || check || pkg.private) {
-          log(separator(packageName))
+          console.log(separator(packageName))
           if (pkg.private) {
             log('Package is private; only generating changelog')
           }
@@ -90,7 +90,7 @@ function action (config, directory, options) {
         if (!method || check || pkg.private) {
           return generateChangelog(changelogOptions).then(() => {
             if (check) {
-              log(separator())
+              console.log(separator())
               continueReleasing()
             }
             if (!check && method || pkg.private) {
@@ -101,7 +101,7 @@ function action (config, directory, options) {
                 `git push origin ${releaseBranch}`,
                 'git push origin --tags'
               )
-              log(separator())
+              console.log(separator())
               continueReleasing()
             }
           })
@@ -110,7 +110,7 @@ function action (config, directory, options) {
         // preform release
         chdir(packageDirectory)
 
-        log(separator(packageName))
+        console.log(separator(packageName))
         log('    Running your tests')
         start()
         exec('npm test', { silent: true, cwd: packageDirectory })
@@ -122,9 +122,9 @@ function action (config, directory, options) {
             stop()
             if (code !== 0) {
               log(err)
-              log(separator())
+              console.log(separator())
             } else {
-              log(separator())
+              console.log(separator())
               continueReleasing()
             }
           })
@@ -184,7 +184,7 @@ function handleTestError (err) {
   log('\n')
   log('Running your tests have failed: \n')
   log('    ' + err)
-  log(separator())
+  console.log(separator())
 }
 
 function handleVersionOutput (method, releaseBranch, newVersion, packageName, options, packageDirectory) {
@@ -227,7 +227,7 @@ function handleChangelogOutput (packageDirectory, skipNpm) {
     } else {
       log('Publishing your package has failed: \n')
       log(err)
-      log(separator())
+      console.log(separator())
     }
   }
 }
