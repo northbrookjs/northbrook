@@ -109,7 +109,7 @@ Useful for monorepo development, if required.
 # **northbrook.json**
 -----
 
-The configuration for all of your needs. These 3 fields are the only options
+The configuration for all of your needs. These 4 fields are the only options
 used by the default plugins.
 
 ```js
@@ -120,14 +120,19 @@ used by the default plugins.
     "." // manage the root dir, if you don't need monorepo capabilities
     "packages/**" // special ** will load all directories inside containing a package.json file
   ],
+
   "plugins": [ // array of plugins to be used
    // names are to be either NPM require()-able name
    // or a relative path to a local plugin
   ],
+
   "ignoreDefaults": [ // array of default plugins to ignore
     "link", // names are that of the CLI commands above
-    "release" // allows reusing the names for external packages
-  ]
+    "release" // allows reusing the names for external plugins
+  ],
+
+  "extends": "some-config-installed" // ESLint-like extension of a configuration
+
   // Whatever else is required/available to external plugins
 }
 ```
