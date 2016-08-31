@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { readFileSync } from 'fs'
 import { exec as execSync } from 'shelljs'
-import { isInitialized, isFile, execp as exec, chdir, separator, log, splitVersion, filterScopes } from '../../util'
+import { isInitialized, isFile, exec, chdir, separator, log, splitVersion, filterScopes } from '../../util'
 import { start, stop, change_sequence as changeSeq } from 'simple-spinner'
 import { checkRelease } from './check-release'
 import { generateChangelog } from './generate-changelog'
@@ -11,6 +11,7 @@ changeSeq(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .'])
 export const plugin = function release (program, config, directory) {
   program.command('release')
     .option('--check', 'only checks what needs to be released')
+    .option('--skip-login', 'skip running npm login')
     .option('--skip-npm', 'do not automatically publish to npm')
     .description('Publishes updates')
     .action((options) => action(config, directory, options))
@@ -70,7 +71,7 @@ function action (config, directory, options) {
         previousFile = readFileSync(changelog, 'utf8')
       }
 
-      if (isDirectoryClean(directory)) {
+      if (check || isDirectoryClean(directory)) {
         if (!method || check || pkg.private) {
           console.log(separator(packageName))
           if (pkg.private) {
@@ -113,7 +114,7 @@ function action (config, directory, options) {
         console.log(separator(packageName))
         log('    Running your tests')
         start()
-        exec('npm test', { silent: true, cwd: packageDirectory })
+        exec('npm test', { cwd: packageDirectory, stdio: 'inherit' })
           .then(handleTestOutput(method, packageName, newVersion, packageDirectory))
           .catch(handleTestError)
           .then(handleVersionOutput(method, releaseBranch, newVersion, packageName, changelogOptions, packageDirectory))
@@ -172,7 +173,7 @@ function handleTestOutput (method, packageName, newVersion, packageDirectory) {
       log('    Running npm version')
       start()
       return exec(`npm version --no-git-tag-version ${method} -m 'release(${packageName}): ${newVersion} [ci skip]'`,
-                  { silent: true, cwd: packageDirectory })
+                  { stdio: 'inherit', cwd: packageDirectory })
     } else {
       throw out
     }
@@ -223,7 +224,7 @@ function handleChangelogOutput (packageDirectory, skipNpm) {
       if (skipNpm) {
         return Promise.resolve({ code: 0, err: '', out: '' })
       }
-      return exec('npm publish', { silent: true, cwd: packageDirectory })
+      return exec('npm publish', { stdio: 'inherit', cwd: packageDirectory })
     } else {
       log('Publishing your package has failed: \n')
       log(err)
