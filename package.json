@@ -1,6 +1,6 @@
 {
   "name": "northbrook",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "description": "A configurable tool for managing projects with NPM",
   "main": "lib/api.js",
   "jsnext:main": "src/api.js",
@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "babel-preset-power-assert": "^1.0.0",
-    "buba": "^2.0.2",
+    "buba": "^2.0.3",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",

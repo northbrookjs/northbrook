@@ -1,3 +1,12 @@
+# v2.2.7 (2016-08-26)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): fix commit tests [8faff272](https://github.com/northbrookjs/northbrook/commits/8faff27260bf8976a0308dcf043b7011a480a9a3)
+
+
 # v2.2.6 (2016-08-26)
 ---
 
