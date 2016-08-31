@@ -1,7 +1,7 @@
 import 'colors'
 import { join, delimiter } from 'path'
 import { stop } from 'simple-spinner'
-import { exec, separator, log } from '../util'
+import { exec, log } from '../util'
 
 
 const flatten = l => l.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), [])
@@ -23,7 +23,6 @@ function action (config, workingDir, scriptName, args, options) {
 
   if (!cmd) {
     log('Cannot find script: '.red + scriptName)
-    return log(separator() + '\n')
   }
 
   process.env.PATH = join(workingDir, 'node_modules/.bin') + delimiter + process.env.PATH
@@ -109,6 +108,7 @@ function _exec (out, silent, cmds) {
         if (code === 0) {
           return runCommand(silent, cmd)
         }
+        throw err
       })
     }
 

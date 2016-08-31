@@ -48,7 +48,7 @@ export function setup ({ config, directory, defaultPlugins = [] }) {
   if (directory) { chdir(directory) }
 
   const packages = resolvePackages(config, directory)
-  if (config && config.packages) {
+  if (config) {
     config.packages = packages
   }
 
