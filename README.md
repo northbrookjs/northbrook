@@ -92,6 +92,15 @@ outputs to the console.
 on a previously unrelease scoped package will fail since it is not run with
 `--access=public`
 
+`--skip-login` - Right before running `npm publish` release will ask you to login
+to your npm user account, this will skip that action.
+
+#### **northbrook run <script>**
+
+Like `npm run <script>` but defined inside of your northbrook.json. Extremely
+useful when combined with the extends option. This will allow you to reuse scripts
+across projects by simply installing a package from NPM!
+
 #### **northbrook exec [command...]**
 
 > $ nb exec -- cat package.json
@@ -132,6 +141,10 @@ used by the default plugins.
   ],
 
   "extends": "some-config-installed" // ESLint-like extension of a configuration
+
+  "scripts": { // define script to be run with `nb run <script>`
+    "test": "echo 'Bad developer with no tests :)'"
+  }
 
   // Whatever else is required/available to external plugins
 }
