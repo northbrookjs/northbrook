@@ -55,8 +55,6 @@ describe('util', () => {
       const { config } = getConfig()
 
       assert(typeof config === 'object')
-      assert(Array.isArray(config.packages))
-      assert.deepEqual(config.packages, ['.'])
     })
   })
 

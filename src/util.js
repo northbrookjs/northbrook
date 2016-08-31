@@ -7,7 +7,7 @@ import { spawn } from 'child_process'
 import 'colors'
 import { cd, exec as cmd } from 'shelljs'
 import findConfig from 'find-config'
-import { start, change_sequence as changeSeq } from 'simple-spinner'
+import { start, stop, change_sequence as changeSeq } from 'simple-spinner'
 
 // constants
 const CONFIG = 'northbrook.json'
@@ -307,23 +307,25 @@ export function chdir (path) {
 /**
  * executes a command asynchronously
  */
-export function exec (command, args, options = { stdio: 'inherit' }) {
-  return new Promise((resolve, reject) => {
-    const { stdout, stderr, stdin } = options ? spawn(command, args, options) : spawn(command, args)
+export function exec (command, args, options = { stdio: 'inherit', env: process.env, cwd: process.cwd(), detached: true }) {
+  return new Promise((resolve) => {
+    if (options && options.start) {
+      process.stdout.write(options.start)
+    }
 
-    stdout.on('data', (data) => {
-      process.stdout.write(data)
+    process.nextTick(() => {
+      const child = spawn(command, args, options)
+
+      child.on('close', (code) => {
+        stop()
+        if (options && options.stop) {
+          process.stdout.write(options.stop)
+        }
+        resolve({
+          code, out: '', err: ''
+        })
+      })
     })
-
-    process.stdin.on('data', (data) => {
-      stdin.write(data)
-    })
-
-    stdout.on('end', (data) => {
-      resolve(data.toString())
-    })
-
-    stderr.on('data', data => reject(data.toString()))
   })
 }
 

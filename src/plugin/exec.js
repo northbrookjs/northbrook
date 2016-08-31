@@ -1,3 +1,4 @@
+import 'colors'
 import { join } from 'path'
 import {
   isInitialized,
@@ -39,13 +40,13 @@ export function action (config, workingDir, args, options) {
     const packageDir = join(workingDir, packageName)
     const name = require(join(packageDir, 'package.json')).name
 
-    return execCmd(cmd, args, { cwd: packageDir, stdio: 'inherit' })
-      .then(({ code, err, out }) => {
-        console.log(separator(name))
-        log(cmd)
-        log(out)
-        console.log(separator())
-        return { cmd, code, err, out }
-      })
+    return execCmd(cmd, args, {
+      cwd: packageDir,
+      stdio: 'inherit',
+      detached: true,
+      env: Object.create(process.env),
+      start: separator(name) + '\n' + '$ ' + (cmd + ' ' + args.join(' ')).white + '\n\n',
+      stop: separator()
+    })
   }))
 }

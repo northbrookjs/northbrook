@@ -1,7 +1,7 @@
 import 'colors'
 import { join, delimiter } from 'path'
 import { stop } from 'simple-spinner'
-import { execp as exec, log } from '../util'
+import { exec, log } from '../util'
 
 
 const flatten = l => l.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), [])
@@ -134,7 +134,11 @@ function runCommand (silent, cmd) {
       stop()
       log(true, `\n-  $`.reset + ` ${cmd.replace('\n', '\\n').replace('\t', '\\t').replace('\r', '\\r')}`.white.italic)
     }
-    return exec(cmd).then(logSuccess(silent))
+
+    const args = cmd.split(' ').filter(x => x.length > 0)
+    const command = args.shift()
+
+    return exec(command, args).then(logSuccess(silent))
   }
 
   return Promise.resolve({ code: 0, out: '', err: '' })
