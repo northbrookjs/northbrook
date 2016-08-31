@@ -45,9 +45,9 @@ export function generateChangelog ({ commits, file, version, url, bugs, previous
     })
 
     changelog.write('\n\n')
-    changelog.write(previousFile)
 
     if (typeof file === 'string') {
+      changelog.write(previousFile)
       changelog.on('finish', () => {
         resolve(changelog)
       })
