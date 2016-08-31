@@ -1,3 +1,4 @@
+import 'colors'
 import gitRawCommits from 'git-raw-commits'
 import gitLatestTag from 'git-latest-semver-tag'
 import commitsParser from 'conventional-commits-parser'
@@ -11,6 +12,14 @@ function incrementName (code) {
     case 2: return 'minor'
     case 3: return 'major'
     default: return ''
+  }
+}
+
+function colorize (name) {
+  switch (name.toLowerCase()) {
+    case 'patch': return name.blue
+    case 'minor': return name.green
+    case 'major': return name.red.bold
   }
 }
 
@@ -43,8 +52,8 @@ export const checkRelease = function (packages) {
             headerShown = true
           }
 
-          log('`' + packageName + '` needs a new ' +
-            incrementName(status[packageName].increment).toUpperCase() +
+          log(packageName + ' needs a new ' +
+            `${colorize(incrementName(status[packageName].increment).toUpperCase())}` +
             ' version released because:')
 
           forEach(status[packageName].commits, function (commit) {
@@ -134,9 +143,9 @@ export function rawCommits (tag) {
 function showReportHeaderPositive () {
   clear()
   console.log(separator())
-  log('RELEASES TO DO\n\n' +
-      '    We checked all packages and recent commits, and discovered that\n' +
-      '    according to semver.org you should release new versions for the\n' +
+  log('RELEASES TO DO'.underline.bold + '\n\n' +
+      '    We checked all packages and recent commits, and discovered that' + '\n' +
+      '    according to semver.org you should release new versions for the' + '\n' +
       '    following packages.\n')
 }
 
