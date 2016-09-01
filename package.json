@@ -47,7 +47,7 @@
     "@northbrook/commit-types": "^1.1.0",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
-    "concat-stream": "^1.5.1",
+    "concat-stream": "^1.5.2",
     "conventional-commits-filter": "^1.0.0",
     "conventional-commits-parser": "^1.2.3",
     "find-config": "^1.0.0",
