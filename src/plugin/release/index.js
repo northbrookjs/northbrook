@@ -234,8 +234,6 @@ function handleChangelogOutput (packageDirectory, skipNpm, skipLogin) {
   return function ({ code, out, err }) {
     stop()
     if (code === 0) {
-      log('\n    Publishing your package')
-      start()
       if (skipNpm) {
         return Promise.resolve({ code: 0, err: '', out: '' })
       }
@@ -246,8 +244,11 @@ function handleChangelogOutput (packageDirectory, skipNpm, skipLogin) {
 
       return exec('npm', ['login'], {stdio: 'inherit', cwd: packageDirectory})
         .then(({ code }) => {
-          if (code === 0) return exec('npm', ['publish'], { stdio: 'inherit', cwd: packageDirectory })
-          else {
+          if (code === 0) {
+            log('\n    Publishing your package')
+            start()
+            return exec('npm', ['publish'], { stdio: 'inherit', cwd: packageDirectory })
+          } else {
             log('Login has failed')
           }
         })
