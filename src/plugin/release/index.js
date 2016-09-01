@@ -11,6 +11,7 @@ changeSeq(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .'])
 export const plugin = function release (program, config, directory) {
   program.command('release')
     .option('--check', 'only checks what needs to be released')
+    .option('--skip-git', 'skip automatically pushing to your git release branch')
     .option('--skip-login', 'skip running npm login')
     .option('--skip-npm', 'do not automatically publish to npm')
     .description('Publishes updates')
@@ -39,6 +40,7 @@ function action (config, directory, options) {
     ? config.releaseBranch
     : 'master'
 
+  const skipGit = options && options.skipGit
   const skipNpm = options && options.skipNpm
   const skipLogin = options && options.skipLogin
 
@@ -96,13 +98,15 @@ function action (config, directory, options) {
               continueReleasing()
             }
             if (!check && method || pkg.private) {
-              execute(packageDirectory,
-                'git add CHANGELOG.md',
-                'git commit -m "docs(CHANGELOG): append to changelog [ci skip]"',
-                `git tag -f ${newVersion}-${packageName}`,
-                `git push origin ${releaseBranch}`,
-                'git push origin --tags'
-              )
+              if (!skipGit) {
+                execute(packageDirectory,
+                  'git add CHANGELOG.md',
+                  'git commit -m "docs(CHANGELOG): append to changelog [ci skip]"',
+                  `git tag -f ${newVersion}-${packageName}`,
+                  `git push origin ${releaseBranch}`,
+                  'git push origin --tags'
+                )
+              }
               console.log(separator())
               continueReleasing()
             }
@@ -118,7 +122,7 @@ function action (config, directory, options) {
         exec('npm', ['test'], { cwd: packageDirectory, stdio: 'inherit' })
           .then(handleTestOutput(method, packageName, newVersion, packageDirectory))
           .catch(handleTestError)
-          .then(handleVersionOutput(method, releaseBranch, newVersion, packageName, changelogOptions, packageDirectory))
+          .then(handleVersionOutput(method, releaseBranch, newVersion, packageName, changelogOptions, packageDirectory, skipGit))
           .then(handleChangelogOutput(packageDirectory, skipNpm, skipLogin))
           .then(({ code, err }) => {
             stop()
@@ -195,7 +199,8 @@ function handleTestError (err) {
   console.log(separator())
 }
 
-function handleVersionOutput (method, releaseBranch, newVersion, packageName, options, packageDirectory) {
+function handleVersionOutput (method, releaseBranch, newVersion, packageName,
+                              options, packageDirectory, skipGit) {
   return function ({code, out, err}) {
     stop()
     if (code === 0) {
@@ -203,13 +208,16 @@ function handleVersionOutput (method, releaseBranch, newVersion, packageName, op
       log('    Generating Changelog')
       start()
       return generateChangelog(options).then((file) => {
-        return execute(packageDirectory,
-          'git add .',
-          `git commit -m "chore(release): ${newVersion} [ci skip]"`,
-          `git tag -f ${newVersion}-${packageName}`,
-          `git push origin ${releaseBranch}`,
-          'git push origin --tags'
-        )
+        if (!skipGit) {
+          return execute(packageDirectory,
+            'git add .',
+            `git commit -m "chore(release): ${newVersion} [ci skip]"`,
+            `git tag -f ${newVersion}-${packageName}`,
+            `git push origin ${releaseBranch}`,
+            'git push origin --tags'
+          )
+        }
+        return Promise.resolve({ code: 0, out: 'skipping git commands', err: '' })
       })
     } else {
       log('\n')
