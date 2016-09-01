@@ -40,7 +40,7 @@
     "test": "npm run build && node cli.js run test",
     "commit": "node cli.js run commit",
     "preversion": "npm run build",
-    "prerelease": "npm run build && echo 'login as `northbrook`' && npm login",
+    "prerelease": "npm run build",
     "release": "node cli.js release"
   },
   "dependencies": {
