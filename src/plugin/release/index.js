@@ -217,7 +217,7 @@ function handleVersionOutput (method, releaseBranch, newVersion, packageName,
             'git push origin --tags'
           )
         }
-        return Promise.resolve({ code: 0, out: 'skipping git commands', err: '' })
+        return exec(packageDirectory, `git tag -f ${newVersion}-${packageName}`)
       })
     } else {
       log('\n')
