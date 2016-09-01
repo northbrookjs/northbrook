@@ -217,7 +217,7 @@ function handleVersionOutput (method, releaseBranch, newVersion, packageName,
             'git push origin --tags'
           )
         }
-        return exec(packageDirectory, `git tag -f ${newVersion}-${packageName}`)
+        return execute(packageDirectory, `git tag -f ${newVersion}-${packageName}`)
       })
     } else {
       log('\n')
