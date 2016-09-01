@@ -55,7 +55,7 @@ export function handleAnswers (gitArgs) {
 function commit (commitMsg, gitArgs) {
   const args = gitArgs.length > 0
     ? ['commit'].concat(gitArgs).concat(['-m', `${commitMsg}`])
-    : ['commit', '-m', `'${commitMsg}'`]
+    : ['commit', '-m', `${commitMsg}`]
 
   return exec('git', args)
     .then(({ code, out }) => {
