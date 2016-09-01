@@ -1,13 +1,3 @@
-# v2.4.1 (2016-09-01)
----
-
-
-## Bug Fixes
-
-- fix(northbrook): fix invalid commit message errors with validate-commit-msg [5f1153b6](https://github.com/northbrookjs/northbrook/commits/5f1153b63bf42172b5035d1549a4dd288292c408)
-- fix(northbrook): actually fix commit message errors [skip ci] [31073682](https://github.com/northbrookjs/northbrook/commits/3107368246a7c3eb9c3dc3abca7f7e1310ffaf27)
-
-
 # v2.4.0 (2016-08-31)
 ---
 
