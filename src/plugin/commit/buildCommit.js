@@ -51,5 +51,9 @@ export function buildCommit (answers) {
     result += '\n\nISSUES CLOSED: ' + footer
   }
 
+  if (result === head) {
+    result += '\n'
+  }
+
   return escapeSpecialChars(result)
 }

@@ -2,7 +2,7 @@ import { join } from 'path'
 import { types } from '@northbrook/commit-types'
 import { prompt } from 'inquirer'
 
-import { isInitialized, execp, clear, filterScopes, log } from '../../util'
+import { isInitialized, exec, execp, clear, filterScopes, log } from '../../util'
 
 import { getQuestions } from './getQuestions'
 import { buildCommit } from './buildCommit'
@@ -18,7 +18,7 @@ function action (config, directory, gitArgs) {
   execp('git commit --dry-run').then(({code, out, err}) => {
     if (code === 0) {
       clear()
-      return askQuestions(config, directory).then(handleAnswers(gitArgs.join(' ')))
+      return askQuestions(config, directory).then(handleAnswers(gitArgs))
     } else {
       if (out.indexOf('nothing added to commit') > -1 || out.indexOf('Changes not staged for commit') > -1) {
         log('\n\nNo files are added to commit.')
@@ -53,7 +53,11 @@ export function handleAnswers (gitArgs) {
 }
 
 function commit (commitMsg, gitArgs) {
-  return execp(`git commit ${gitArgs} -m '${commitMsg}'`)
+  const args = gitArgs.length > 0
+    ? ['commit'].concat(gitArgs).concat(['-m', `${commitMsg}`])
+    : ['commit', '-m', `'${commitMsg}'`]
+
+  return exec('git', args)
     .then(({ code, out }) => {
       if (code === 0) {
         log('\nSuccessfully built commit.')
