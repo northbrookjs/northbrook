@@ -175,7 +175,6 @@ function handleTestOutput (method, packageName, newVersion, packageDirectory) {
     if (code === 0) {
       stop()
       log(out)
-      log('    Running npm version')
       start()
       const args = [
         'version',
@@ -184,7 +183,7 @@ function handleTestOutput (method, packageName, newVersion, packageDirectory) {
         '-m',
         `'release(${packageName}): ${newVersion} [ci skip]'`
       ]
-      return exec(`npm`, args, { stdio: 'inherit', cwd: packageDirectory })
+      return exec(`npm`, args, { stdio: 'inherit', cwd: packageDirectory, start: '    Running npm version' })
     } else {
       throw out
     }
@@ -239,15 +238,25 @@ function handleChangelogOutput (packageDirectory, skipNpm, skipLogin) {
       }
 
       if (skipLogin) {
-        return exec('npm', ['publish'], { stdio: 'inherit', cwd: packageDirectory })
+        return exec('npm', ['publish'], {
+          stdio: 'inherit',
+          cwd: packageDirectory,
+          start: '    Publishing your package'
+        })
       }
 
-      return exec('npm', ['login'], {stdio: 'inherit', cwd: packageDirectory})
+      return exec('npm', ['login'], {
+        stdio: 'inherit',
+        cwd: packageDirectory,
+        start: '    Login to NPM\n'
+      })
         .then(({ code }) => {
           if (code === 0) {
-            log('\n    Publishing your package')
-            start()
-            return exec('npm', ['publish'], { stdio: 'inherit', cwd: packageDirectory })
+            return exec('npm', ['publish'], {
+              stdio: 'inherit',
+              cwd: packageDirectory,
+              start: '\nPublishing your package'
+            })
           } else {
             log('Login has failed')
           }
