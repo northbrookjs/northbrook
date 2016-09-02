@@ -49,18 +49,11 @@ describe('util.fs', () => {
 
       const expected = [
         'array.js',
-        'array.test.js',
         'console.js',
-        'console.test.js',
         'fs.js',
-        'fs.test.js',
-        'index.js',
         'object.js',
-        'object.test.js',
         'packages.js',
-        'packages.test.js',
-        'shell.js',
-        'shell.test.js'
+        'shell.js'
       ]
 
       assert.deepEqual(files, expected)
