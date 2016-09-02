@@ -3,7 +3,7 @@ import assert from 'power-assert'
 
 import { resolvePackages } from '../../../src/util/config/packages'
 
-describe('util.config.plugins', () => {
+describe('util.config.packages', () => {
   describe('resolvePackages', () => {
     it('should find all packages in a directory', () => {
       const packages = ['.']
