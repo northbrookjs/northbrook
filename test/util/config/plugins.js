@@ -5,7 +5,7 @@ import {
   isPlugin,
   tryRequirePlugin,
   filterDefaultPlugins,
-  resolvePlugins } from './plugins'
+  resolvePlugins } from '../../../src/util/config/plugins'
 
 describe('util.config.plugins', () => {
   describe('isPlugin', () => {

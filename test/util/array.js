@@ -2,7 +2,7 @@ import { describe, it } from 'mocha'
 import assert from 'power-assert'
 import sinon from 'sinon'
 
-import { forEach, map, reduce, filter } from './array'
+import { forEach, map, reduce, filter } from '../../src/util/array'
 
 describe('util.array', () => {
   describe('forEach', () => {

@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha'
 import assert from 'power-assert'
 
-import { filterScopes, splitVersion } from './packages'
+import { filterScopes, splitVersion } from '../../src/util/packages'
 
 describe('util.packages', () => {
   describe('filterScopes', () => {

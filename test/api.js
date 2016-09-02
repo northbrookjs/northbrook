@@ -1,8 +1,7 @@
 import { describe, it } from 'mocha'
 import assert from 'power-assert'
 
-import { getConfig } from './util'
-import { setup, basicPlugin } from './api'
+import { setup, basicPlugin, getConfig } from '../src/api'
 
 // simulate args as running from cli
 const args = (...testArgs) =>

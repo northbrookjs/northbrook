@@ -2,7 +2,7 @@ import { describe, it } from 'mocha'
 import assert from 'power-assert'
 import { join } from 'path'
 
-import { exists, isDirectory, isFile, isLink, getAllInDirectory } from './fs'
+import { exists, isDirectory, isFile, isLink, getAllInDirectory } from '../../src/util/fs'
 
 describe('util.fs', () => {
   describe('exists', () => {

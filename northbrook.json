@@ -2,7 +2,7 @@
   "scripts": {
     "build": "rimraf lib && buba -i src -o lib",
     "test:lint": "eslint src/*.js",
-    "test:unit": "istanbul cover ./node_modules/.bin/_mocha src/**/*.test.js -- -r buba/register",
+    "test:unit": "istanbul cover ./node_modules/.bin/_mocha -- -r buba/register",
     "pretest": "node cli.js run build --silent",
     "test": "nb run test:lint && nb run test:unit",
     "precommit": "npm run build",

@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha'
 import assert from 'power-assert'
 
-import { execp } from './shell'
+import { execp } from '../../src/util/shell'
 
 describe('util.shell', () => {
   describe('execp', () => {

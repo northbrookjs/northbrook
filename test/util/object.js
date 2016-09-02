@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha'
 import assert from 'power-assert'
 
-import { pluck } from './object'
+import { pluck } from '../../src/util/object'
 
 describe('util.object', () => {
   describe('pluck', () => {

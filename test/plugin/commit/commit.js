@@ -1,8 +1,8 @@
 import { describe, it } from 'mocha'
 import assert from 'power-assert'
 
-import { buildCommit } from './buildCommit'
-import { getQuestions } from './getQuestions'
+import { buildCommit } from '../../../src/plugin/commit/buildCommit'
+import { getQuestions } from '../../../src/plugin/commit/getQuestions'
 import { types } from '@northbrook/commit-types'
 
 const scopes = [

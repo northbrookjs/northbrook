@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha'
 import assert from 'power-assert'
 
-import { resolvePackages } from './packages'
+import { resolvePackages } from '../../../src/util/config/packages'
 
 describe('util.config.plugins', () => {
   describe('resolvePackages', () => {

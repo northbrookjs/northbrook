@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha'
 import assert from 'power-assert'
 
-import { getConfig } from './config'
+import { getConfig } from '../../../src/util/config/config'
 
 describe('util.config.config', () => {
   describe('getConfig', () => {

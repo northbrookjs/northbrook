@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha'
 import assert from 'power-assert'
 
-import { separator, modOutput } from './console'
+import { separator, modOutput } from '../../src/util/console'
 
 describe('util.console', () => {
   describe('separator', () => {
