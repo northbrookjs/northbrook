@@ -1,3 +1,22 @@
+# v2.5.0 (2016-09-02)
+---
+
+
+## Features
+
+- feat(northbrook): add option to skip git commands [2752de2e](https://github.com/northbrookjs/northbrook/commits/2752de2ea5265aff944bbe4092b5a1cfc96045c9)
+- feat(northbrook): refactor util into smaller files and export from external api [c9850351](https://github.com/northbrookjs/northbrook/commits/c985035136cb44f8e74fc86be7fe1b838ab1a657)
+
+## Bug Fixes
+
+- fix(northbrook): fix invalid commit message errors with validate-commit-msg [5f1153b6](https://github.com/northbrookjs/northbrook/commits/5f1153b63bf42172b5035d1549a4dd288292c408)
+- fix(northbrook): actually fix commit message errors [skip ci] [31073682](https://github.com/northbrookjs/northbrook/commits/3107368246a7c3eb9c3dc3abca7f7e1310ffaf27)
+- fix(northbrook): fix login input [95bf9b8e](https://github.com/northbrookjs/northbrook/commits/95bf9b8e87a9a46a01bbc1383a9e26de04737ee8)
+- fix(northbrook): should always create a git tag [c7693813](https://github.com/northbrookjs/northbrook/commits/c7693813478fd7a2121762b1e544824d7a3176ff)
+- fix(northbrook): use correct execute command [1b0adb72](https://github.com/northbrookjs/northbrook/commits/1b0adb722f4e6f02fe5bc5032400ce20aa074953)
+- fix(northbrook): improve output of release commands [3c589daa](https://github.com/northbrookjs/northbrook/commits/3c589daabbbc2d5ec13b2c25a7d8cb9805d9d7dd)
+
+
 # v2.4.0 (2016-08-31)
 ---
 
