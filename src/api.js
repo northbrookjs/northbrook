@@ -8,7 +8,8 @@ import {
   chdir
 } from './util'
 
-export { getConfig } from './util'
+// many functions are useful to plugins expose them directly
+export * from './util'
 
 import { plugin as exec } from './plugin/exec'
 import { plugin as link } from './plugin/link'
