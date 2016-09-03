@@ -80,7 +80,7 @@ on a previously unreleased scoped package will fail since it is not run with
 `--skip-login` - Right before running `npm publish` release will ask you to login
 to your npm user account, this will skip that action.
 
-#### **northbrook run <script>**
+#### **northbrook run [script]**
 
 Like `npm run <script>` but defined inside of your northbrook.json. Extremely
 useful when combined with the extends option. This will allow you to reuse scripts
