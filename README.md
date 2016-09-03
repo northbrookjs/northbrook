@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/northbrookjs/northbrook.svg?branch=master)](https://travis-ci.org/northbrookjs/northbrook)
 [![dependencies Status](https://david-dm.org/northbrookjs/northbrook/status.svg)](https://david-dm.org/northbrookjs/northbrook)
 [![devDependencies Status](https://david-dm.org/northbrookjs/northbrook/dev-status.svg)](https://david-dm.org/northbrookjs/northbrook?type=dev)
-[![GitHub issues](https://img.shields.io/github/issues/northbrookjs/northbrook.svg)](https://github.com/northbrookjs/northbrook/issues)
+[![GitHub Issues](https://img.shields.io/github/issues/northbrookjs/northbrook.svg)](https://github.com/northbrookjs/northbrook/issues)
 
 
 > A configurable tool for managing projects with NPM
@@ -11,13 +11,13 @@
 # Features and Design Goals
 ---
 
-- [x] Manage many interlinked or closely related packages with ease
-- [x] Useful out-of-box without configuration
-- [x] Manage commit messages
-- [x] Automatic Semantic Versioning
-- [x] Automated Changelog Generation
-- [x] Automated Deployment to NPM
-- [x] Powerful plugin system
+- Manage package, including monorepos, with ease
+- Useful out-of-box without configuration
+- Manage commit messages
+- Automatic Semantic Versioning
+- Automated Changelog Generation
+- Automated Deployment to NPM
+- Powerful plugin system
 
 # Why another thing?
 ---
@@ -48,29 +48,14 @@ configurations for your build|test|lint|anything ever again!
 # Let me have it!
 
 ```sh
-# Install
-npm install -g northbrook
+# required
+npm install --save-dev northbrook
 
-# Usage
-mkdir myNewThingy
-cd myNewThingy
-
-northbrook init
-# or abbreviated
-nb init
+# recommended
+npm install --save-dev northbrook ghooks validate-commit-msg
 ```
 
 # **Command Line Interface**
-
-### **northbrook init**
-
-Initializes your new `northbrook` managed project with default
-configurations. Will generate the following files for you.
-
-- northbrook.json
-- package.json
-- LICENSE.md (MIT)
-- .npmignore
 
 #### **northbrook commit**
 
@@ -89,7 +74,7 @@ a changelog for each package.
 outputs to the console.
 
 `--skip-npm` - Useful if first time publishing scoped packages. Running release
-on a previously unrelease scoped package will fail since it is not run with
+on a previously unreleased scoped package will fail since it is not run with
 `--access=public`
 
 `--skip-login` - Right before running `npm publish` release will ask you to login
@@ -118,7 +103,7 @@ Useful for monorepo development, if required.
 # **northbrook.json**
 -----
 
-The configuration for all of your needs. These 4 fields are the only options
+The configuration for all of your needs. These fields are the only options
 used by the default plugins.
 
 ```js
