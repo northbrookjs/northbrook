@@ -1,3 +1,12 @@
+# v3.0.1 (2016-09-03)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): ensure buba is installed for build step in postinstall [2577ac32](https://github.com/northbrookjs/northbrook/commits/2577ac32c1c66f0e9b54e492258bf9d31c809212)
+
+
 # v3.0.0 (2016-09-03)
 ---
 
