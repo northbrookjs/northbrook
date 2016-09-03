@@ -42,7 +42,7 @@
     "preversion": "npm run build",
     "prerelease": "npm run build",
     "release": "node cli.js release",
-    "postinstall": "node lib/post-install.js"
+    "postinstall": "npm run build && node lib/post-install.js"
   },
   "dependencies": {
     "@northbrook/commit-types": "^1.1.0",
