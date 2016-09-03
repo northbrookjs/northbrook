@@ -1,3 +1,16 @@
+# v3.0.0 (2016-09-03)
+---
+
+
+## Breaking Changes
+
+- feat(northbrook): remove \\`nb init\\` in favor of post-install script [6f922d3e](https://github.com/northbrookjs/northbrook/commits/6f922d3e102b743902791001e1e190ba9247c5f4)
+
+## Features
+
+- feat(northbrook): add utility functions to modify configuration files [5f51da37](https://github.com/northbrookjs/northbrook/commits/5f51da37e76a4e3e932ac031129b839f36b2ac9c)
+
+
 # v2.5.0 (2016-09-02)
 ---
 
