@@ -13,12 +13,11 @@ export * from './util'
 
 import { plugin as exec } from './plugin/exec'
 import { plugin as link } from './plugin/link'
-import { plugin as init } from './plugin/init'
 import { plugin as commit } from './plugin/commit'
 import { plugin as release } from './plugin/release'
 import { plugin as scripts } from './plugin/run'
 
-export const defaultPlugins = [ init, commit, release, exec, link, scripts ]
+export const defaultPlugins = [ commit, release, exec, link, scripts ]
 
 const clone = (...obj) => Object.assign({}, ...obj)
 
