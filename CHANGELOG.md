@@ -1,3 +1,12 @@
+# v3.0.2 (2016-09-04)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): move .babelrc to test folder as it's the only place needed [8c10c56e](https://github.com/northbrookjs/northbrook/commits/8c10c56e70361c95b0acb43baa5e4f0ee24b24c8)
+
+
 # v3.0.1 (2016-09-03)
 ---
 
