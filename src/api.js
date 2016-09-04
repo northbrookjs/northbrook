@@ -3,6 +3,7 @@ import {
   resolvePlugins,
   resolvePackages,
   resolveExtends,
+  deepmerge,
   filterDefaultPlugins,
   forEach,
   chdir
@@ -18,8 +19,6 @@ import { plugin as release } from './plugin/release'
 import { plugin as scripts } from './plugin/run'
 
 export const defaultPlugins = [ commit, release, exec, link, scripts ]
-
-const clone = (...obj) => Object.assign({}, ...obj)
 
 /**
  * Utility function to create a basic plugin
@@ -61,7 +60,7 @@ export function setup ({ config, directory, defaultPlugins = [] }) {
 
   const program = commander.version(version)
 
-  forEach(plugins, plugin => plugin(program, clone(configExtends, config), directory))
+  forEach(plugins, plugin => plugin(program, deepmerge(configExtends, config), directory))
 
   process.on('beforeExit', () => {
     process.stdout.write('\n', { encoding: 'utf8' })
