@@ -28,28 +28,29 @@ const defaultConfig = {
   scripts: {}
 }
 
-modifyConfig(PACKAGE, function (pkg) {
-  if (!pkg) { throw new Error('package.json can not be found!') }
+if (!process.env.CONTINUOUS_INTEGRATION) {
+  modifyConfig(PACKAGE, function (pkg) {
+    if (!pkg) { throw new Error('package.json can not be found!') }
 
-  const existingConfig = pkg.config || {}
-  const existingScripts = pkg.scripts || {}
+    const existingConfig = pkg.config || {}
+    const existingScripts = pkg.scripts || {}
 
-  return Object.assign({}, pkg, {
-    config: Object.assign({}, existingConfig, config),
-    scripts: Object.assign({}, existingScripts, scripts)
+    return Object.assign({}, pkg, {
+      config: Object.assign({}, existingConfig, config),
+      scripts: Object.assign({}, existingScripts, scripts)
+    })
   })
-})
-.then(() => {
-  fixpack(PACKAGE)
-})
+  .then(() => {
+    fixpack(PACKAGE)
+  })
 
-if (!isFile(CONFIG)) {
-  execp(`touch ${CONFIG}`)
-    .then(({ code, out, err }) => {
+  if (!isFile(CONFIG)) {
+    execp(`touch ${CONFIG}`).then(({ code, out, err }) => {
       if (code === 0) {
         writeFileSync(CONFIG, beautify(defaultConfig))
       } else {
         throw new Error('Could not create northbrook.json')
       }
     })
+  }
 }

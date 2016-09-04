@@ -20,7 +20,6 @@
   },
   "dependencies": {
     "@northbrook/commit-types": "^1.1.0",
-    "buba": "^2.0.4",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "concat-stream": "^1.5.1",
@@ -39,6 +38,7 @@
   },
   "devDependencies": {
     "babel-preset-power-assert": "^1.0.0",
+    "buba": "^2.0.4",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
@@ -71,7 +71,7 @@
   "scripts": {
     "build": "rimraf lib && buba -i src -o lib",
     "commit": "node cli.js run commit",
-    "postinstall": "npm run build && node lib/post-install.js",
+    "postinstall": "node lib/post-install.js",
     "prerelease": "npm run build",
     "preversion": "npm run build",
     "release": "node cli.js release",
