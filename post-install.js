@@ -57,7 +57,7 @@ function getConfig (file, options = { home: false, json: true }) {
 /**
  * tests if an absolute path exists
  */
-export function exists (pathname) {
+function exists (pathname) {
   try {
     return statSync(pathname)
   } catch (e) {
