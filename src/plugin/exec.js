@@ -2,7 +2,6 @@ import 'colors'
 import { join } from 'path'
 import {
   isInitialized,
-  map,
   onlyPackage,
   exec as execCmd,
   separator,
@@ -22,8 +21,8 @@ const description = 'Execute a command in all packages'
 export function action (config, workingDir, args, options) {
   isInitialized(config, 'exec')
 
-  const packages = options.parent.only
-    ? onlyPackage(options.parent.only, config.packages)
+  const packages = options.only
+    ? onlyPackage(options.only, config.packages)
     : config.packages
 
   if (packages.length === 0) {
@@ -41,6 +40,8 @@ export function action (config, workingDir, args, options) {
     const packageDir = join(workingDir, packageName)
     const name = require(join(packageDir, 'package.json')).name
 
+    // create ENV variable for scripts to use
+    process.env.NORTHBROOK_EXEC_DIR = packageDir
     const output = execCmd(cmd, args, {
       cwd: packageDir,
       stdio: 'inherit',
