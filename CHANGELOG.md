@@ -1,3 +1,12 @@
+# v3.0.7 (2016-09-04)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): make exec entirely synchronous [f548469b](https://github.com/northbrookjs/northbrook/commits/f548469b0bf6e85ca0cdf43da44c02d47a4fc505)
+
+
 # v3.0.6 (2016-09-04)
 ---
 
