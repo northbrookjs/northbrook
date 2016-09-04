@@ -71,7 +71,7 @@
   "scripts": {
     "build": "rimraf lib && buba -i src -o lib",
     "commit": "node cli.js run commit",
-    "postinstall": "node lib/post-install.js",
+    "postinstall": "node post-install.js",
     "prerelease": "npm run build",
     "preversion": "npm run build",
     "release": "node cli.js release",
