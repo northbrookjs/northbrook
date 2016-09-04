@@ -1,32 +1,15 @@
 {
   "name": "northbrook",
-  "version": "3.0.3",
   "description": "A configurable tool for managing projects with NPM",
-  "main": "lib/api.js",
-  "jsnext:main": "src/api.js",
+  "version": "3.0.3",
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
   "bin": {
     "northbrook": "cli.js",
     "nb": "cli.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/northbrookjs/northbrook.git"
-  },
-  "keywords": [
-    "reproducible",
-    "versionable",
-    "pluggable",
-    "monorepo",
-    "lerna",
-    "project",
-    "management"
-  ],
-  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/northbrookjs/northbrook/issues"
   },
-  "homepage": "https://github.com/northbrookjs/northbrook#readme",
   "config": {
     "ghooks": {
       "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
@@ -34,15 +17,6 @@
     "validate-commit-msg": {
       "types": "@northbrook/commit-types"
     }
-  },
-  "scripts": {
-    "build": "rimraf lib && buba -i src -o lib",
-    "test": "npm run build && node cli.js run test",
-    "commit": "node cli.js run commit",
-    "preversion": "npm run build",
-    "prerelease": "npm run build",
-    "release": "node cli.js release",
-    "postinstall": "npm run build && node lib/post-install.js"
   },
   "dependencies": {
     "@northbrook/commit-types": "^1.1.0",
@@ -76,5 +50,31 @@
     "rimraf": "^2.5.4",
     "sinon": "^1.17.5",
     "validate-commit-msg": "^2.7.0"
+  },
+  "homepage": "https://github.com/northbrookjs/northbrook#readme",
+  "jsnext:main": "src/api.js",
+  "keywords": [
+    "lerna",
+    "management",
+    "monorepo",
+    "pluggable",
+    "project",
+    "reproducible",
+    "versionable"
+  ],
+  "license": "MIT",
+  "main": "lib/api.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/northbrookjs/northbrook.git"
+  },
+  "scripts": {
+    "build": "rimraf lib && buba -i src -o lib",
+    "commit": "node cli.js run commit",
+    "postinstall": "npm run build && node lib/post-install.js",
+    "prerelease": "npm run build",
+    "preversion": "npm run build",
+    "release": "node cli.js release",
+    "test": "npm run build && node cli.js run test"
   }
 }

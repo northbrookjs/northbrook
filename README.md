@@ -204,12 +204,6 @@ The approach relies heavily upon the flattening of that NPM 3 does in order
 to find plugins in a way that doesn't require searching all over the place
 for where they might be located.
 
-##### Why is it running a different version than what I have installed globally?
-
-Because installing things globally isn't really that great of an idea, its only
-meant to help with `northbrook init`, so northbrook will use a locally installed
-version if it can find one.
-
 # Recommendations
 
 ###### Build Steps
@@ -234,9 +228,6 @@ Though not required, adding this to your `package.json` will allow you to enjoy
 further git commit checking in case you use `git commit` out of habit. In order
 to make good use of this configuration you'll need to install `ghooks` and
 `validate-commit-msg` to your devDependencies.
-
-If you are using `northbrook init` it will generate these for you, but it does
-**not** install them for you.
 
 ```js
 "config": {
