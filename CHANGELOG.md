@@ -1,3 +1,12 @@
+# v3.0.6 (2016-09-04)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): fix post-install script [dff16329](https://github.com/northbrookjs/northbrook/commits/dff1632935af499366abb3289950978e2b6a25c8)
+
+
 # v3.0.5 (2016-09-04)
 ---
 
