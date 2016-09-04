@@ -1,3 +1,14 @@
+# v3.0.5 (2016-09-04)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): only run post-install script on postinstall when not on travis-ci [06f41d7b](https://github.com/northbrookjs/northbrook/commits/06f41d7b6f92e64d4aa8671be994dbf955070190)
+- fix(northbrook): move postinstall script to plain es5 [a9f4dba1](https://github.com/northbrookjs/northbrook/commits/a9f4dba1fecb3fab65990bd0e4fa28bba5c6134f)
+- fix(northbrook): remove export statement [e62e2070](https://github.com/northbrookjs/northbrook/commits/e62e207010e96a23ce1bbea139f38b473f8d3b07)
+
+
 # v3.0.4 (2016-09-04)
 ---
 
