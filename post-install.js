@@ -1,22 +1,21 @@
-var path = require('path')
-var join = path.join
-var dirname = path.dirname
+var join = require('path').join
 
 var fs = require('fs')
 var createWriteStream = fs.createWriteStream
 var writeFileSync = fs.writeFileSync
-var readFileSync = fs.readFileSync
 var statSync = fs.statSync
 
-var findConfig = require('find-config')
 var fixpack = require('fixpack')
 var exec = require('shelljs').exec
 var jsonbeautify = require('json-beautify')
 
 var beautify = function (obj) { return jsonbeautify(obj, null, 2, 80) }
 
-var PACKAGE = join(process.cwd(), 'package.json')
-var CONFIG = join(process.cwd(), 'northbrook.json')
+// this works on the assumption that npm 3 will always install this at the
+// top-most level of your node_modules
+var CWD = join(__dirname, '../../')
+var PACKAGE = join(CWD, 'package.json')
+var CONFIG = join(CWD, 'northbrook.json')
 
 var config = {
   ghooks: {
@@ -35,23 +34,6 @@ var scripts = {
 var defaultConfig = {
   plugins: [],
   scripts: {}
-}
-
-function getConfig (file, options = { home: false, json: true }) {
-  var json = options && options.json || true
-  var path = findConfig(file || CONFIG, options)
-
-  if (!isFile(path)) {
-    return { path: null, directory: null, config: null }
-  }
-
-  var directory = dirname(path)
-
-  var config = json
-    ? Object.assign({}, JSON.parse(readFileSync(path)))
-    : readFileSync(path)
-
-  return { path: path, directory: directory, config: config }
 }
 
 /**
@@ -80,21 +62,16 @@ function modifyConfig (configFile, callback) {
   return new Promise(function (resolve, reject) {
     if (typeof configFile === 'function') {
       callback = configFile
-      configFile = 'northbrook.json'
+      configFile = CONFIG
     }
 
-    var _config = getConfig(configFile)
+    var newConfig = callback(require(configFile))
 
-    var config = _config.config
-    var configPath = _config.path
-
-    var newConfig = callback(config)
-
-    if (!newConfig && typeof newConfig !== 'object') {
+    if (!newConfig || typeof newConfig !== 'object') {
       throw new Error('Callback did not return a new JSON object')
     }
 
-    var fileStream = createWriteStream(configPath)
+    var fileStream = createWriteStream(configFile)
 
     fileStream.write(beautify(newConfig))
     fileStream.write('\n')
