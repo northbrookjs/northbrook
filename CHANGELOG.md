@@ -1,3 +1,12 @@
+# v3.0.4 (2016-09-04)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): run fixpack on package.json [a859d6a0](https://github.com/northbrookjs/northbrook/commits/a859d6a02d48f155d991113a8b35367e83eaff91)
+
+
 # v3.0.3 (2016-09-04)
 ---
 
