@@ -1,8 +1,7 @@
 import { join } from 'path'
 import { writeFileSync } from 'fs'
 import fixpack from 'fixpack'
-import { execp } from 'shelljs'
-import { modifyConfig, isFile } from './util'
+import { modifyConfig, isFile, execp } from './util'
 import jsonbeautify from 'json-beautify'
 
 const beautify = obj => jsonbeautify(obj, null, 2, 80)
