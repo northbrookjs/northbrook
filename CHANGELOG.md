@@ -1,3 +1,12 @@
+# v3.0.3 (2016-09-04)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): json-beautify is a dep not devdep [b7ddc506](https://github.com/northbrookjs/northbrook/commits/b7ddc5067f88ed1516aaff038a3056b69e91363c)
+
+
 # v3.0.2 (2016-09-04)
 ---
 
