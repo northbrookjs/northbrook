@@ -71,23 +71,36 @@ export function resolveExtends (config, workingDir) {
 
   const extension = pluck('extends', config)
 
-  return extension &&
-        getExtends(extension) ||
-        getExtends(prefix + extension) ||
-        getExtends(scopePrefix + extension) || {}
+  function resolveExtension (ext) {
+    return extension &&
+      getExtends(extension) ||
+      getExtends(prefix + extension) ||
+      getExtends(scopePrefix + extension) || {}
+  }
+
+  if (typeof extension === 'string') {
+    return resolveExtension(extension)
+  } else if (Array.isArray(extension)) {
+    return extension.reduce((config, ext) => {
+      return deepmerge(config, resolveExtension(ext))
+    }, {})
+  }
+
+  return {}
 }
 
 /**
  * Allows making adjustments to a configuration file
  */
-export function modifyConfig (configFile, callback) {
+export function modifyConfig (configFile, callback, options) {
   return new Promise((resolve, reject) => {
     if (typeof configFile === 'function') {
+      options = callback
       callback = configFile
       configFile = CONFIG
     }
 
-    const { directory, config } = getConfig(configFile)
+    const { directory, config } = getConfig(configFile, options)
 
     const configPath = join(directory, configFile)
 
@@ -117,7 +130,7 @@ export function modifyConfig (configFile, callback) {
 /**
  * shortcut to adding a plugin to a northbrook.json
  */
-export function addPlugin (pluginName) {
+export function addPlugin (pluginName, options) {
   return modifyConfig(CONFIG, function (config) {
     if (!config) {
       return console.log('Cannot find a ' + CONFIG + ' to append to')
@@ -136,13 +149,13 @@ export function addPlugin (pluginName) {
     return Object.assign({}, config, {
       plugins: [...plugins, pluginName]
     })
-  })
+  }, options)
 }
 
 /**
  * shortcut to adding a package to a northbrook.json
  */
-export function addPackage (relativePathToPackage) {
+export function addPackage (relativePathToPackage, options) {
   return modifyConfig(CONFIG, function (config) {
     if (!config) {
       return console.log('Cannot find a ' + CONFIG + ' to append to')
@@ -159,5 +172,45 @@ export function addPackage (relativePathToPackage) {
     return Object.assign({}, config, {
       packages: [...packages, relativePathToPackage]
     })
-  })
+  }, options)
+}
+
+export function deepmerge (target, src) {
+  const array = Array.isArray(src)
+  let dst = array && [] || {}
+
+  if (array) {
+    target = target || []
+    dst = dst.concat(target)
+    src.forEach(function (e, i) {
+      if (typeof dst[i] === 'undefined') {
+        dst[i] = e
+      } else if (typeof e === 'object') {
+        dst[i] = deepmerge(target[i], e)
+      } else {
+        if (target.indexOf(e) === -1) {
+          dst.push(e)
+        }
+      }
+    })
+  } else {
+    if (target && typeof target === 'object') {
+      Object.keys(target).forEach(function (key) {
+        dst[key] = target[key]
+      })
+    }
+    Object.keys(src).forEach(function (key) {
+      if (typeof src[key] !== 'object' || !src[key]) {
+        dst[key] = src[key]
+      } else {
+        if (!target[key]) {
+          dst[key] = src[key]
+        } else {
+          dst[key] = deepmerge(target[key], src[key])
+        }
+      }
+    })
+  }
+
+  return dst
 }
