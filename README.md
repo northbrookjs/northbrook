@@ -214,7 +214,7 @@ version if it can find one.
 
 ###### Build Steps
 
-If your package as a build step involved such as using TypeScript or Buble, it
+If your package has a build step involved such as using TypeScript or Buble, it
 is recommended that in your package.json you run your build step inside of
 `preversion` in order to ensure your built library is up-to-date when published
 to npm when using `northbrook release`.
