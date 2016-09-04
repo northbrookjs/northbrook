@@ -1,3 +1,18 @@
+# v3.1.0 (2016-09-04)
+---
+
+
+## Features
+
+- feat(northbrook): add NORTHBROOK_EXEC_DIR to env for exec scripts to use [c7ea34f1](https://github.com/northbrookjs/northbrook/commits/c7ea34f184a7ae72eaa58e803b27b664c0889219)
+- feat(northbrook): allow extending multiple confiurations and additional options to methods [83fe26de](https://github.com/northbrookjs/northbrook/commits/83fe26de4f73524f4ab956cb95acbe1fc6418a69)
+
+## Bug Fixes
+
+- fix(northbrook): extend defaults rather than replacing them [a6a2bbb6](https://github.com/northbrookjs/northbrook/commits/a6a2bbb6b4320c94b0dd927e2183c46843c50a38)
+- fix(northbrook): use deepmerge to properly extend configurations [99585df1](https://github.com/northbrookjs/northbrook/commits/99585df1005000c821c78c5ae3d17fbfa8193264)
+
+
 # v3.0.7 (2016-09-04)
 ---
 
