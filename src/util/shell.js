@@ -2,10 +2,18 @@ import { spawn } from 'child_process'
 import { stop } from 'simple-spinner'
 import { exec as cmd, cd } from 'shelljs'
 
+const defaultOptions = {
+  stdio: 'inherit',
+  env: Object.create(process.env),
+  cwd: process.env.NORTHBROOK_EXEC_DIR || process.cwd(),
+  detached: true
+}
+
 /**
  * executes a command asynchronously that shares the stdin and stdout
  */
-export function exec (command, args, options = { stdio: 'inherit', env: process.env, cwd: process.cwd(), detached: true }) {
+export function exec (command, args, _options = defaultOptions) {
+  const options = Object.assign({}, defaultOptions, _options)
   return new Promise((resolve) => {
     if (options && options.start) {
       process.stdout.write(options.start)
@@ -27,11 +35,14 @@ export function exec (command, args, options = { stdio: 'inherit', env: process.
   })
 }
 
+const defaultPOptions = Object.assign({}, defaultOptions, { stdio: 'pipe', silent: true })
+
 /**
  * execute a command asynchronously without sharing stdin and stdiout
  * @type {Object}
  */
-export function execp (command, options = { silent: true }) {
+export function execp (command, _options = defaultPOptions) {
+  const options = Object.assign({}, defaultPOptions, _options)
   return new Promise((resolve, reject) => {
     cmd(command, options, function (code, out, err) {
       resolve({ code, err, out })
