@@ -35,12 +35,13 @@ export function action (config, workingDir, args, options) {
 
   const cmd = args.shift()
 
-  // return promise for testing
-  return Promise.all(map(packages, function (packageName) {
+  const outputs = []
+
+  function runCommand (packageName, next) {
     const packageDir = join(workingDir, packageName)
     const name = require(join(packageDir, 'package.json')).name
 
-    return execCmd(cmd, args, {
+    const output = execCmd(cmd, args, {
       cwd: packageDir,
       stdio: 'inherit',
       detached: true,
@@ -48,5 +49,22 @@ export function action (config, workingDir, args, options) {
       start: separator(name) + '\n' + '$ ' + (cmd + ' ' + args.join(' ')).white + '\n\n',
       stop: separator()
     })
-  }))
+
+    outputs.push(output)
+
+    output.then(() => {
+      next()
+    })
+  }
+
+  function next () {
+    if (packages.length > 0) {
+      const packageName = packages.shift()
+      runCommand(packageName, next)
+    }
+  }
+
+  next()
+
+  return Promise.all(outputs)
 }
