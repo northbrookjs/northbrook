@@ -20,7 +20,7 @@ const command = 'exec [command...]'
 const description = 'Execute a command in all packages'
 
 function filterExclusions (packages, exclusions) {
-  return filter(packages, x => exclusions.indexOf(x) === -1, )
+  return filter(packages, x => exclusions.indexOf(x) === -1)
 }
 
 // exported for testing
