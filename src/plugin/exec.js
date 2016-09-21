@@ -5,25 +5,33 @@ import {
   onlyPackage,
   exec as execCmd,
   separator,
-  log
+  log,
+  filter
 } from '../util'
 
 export const plugin = function exec (program, config, directory) {
   program.command(command).description(description)
     .option('-o, --only <packageName>', 'Only execute in a single package directory')
+    .option('-e, --exclude [packageNames...]', 'Exclude directories')
     .action((...args) => action(config, directory, ...args))
 }
 
 const command = 'exec [command...]'
 const description = 'Execute a command in all packages'
 
+function filterExclusions (packages, exclusions) {
+  return filter(packages, x => exclusions.indexOf(x) === -1, )
+}
+
 // exported for testing
 export function action (config, workingDir, args, options) {
   isInitialized(config, 'exec')
 
-  const packages = options.only
+  const packages = filterExclusions(options.only
     ? onlyPackage(options.only, config.packages)
     : config.packages
+    , options.exclude || []
+  )
 
   if (packages.length === 0) {
     if (options.only) {
