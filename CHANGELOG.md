@@ -1,3 +1,12 @@
+# v3.1.3 (2016-09-21)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): real fixes for symlink behavior [bcb3477b](https://github.com/northbrookjs/northbrook/commits/bcb3477b206bac8feb5be4dfe2812ffc48a12584)
+
+
 # v3.1.2 (2016-09-21)
 ---
 
