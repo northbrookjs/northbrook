@@ -1,3 +1,12 @@
+# v3.1.2 (2016-09-21)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): fix linking scoped packages [aa32750c](https://github.com/northbrookjs/northbrook/commits/aa32750cd5e16a61d6efb3770bee6486ff7f414c)
+
+
 # v3.1.1 (2016-09-21)
 ---
 
