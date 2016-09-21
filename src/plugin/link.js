@@ -70,7 +70,7 @@ function symlink (packagesToSymlink, symlinkToName, workingDir) {
         mkdirp(join(nodeDir, scope), function (err) {
           if (err) throw err
 
-          symlinkSync(srcDir, join(destinationDir, scope))
+          symlinkSync(srcDir, join(nodeDir, scope))
         })
       } else {
         symlinkSync(srcDir, destinationDir)
