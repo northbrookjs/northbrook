@@ -1,3 +1,12 @@
+# v3.1.1 (2016-09-21)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): fix for linking packages [e2fe103b](https://github.com/northbrookjs/northbrook/commits/e2fe103bfe2478641606a07731adf5daa7595130)
+
+
 # v3.1.0 (2016-09-04)
 ---
 
