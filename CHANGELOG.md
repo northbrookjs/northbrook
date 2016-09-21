@@ -1,3 +1,12 @@
+# v3.2.1 (2016-09-21)
+---
+
+
+## Bug Fixes
+
+- fix(northbrook): fix exec plugin [a5cf5fc7](https://github.com/northbrookjs/northbrook/commits/a5cf5fc7ec139bfa21c89774963af251828af8a2)
+
+
 # v3.2.0 (2016-09-21)
 ---
 
