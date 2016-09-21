@@ -2,7 +2,7 @@ import { join } from 'path'
 import { sync as symlinkSync } from 'symlink-or-copy'
 import mkdirp from 'mkdirp'
 
-import { isInitialized, filter, map, forEach, isFile, pluck, log, separator, isLink } from '../util'
+import { isInitialized, filter, map, forEach, isFile, pluck, log, separator, isLink, exists } from '../util'
 
 export const plugin = function link (program, config, directory) {
   program.command('link')
@@ -32,22 +32,18 @@ function action (config, directory) {
       .concat(findPackagesToSymlink(devDependencies))
       .map(toManagedNames(packageNames, config.packages))
 
-    log(separator(name))
-
     if (packageNamesToSymlink.length === 0) {
       log('nothing to symlink to')
       return log(separator())
     }
 
-    log('symlinking packages for ' + name, '...')
+    log(name, ':')
 
     symlink(packageNamesToSymlink, config.packages[index], directory)
-
-    log(separator())
   })
 }
 
-function symlink (packagesToSymlink, symlinkToName, workingDir) {
+function symlink (packagesToSymlink, symlinkToName, workingDir, done) {
   const nodeDir = join(workingDir, symlinkToName, 'node_modules')
 
   packagesToSymlink.forEach(function (pkg) {
@@ -56,23 +52,30 @@ function symlink (packagesToSymlink, symlinkToName, workingDir) {
     const destinationDir = join(nodeDir, pkg)
 
     if (isLink(destinationDir)) {
-      return log(symlinkToName, 'already exists...')
+      return log('symlinks for', symlinkToName, 'already exist...')
     }
 
     mkdirp(nodeDir, function (err) {
       if (err) throw err
 
-      log('Symlinking ' + srcName + '...')
-
       if (isScoped(srcName)) {
-        const [scope] = srcName.split('/')
+        const [scope, name] = srcName.split('/')
 
         mkdirp(join(nodeDir, scope), function (err) {
           if (err) throw err
 
-          symlinkSync(srcDir, join(nodeDir, scope))
+          const dest = join(nodeDir, scope, name)
+
+          if (exists(dest)) {
+            return log('  ', srcName, 'already exists')
+          }
+
+          symlinkSync(srcDir, dest)
         })
       } else {
+        if (exists(destinationDir)) {
+          return log('  ', srcName, 'already exists')
+        }
         symlinkSync(srcDir, destinationDir)
       }
     })
