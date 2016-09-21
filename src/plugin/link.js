@@ -64,9 +64,23 @@ function symlink (packagesToSymlink, symlinkToName, workingDir) {
 
       log('Symlinking ' + srcName + '...')
 
-      symlinkSync(srcDir, destinationDir)
+      if (isScoped(srcName)) {
+        const [scope] = srcName.split('/')
+
+        mkdirp(join(nodeDir, scope), function (err) {
+          if (err) throw err
+
+          symlinkSync(srcDir, join(destinationDir, scope))
+        })
+      } else {
+        symlinkSync(srcDir, destinationDir)
+      }
     })
   })
+}
+
+function isScoped (name) {
+  return name[0] === '@' && name.split('/').length === 2
 }
 
 function toManagedNames (packageNames, packages) {
