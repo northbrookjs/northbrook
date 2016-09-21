@@ -1,3 +1,12 @@
+# v3.2.0 (2016-09-21)
+---
+
+
+## Features
+
+- feat(northbrook): add option to exclude packages from exec [8dd2d724](https://github.com/northbrookjs/northbrook/commits/8dd2d724de236c52d64a7db3743737f666af9ce6)
+
+
 # v3.1.3 (2016-09-21)
 ---
 
