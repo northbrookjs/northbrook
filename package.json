@@ -49,7 +49,7 @@
     "power-assert": "^1.4.1",
     "rimraf": "^2.5.4",
     "sinon": "^1.17.5",
-    "validate-commit-msg": "^2.7.0"
+    "validate-commit-msg": "^2.8.2"
   },
   "homepage": "https://github.com/northbrookjs/northbrook#readme",
   "jsnext:main": "src/api.js",
