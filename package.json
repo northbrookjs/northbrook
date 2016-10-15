@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "babel-preset-power-assert": "^1.0.0",
-    "buba": "^2.0.4",
+    "buba": "^3.0.1",
     "eslint": "^3.5.0",
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
