@@ -85,7 +85,7 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 
       io.stdout.write(header);
 
-      io.stdout.write(`Running tests`);
+      io.stdout.write(EOL +`Running tests`);
 
       start();
 
