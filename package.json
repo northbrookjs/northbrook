@@ -4,6 +4,10 @@
   "description": "Manage your projects with the power of NPM",
   "main": "index.js",
   "typings": "index.d.ts",
+  "bin": {
+    "northbrook": "bin/northbrook.js",
+    "nb": "bin/northbrook.js"
+  },
   "scripts": {
     "build": "npm run clean && tsc -P .config/tsconfig.json",
     "changelog": "conventional-changelog --infile CHANGELOG.md --same-file --release-count 0 --preset angular",
