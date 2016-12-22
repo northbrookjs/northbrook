@@ -1,10 +1,11 @@
 import { spawn } from 'child_process';
 import { Stdio } from '../../../types';
-import { execute, defaultStdio } from '../../../helpers';
+import { stdio } from 'stdio-mock';
+import { execute } from '../../../helpers';
 
 export function switchToReleaseBranch(
   releaseBranch = 'master',
-  io: Stdio = defaultStdio,
+  io: Stdio = stdio(),
   cwd: string = process.cwd(),
   _spawn = spawn)
 {
