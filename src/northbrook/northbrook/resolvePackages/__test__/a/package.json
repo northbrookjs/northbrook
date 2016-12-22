@@ -1,0 +1,8 @@
+{
+  "name": "a-testpackage",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "jsnext:main": "index.ts",
+  "module": "index.ts",
+  "typings": "index.d.ts"
+}
