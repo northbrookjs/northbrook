@@ -78,7 +78,9 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
       if (Object.keys(affectedPackages).length === 0)
         throw `No packages currently require a new release`;
 
-      const header = generateHeader(config, affectedPackages);
+      const method = options.comver ? 'comver' : 'semver';
+
+      const header = generateHeader(config, affectedPackages, method);
 
       if (options.check)
         throw header;
@@ -135,7 +137,8 @@ const separator =
 
 function generateHeader(
   config: NorthbrookConfig,
-  affectedPackages: AffectedPackages): string
+  affectedPackages: AffectedPackages,
+  method: 'comver' | 'semver'): string
 {
   const packages = config.packages as Array<string>;
   const affectedPackageNames: Array<string> = Object.keys(affectedPackages);
@@ -152,7 +155,7 @@ function generateHeader(
 
     const commits = affectedPackages[name].commits;
 
-    const suggestedUpdate = getSuggestedUpdate(commits);
+    const suggestedUpdate = getSuggestedUpdate(commits, method);
 
     const increment = incrementName(suggestedUpdate);
 
