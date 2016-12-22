@@ -1,3 +1,11 @@
+# 4.0.2 (2016-12-22)
+---
+
+## Bug Fixes
+
+- fix(release): improve logging [886312bb](undefined/commits/886312bb66533d13568009f567e2fb5fae0ace24)
+- fix(release): use standard git message type [42d2106e](undefined/commits/42d2106edcddc8f004b8ce7c7e18295d55c675b4)
+
 # 4.0.1 (2016-12-22)
 ---
 
