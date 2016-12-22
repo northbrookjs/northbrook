@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { EOL } from 'os';
 import { map, filter } from 'ramda';
 import { NorthbrookConfig, AffectedPackages, Commit, Stdio } from '../../../types';
 import { execute, getSuggestedUpdate } from '../../../helpers';
@@ -48,7 +49,8 @@ function bumpVersion(affectedPackages: AffectedPackages, io: Stdio, method: 'com
 
     const newVersion = getNewVersion(splitVersion(pkg.version as string), suggestedUpdate);
 
-    const message = `release(${name}): v${newVersion} [ci skip]`;
+    const message = `chore(release): v${newVersion} [ci skip]` + EOL + EOL +
+      `AFFECTS: ${name}`;
 
     return execute(
       'npm',
