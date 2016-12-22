@@ -2,6 +2,10 @@ import { EOL } from 'os';
 import { spawnSync } from 'child_process';
 import { cyan, bold, underline } from 'typed-colors';
 
+const { start, stop, change_sequence } = require('simple-spinner');
+
+change_sequence(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .']);
+
 import {
   Stdio,
   command,
@@ -81,16 +85,46 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 
       io.stdout.write(header);
 
-      return runTests(directory, io)(affectedPackages)
+      io.stdout.write(`Running tests`);
+
+      start();
+
+      return runTests(directory)(affectedPackages)
+        .then(stopWriteStart(io, 'Bumping package versions'))
         .then(() => bumpPackageVersions(config, io, options)(affectedPackages))
-        .then(npmLogin(io, directory))
+        .then(packages => {
+          if (!options.skipLogin) {
+            stopWriteStart(io, 'Logging in with NPM');
+            return npmLogin(io, directory)(packages);
+          }
+
+          return packages;
+        })
+        .then(stopWriteStart(io, 'Creating git tags'))
         .then(gitTags(directory, io))
+        .then(stopWriteStart(io, 'Generating changelogs'))
         .then(generateChangelogs)
+        .then(stopWriteStart(io, 'Pushing to release branch'))
         .then(() => gitPushToReleaseBranch(options.releaseBranch, directory, io));
     })
-    .catch((e: Error) => io.stderr.write(e.message || e + EOL))
-    .then(() => io.stdout.write(EOL));
+    .catch((e: Error) => {
+      stop();
+      io.stderr.write(e.message || e + EOL);
+    })
+    .then(() => {
+      stop();
+      io.stdout.write(EOL);
+    });
 });
+
+function stopWriteStart(io: Stdio, content: string) {
+  return function (x: any) {
+    stop();
+    io.stdout.write(content);
+    start();
+    return x;
+  };
+}
 
 const separator =
   '##----------------------------------------------------------------------------##';
