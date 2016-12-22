@@ -16,7 +16,7 @@ export function breaking(): Array<Question> {
   const breakingChanges =
     input(
       'breakingChange',
-      'Provide a description of the breaking changes. Use "|" to break new linke' + EOL,
+      'Provide a description of the breaking changes. Use "|" to break new linke' + EOL + ' >',
       {
         when: answers => answers.breaking === 'yes',
       },
