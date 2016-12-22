@@ -35,7 +35,7 @@ function writeChangelog(
   io: Stdio,
   changelog: NodeJS.WritableStream): Promise<any>
 {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const { directory, pkg } = releasePackage;
 
     io.stdout.write(`${pkg.name}: Generating changelog...`);
@@ -101,12 +101,14 @@ function writeChangelog(
 
     changelog.write(fileContents);
 
+    changelog.on('finish', () => resolve(releasePackage));
     changelog.on('end', () => resolve(releasePackage));
 
-    if (typeof changelog.end === 'function')
-      setTimeout(() => changelog.end());
-    else
-      resolve(releasePackage);
+    try {
+      changelog.end();
+    } catch (e) {
+      reject(e);
+    }
   });
 }
 
