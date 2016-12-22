@@ -15,7 +15,7 @@
     "release:minor": "npm version minor -m 'chore(package): v%s'",
     "release:major": "npm version major -m 'chore(package): v%s'",
     "test": "npm run test:lint && npm run test:unit",
-    "test:lint": "tslint src/**/*.ts src/*.ts",
+    "test:lint": "tslint src/**/**/**/*.ts src/**/**/*.ts src/**/*.ts src/*.ts",
     "test:unit": "mocha -r ts-node/register src/**/*.test.ts src/**/**/*.test.ts src/**/**/**/*.test.ts"
   },
   "repository": {
