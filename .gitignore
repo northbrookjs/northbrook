@@ -50,5 +50,6 @@ index.d.ts
 !src/northbrook/northbrook
 !src/plugins
 !src/types
+!src/**/index.js
 .tmp
 .local
