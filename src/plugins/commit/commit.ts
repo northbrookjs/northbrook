@@ -1,6 +1,5 @@
 import { EOL } from 'os';
 import { join } from 'path';
-import { exec } from 'child_process';
 import { command, Command, alias, description, withCallback } from '../../';
 import { createCommit } from './createCommit';
 

@@ -32,8 +32,6 @@ import { ReleasePackage } from './types';
 import { getSuggestedUpdate } from '../../helpers';
 import { getPackagesToUpdate } from './bumpPackageVersions/getPackagesToUpdate';
 import { incrementName } from './bumpPackageVersions/incrementName';
-import { getNewVersion } from './bumpPackageVersions/getNewVersion';
-import { splitVersion } from './bumpPackageVersions/splitVersion';
 
 const releaseDescription = description('Automated package releases');
 const checkFlag = flag('boolean', alias('check'), description('Calculate releases to make'));
@@ -156,7 +154,7 @@ function generateHeader(
   let message = separator + EOL + reportHeaderPositive();
 
   packagesToUpdate.forEach((releasePackage: ReleasePackage) => {
-    const { pkg, name, directory } = releasePackage;
+    const { name } = releasePackage;
 
     const commits = affectedPackages[name].commits;
 
@@ -165,8 +163,6 @@ function generateHeader(
     const increment = incrementName(suggestedUpdate);
 
     if (!increment) return;
-
-    const newVersion = getNewVersion(splitVersion(pkg.version), suggestedUpdate);
 
     message += `${cyan(bold(name))} ` +
       `needs a new ${bold(increment.toUpperCase())} version released:` + EOL;

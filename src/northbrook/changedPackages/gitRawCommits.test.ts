@@ -20,7 +20,6 @@ const logMessage =
 describe('gitRawCommits', () => {
   it('parses commit messages', () => {
     const io = stdio();
-    const cwd = __dirname;
 
     const spawn = mockSpawn(function (cp: MockChildProcess) {
       cp.stdout.write(logMessage);

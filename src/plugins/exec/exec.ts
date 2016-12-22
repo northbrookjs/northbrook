@@ -1,9 +1,7 @@
 import { EOL } from 'os';
 import { join } from 'path';
-import { spawn } from 'child_process';
-import { pointer } from 'typed-figures';
-import { bold, cyan, italic, red } from 'typed-colors';
-import { command, Command, alias, each, description, Stdio } from '../../';
+import { red } from 'typed-colors';
+import { command, Command, alias, each, description } from '../../';
 import { execute } from '../../helpers';
 
 const m: {
@@ -18,7 +16,7 @@ const logError = (stderr: NodeJS.WritableStream) => (e: Error) =>
   stderr.write(EOL + red(`ERROR`) + `: ${e.message}` + EOL + EOL);
 
 each(plugin, function ({ pkg, args }, io) {
-  const { name, path } = pkg;
+  const { path } = pkg;
 
   const cmd = args.shift() as string;
 

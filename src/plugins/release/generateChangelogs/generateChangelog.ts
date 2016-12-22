@@ -4,7 +4,7 @@ import { EOL } from 'os';
 import { join } from 'path';
 import { readFileSync, createWriteStream } from 'fs';
 
-import { execute, defaultStdio, exists } from '../../../helpers';
+import { execute, exists } from '../../../helpers';
 import { Stdio, Commit } from '../../../types';
 import { ReleasePackage } from '../types';
 
@@ -36,7 +36,7 @@ function writeChangelog(
   changelog: NodeJS.WritableStream): Promise<any>
 {
   return new Promise((resolve, reject) => {
-    const { directory, pkg } = releasePackage;
+    const { pkg } = releasePackage;
 
     const sections: any = {
       breaks: [] as Commit[],

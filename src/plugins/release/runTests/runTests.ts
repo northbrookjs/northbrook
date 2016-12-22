@@ -1,4 +1,3 @@
-import { EOL } from 'os';
 import { spawn } from 'child_process';
 import { stdio } from 'stdio-mock';
 import { Stdio, AffectedPackages } from '../../../types';

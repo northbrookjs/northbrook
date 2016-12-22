@@ -1,6 +1,5 @@
 import * as assert from 'assert';
 import { tryRequire } from './tryRequire';
-import * as mocha from 'mocha';
 
 describe('tryRequire', () => {
   it('should return a required package', () => {

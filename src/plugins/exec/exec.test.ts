@@ -1,5 +1,3 @@
-import * as assert from 'assert';
-import { join } from 'path';
 import { stdio } from 'stdio-mock';
 
 import { northbrook } from '../../';

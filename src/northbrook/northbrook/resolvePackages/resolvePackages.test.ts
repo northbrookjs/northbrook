@@ -1,5 +1,4 @@
 import * as assert from 'assert';
-import { join } from 'path';
 import { resolvePackages } from './resolvePackages';
 import { stdio } from 'stdio-mock';
 

@@ -1,13 +1,11 @@
-import { join } from 'path';
 import { EOL } from 'os';
-import { map, filter } from 'ramda';
-import { NorthbrookConfig, AffectedPackages, Commit, Stdio } from '../../../types';
+import { NorthbrookConfig, AffectedPackages, Stdio } from '../../../types';
 import { execute, getSuggestedUpdate } from '../../../helpers';
 
 import { splitVersion } from './splitVersion';
 import { incrementName } from './incrementName';
 import { getNewVersion } from './getNewVersion';
-import { getPackagesToUpdate, getPkg } from './getPackagesToUpdate';
+import { getPackagesToUpdate } from './getPackagesToUpdate';
 
 export function bumpPackageVersions(
   config: NorthbrookConfig,
