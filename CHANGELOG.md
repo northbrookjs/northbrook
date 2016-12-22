@@ -1,3 +1,11 @@
+# 4.0.1 (2016-12-22)
+---
+
+## Bug Fixes
+
+- fix(release): allow using comver for release --check [19e623a0](undefined/commits/19e623a0a63f01b8f4c1d6c0de0e60622d4c2d11)
+- fix(release): include package.json in commits [d75fa2e3](undefined/commits/d75fa2e3898a236bd024f5bf9e5487b09f3e2820)
+
 # 4.0.0 (2016-12-22)
 ---
 
