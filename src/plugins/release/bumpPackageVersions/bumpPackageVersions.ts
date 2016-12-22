@@ -60,6 +60,6 @@ function bumpVersion(affectedPackages: AffectedPackages, io: Stdio, method: 'com
       io,
       directory,
     )
-      .then(() => ({ pkg: getPkg(directory).pkg, name, directory, commits }));
+      .then(() => ({ pkg: { ...pkg, version: newVersion }, name, directory, commits }));
   };
 }
