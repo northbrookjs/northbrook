@@ -85,7 +85,7 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 
       io.stdout.write(header);
 
-      io.stdout.write(EOL + `Running tests`);
+      io.stdout.write(EOL + bold(`Running tests`));
 
       start();
 
@@ -122,7 +122,7 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 function stopWriteStart(io: Stdio, content: string) {
   return function (x: any) {
     stop();
-    io.stdout.write(EOL + content);
+    io.stdout.write(EOL + bold(content));
     start();
     return x;
   };
