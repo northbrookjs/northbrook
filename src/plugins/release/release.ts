@@ -123,7 +123,7 @@ function generateHeader(
     });
   });
 
-  message += separator + EOL;
+  message += EOL + separator + EOL;
 
   return message;
 }
@@ -132,7 +132,7 @@ function reportHeaderPositive () {
   return '                                RELEASES TO DO' + EOL + EOL +
       'We checked all packages and recent commits, and discovered that' + '\n' +
       'according to semver.org you should release new versions for the' + '\n' +
-      'following packages' + EOL;
+      'following packages' + EOL + EOL;
 }
 
 function reportHeaderNegative () {
