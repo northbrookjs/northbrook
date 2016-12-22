@@ -57,10 +57,10 @@ export const plugin: Command =
 withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
   switchToReleaseBranch(options.releaseBranch, io, directory)
     .then(() => io.stdout.write('Calculating changed packages...' + EOL))
-    .then(() => changedPackages(directory, io))
+    .then(() => changedPackages(directory))
     .then(affectedPackages => {
       if (Object.keys(affectedPackages).length === 0)
-        throw new Error(`No packages currently require a new release`);
+        throw `No packages currently require a new release`;
 
       const header = generateHeader(config, affectedPackages);
 
@@ -69,16 +69,15 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 
       io.stdout.write(header);
 
-      return affectedPackages;
+      return runTests(directory, io)(affectedPackages)
+        .then(bumpPackageVersions(config, io, options))
+        .then(npmLogin(io, directory))
+        .then(npmPublish(io))
+        .then(gitTags(directory, io))
+        .then(generateChangelogs)
+        .then(() => gitPushToReleaseBranch(options.releaseBranch, directory, io));
     })
-    .then(runTests(directory, io))
-    .then(bumpPackageVersions(config, io))
-    .then(npmLogin(io, directory))
-    .then(npmPublish(io))
-    .then(gitTags(directory, io))
-    .then(generateChangelogs)
-    .then(() => gitPushToReleaseBranch(options.releaseBranch, directory, io))
-    .catch((e: Error) => io.stderr.write(e.message + EOL))
+    .catch((e: Error) => io.stderr.write(e.message || e + EOL))
     .then(() => io.stdout.write(EOL));
 });
 
