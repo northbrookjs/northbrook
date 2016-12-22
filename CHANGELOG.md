@@ -1,31 +1,3 @@
-<a name="4.0.0"></a>
-# [4.0.0](https://github.com/northbrookjs/northbrook/compare/v3.2.1-northbrook...v4.0.0) (2016-12-22)
-
-
-### Bug Fixes
-
-* **commit:** remove unneeded checkForStagedCommits ([7a78b0e](https://github.com/northbrookjs/northbrook/commit/7a78b0e))
-* **commit:** use arrows to show placement ([e3a22ab](https://github.com/northbrookjs/northbrook/commit/e3a22ab))
-* **release:** remove extra log message ([9bfe73c](https://github.com/northbrookjs/northbrook/commit/9bfe73c))
-* **release:** silence switchToReleaseBranch ([d98ed46](https://github.com/northbrookjs/northbrook/commit/d98ed46))
-
-
-### Features
-
-* **northbrook:** from-scratch reimplementation ([e8f3657](https://github.com/northbrookjs/northbrook/commit/e8f3657))
-* **northbrook:** include northbrook folder ([482db74](https://github.com/northbrookjs/northbrook/commit/482db74))
-* **northbrook:** make check output prettier ([6064257](https://github.com/northbrookjs/northbrook/commit/6064257))
-* **release:** allow usage of comver and semver ([18e692b](https://github.com/northbrookjs/northbrook/commit/18e692b))
-* **release:** format release header ([dedac28](https://github.com/northbrookjs/northbrook/commit/dedac28))
-* **release:** use listr for task list ([b381732](https://github.com/northbrookjs/northbrook/commit/b381732))
-
-
-### BREAKING CHANGES
-
-* northbrook: northbrook.json is now northbrook.js or northbrook.ts. `packages` and `plugins` are the only config options left.
-
-
-
 <a name="3.2.1-northbrook"></a>
 ## [3.2.1-northbrook](https://github.com/northbrookjs/northbrook/compare/v3.2.0-northbrook...v3.2.1-northbrook) (2016-09-21)
 
