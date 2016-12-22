@@ -1,4 +1,6 @@
 import { EOL } from 'os';
+import { spawnSync } from 'child_process';
+import { cyan, bold, underline } from 'typed-colors';
 
 const Listr = require('listr');
 
@@ -56,9 +58,19 @@ export const plugin: Command =
     releaseBranch,
   );
 
+function isDirectoryClean (workingDir: string): boolean {
+  const isUnstagedChanges =
+    spawnSync('git diff --exit-code', { cwd: workingDir }).status;
+  const isStagedChanged =
+    spawnSync('git diff --cached --exit-code', { cwd: workingDir}).status;
+  return !(isUnstagedChanges || isStagedChanged);
+}
+
 withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
-  switchToReleaseBranch(options.releaseBranch, io, directory)
-    .then(() => io.stdout.write('Calculating changed packages...' + EOL + EOL))
+  if (!isDirectoryClean(directory))
+    return io.stdout.write(`Git Directory is not clean` + EOL + EOL);
+
+  return switchToReleaseBranch(options.releaseBranch, void 0, directory)
     .then(() => changedPackages(directory))
     .then(affectedPackages => {
       if (Object.keys(affectedPackages).length === 0)
@@ -87,13 +99,14 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
         },
         {
           title: 'NPM Login',
+          skip: () => options.skipLogin,
           task: (ctx: any) => npmLogin(io, directory)(ctx.releasePackages)
             .then((packages: ReleasePackage[]) => {
               ctx.releasePackages = packages;
             }),
         },
         {
-          title: 'NPM Public',
+          title: 'NPM Publish',
           task: (ctx: any) => npmLogin(io, directory)(ctx.releasePackages),
         },
         {
@@ -109,7 +122,7 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
           task: () => gitPushToReleaseBranch(options.releaseBranch, directory, io),
         },
       ])
-        .run();
+      .run();
     })
     .catch((e: Error) => io.stderr.write(e.message || e + EOL))
     .then(() => io.stdout.write(EOL));
@@ -145,13 +158,14 @@ function generateHeader(
 
     const newVersion = getNewVersion(splitVersion(pkg.version), suggestedUpdate);
 
-    message += `${name} needs a new ${increment.toUpperCase()} version released because:` + EOL;
+    message += `${cyan(bold(name))} ` +
+      `needs a new ${bold(increment.toUpperCase())} version released:` + EOL;
 
     commits.forEach(commit => {
       const { type, scope, subject, breakingChanges } = commit.message;
 
-      message += '  - ' + `${type}(${scope}): ${subject}` +
-        `${breakingChanges && ' BREAKING CHANGE'}` + EOL;
+      message += bold('  - ') + `${type}(${scope}): ${subject}` +
+        `${breakingChanges && ' - ' + cyan('BREAKING CHANGE') || ''}` + EOL;
     });
   });
 
@@ -161,7 +175,7 @@ function generateHeader(
 }
 
 function reportHeaderPositive () {
-  return '                                RELEASES TO DO' + EOL + EOL +
+  return '                                ' + underline(bold('RELEASES TO DO')) + EOL + EOL +
       'We checked all packages and recent commits, and discovered that' + '\n' +
       'you should release new versions for the following packages' + EOL + EOL;
 }
