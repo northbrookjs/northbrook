@@ -11,9 +11,9 @@
   "scripts": {
     "build": "npm run clean && tsc -P .config/tsconfig.json",
     "clean": "rimraf northbrook helpers plugins types index.js index.js.map index.d.ts",
-    "commit": "bin/northbrook.js commit",
+    "commit": "npm run build && bin/northbrook.js commit",
     "preversion": "npm run build",
-    "release": "bin/northbrook.js release",
+    "release": "npm run build && bin/northbrook.js release",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "tslint src/**/**/**/*.ts src/**/**/*.ts src/**/*.ts src/*.ts",
     "test:unit": "mocha -r ts-node/register src/**/*.test.ts src/**/**/*.test.ts src/**/**/**/*.test.ts"
