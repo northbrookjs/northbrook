@@ -1,5 +1,7 @@
 import { EOL } from 'os';
 
+const Listr = require('listr');
+
 import {
   Stdio,
   command,
@@ -56,7 +58,7 @@ export const plugin: Command =
 
 withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
   switchToReleaseBranch(options.releaseBranch, io, directory)
-    .then(() => io.stdout.write('Calculating changed packages...' + EOL))
+    .then(() => io.stdout.write('Calculating changed packages...' + EOL + EOL))
     .then(() => changedPackages(directory))
     .then(affectedPackages => {
       if (Object.keys(affectedPackages).length === 0)
@@ -69,13 +71,45 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 
       io.stdout.write(header);
 
-      return runTests(directory, io)(affectedPackages)
-        .then(bumpPackageVersions(config, io, options))
-        .then(npmLogin(io, directory))
-        .then(npmPublish(io))
-        .then(gitTags(directory, io))
-        .then(generateChangelogs)
-        .then(() => gitPushToReleaseBranch(options.releaseBranch, directory, io));
+      return new Listr([
+        {
+          title: 'Run Tests',
+          task: () => runTests(directory, io)(affectedPackages),
+        },
+        {
+          title: 'Bump Package Versions',
+          task: (ctx: any) => {
+            return bumpPackageVersions(config, io, options)(affectedPackages)
+              .then((packages: ReleasePackage[]) => {
+                ctx.releasePackages = packages;
+              });
+          },
+        },
+        {
+          title: 'NPM Login',
+          task: (ctx: any) => npmLogin(io, directory)(ctx.releasePackages)
+            .then((packages: ReleasePackage[]) => {
+              ctx.releasePackages = packages;
+            }),
+        },
+        {
+          title: 'NPM Public',
+          task: (ctx: any) => npmLogin(io, directory)(ctx.releasePackages),
+        },
+        {
+          title: 'Create git tags',
+          task: (ctx: any) => gitTags(directory, io)(ctx.releasePackages),
+        },
+        {
+          title: 'Generate Changelogs',
+          task: (ctx: any) => generateChangelogs(ctx.releasePackages),
+        },
+        {
+          title: 'Push to release branch',
+          task: () => gitPushToReleaseBranch(options.releaseBranch, directory, io),
+        },
+      ])
+        .run();
     })
     .catch((e: Error) => io.stderr.write(e.message || e + EOL))
     .then(() => io.stdout.write(EOL));
@@ -116,10 +150,8 @@ function generateHeader(
     commits.forEach(commit => {
       const { type, scope, subject, breakingChanges } = commit.message;
 
-      message += '  - ' + `${type}(${scope}): ${subject}`;
-
-      if (breakingChanges)
-        message += '    BREAKING CHANGE';
+      message += '  - ' + `${type}(${scope}): ${subject}` +
+        `${breakingChanges && ' BREAKING CHANGE'}` + EOL;
     });
   });
 
@@ -131,12 +163,11 @@ function generateHeader(
 function reportHeaderPositive () {
   return '                                RELEASES TO DO' + EOL + EOL +
       'We checked all packages and recent commits, and discovered that' + '\n' +
-      'according to semver.org you should release new versions for the' + '\n' +
-      'following packages' + EOL + EOL;
+      'you should release new versions for the following packages' + EOL + EOL;
 }
 
 function reportHeaderNegative () {
   return 'Nothing to release.' + EOL + EOL +
       'We checked all packages and recent commits, and discovered that' + EOL +
-      'you do not need to release any new version, according to semver.org.';
+      'you do not need to release any new version.';
 }
