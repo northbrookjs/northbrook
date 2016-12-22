@@ -2,8 +2,6 @@ import { EOL } from 'os';
 import { spawnSync } from 'child_process';
 import { cyan, bold, underline } from 'typed-colors';
 
-const Listr = require('listr');
-
 import {
   Stdio,
   command,
