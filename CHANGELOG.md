@@ -1,3 +1,22 @@
+# 4.0.0 (2016-12-22)
+---
+
+## Breaking Changes
+
+1. northbrook.json is now northbrook.js or northbrook.ts. `packages` and `plugins` are the only config options left.
+  - feat(northbrook): from-scratch reimplementation [e8f3657a](undefined/commits/e8f3657a29e8ba592bff7efe84127b317466568d)
+
+## Features
+
+- feat(northbrook): include northbrook folder [482db740](undefined/commits/482db74086716b88b6d666b90d6d6e4a7751f318)
+- feat(northbrook): make check output prettier [60642576](undefined/commits/60642576ba6eccbdd5edc3c0034282560eb20a7a)
+- feat(release): format release header [dedac289](undefined/commits/dedac289a4ad20988c40c24c11458999eafe302c)
+- feat(release): allow usage of comver and semver [18e692b6](undefined/commits/18e692b618f8746dd3351d68a98368244414746c)
+
+## Bug Fixes
+
+- fix(commit): remove unneeded checkForStagedCommits [7a78b0ea](undefined/commits/7a78b0eab946fbc459fec889e043853920866811)
+
 <a name="3.2.1-northbrook"></a>
 ## [3.2.1-northbrook](https://github.com/northbrookjs/northbrook/compare/v3.2.0-northbrook...v3.2.1-northbrook) (2016-09-21)
 
