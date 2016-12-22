@@ -48,18 +48,20 @@ function bumpVersion(affectedPackages: AffectedPackages, io: Stdio, method: 'com
 
     const newVersion = getNewVersion(splitVersion(pkg.version as string), suggestedUpdate);
 
+    const message = `release(${name}): v${newVersion} [ci skip]`;
+
     return execute(
       'npm',
       [
         'version',
         '--no-git-tag-version',
         increment,
-        '-m',
-        `'release(${name}): v${newVersion} [ci skip]'`,
       ],
       io,
       directory,
     )
+      .then(() => execute('git', ['add', 'package.json'], io, directory))
+      .then(() => execute('git', ['commit', '-m', message], io, directory))
       .then(() => ({ pkg: { ...pkg, version: newVersion }, name, directory, commits }));
   };
 }
