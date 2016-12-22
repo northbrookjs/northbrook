@@ -21,4 +21,4 @@ each(plugin, function ({ config, pkg }, io) {
     createPackages(allDependencies, pkg.path, pkg.name, packages, io);
 
   return new Promise(buildPackages);
-})
+});

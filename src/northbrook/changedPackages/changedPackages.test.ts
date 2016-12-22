@@ -35,7 +35,7 @@ const logMessage =
 `Tylor Steinberger${separator}` +
 `tlsteinberger167@gmail.com${separator}` +
 `1474495070${separator}` +
-`${testCommitMessage('feat', [`that`], true, false, false)}${separator}`+
+`${testCommitMessage('feat', [`that`], true, false, false)}${separator}` +
 `a9cf5fc7ec139bfa21c89774963af251828af8a2${separator}` +
 `a9cf5fc${separator}` +
 `Tylor Steinberger${separator}` +

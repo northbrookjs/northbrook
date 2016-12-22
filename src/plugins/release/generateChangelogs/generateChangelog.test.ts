@@ -50,7 +50,7 @@ describe('generateChangelog', () => {
             breakingChanges: null,
             issuesClosed: null,
             suggestedUpdate: 2,
-            raw: `feat(northbrook): the best ever${EOL}${EOL}body${EOL}${EOL}AFFECTS: northbrook`;
+            raw: `feat(northbrook): the best ever${EOL}${EOL}body${EOL}${EOL}AFFECTS: northbrook`,
           },
         },
         {
@@ -68,7 +68,7 @@ describe('generateChangelog', () => {
             breakingChanges: null,
             issuesClosed: null,
             suggestedUpdate: 1,
-            raw: `fix(northbrook): the best ever${EOL}${EOL}body${EOL}${EOL}AFFECTS: northbrook`;
+            raw: `fix(northbrook): the best ever${EOL}${EOL}body${EOL}${EOL}AFFECTS: northbrook`,
           },
         },
         {
@@ -86,7 +86,7 @@ describe('generateChangelog', () => {
             breakingChanges: 'stuff and things',
             issuesClosed: null,
             suggestedUpdate: 3,
-            raw: `feat(northbrook): the break${EOL}${EOL}body${EOL}${EOL}AFFECTS: northbrook`;
+            raw: `feat(northbrook): the break${EOL}${EOL}body${EOL}${EOL}AFFECTS: northbrook`,
           },
         },
       ];

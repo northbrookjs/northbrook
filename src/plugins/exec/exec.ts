@@ -32,4 +32,3 @@ each(plugin, function ({ pkg, args }, io) {
       m.removePath(join(path, 'node_modules'));
     });
 });
-
