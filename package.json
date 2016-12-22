@@ -10,14 +10,10 @@
   },
   "scripts": {
     "build": "npm run clean && tsc -P .config/tsconfig.json",
-    "changelog": "conventional-changelog --infile CHANGELOG.md --same-file --release-count 0 --preset angular",
     "clean": "rimraf northbrook helpers plugins types index.js index.js.map index.d.ts",
-    "commit": "git-cz",
-    "postchangelog": "git add CHANGELOG.md && git commit -m 'docs(CHANGELOG): append to changelog'",
-    "postversion": "npm run changelog && git push origin master --tags && npm publish --access=public",
+    "commit": "bin/northbrook.js commit",
     "preversion": "npm run build",
-    "release:minor": "npm version minor -m 'chore(package): v%s'",
-    "release:major": "npm version major -m 'chore(package): v%s'",
+    "release": "bin/northbrook.js release",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "tslint src/**/**/**/*.ts src/**/**/*.ts src/**/*.ts src/*.ts",
     "test:unit": "mocha -r ts-node/register src/**/*.test.ts src/**/**/*.test.ts src/**/**/**/*.test.ts"
@@ -80,7 +76,6 @@
   "dependencies": {
     "app-module-path": "^2.1.0",
     "findup-sync": "^0.4.3",
-    "listr": "^0.9.0",
     "mkdirp": "^0.5.1",
     "ramda": "^0.22.1",
     "reginn": "^2.1.3",

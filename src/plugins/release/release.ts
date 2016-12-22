@@ -83,46 +83,12 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 
       io.stdout.write(header);
 
-      return new Listr([
-        {
-          title: 'Run Tests',
-          task: () => runTests(directory, io)(affectedPackages),
-        },
-        {
-          title: 'Bump Package Versions',
-          task: (ctx: any) => {
-            return bumpPackageVersions(config, io, options)(affectedPackages)
-              .then((packages: ReleasePackage[]) => {
-                ctx.releasePackages = packages;
-              });
-          },
-        },
-        {
-          title: 'NPM Login',
-          skip: () => options.skipLogin,
-          task: (ctx: any) => npmLogin(io, directory)(ctx.releasePackages)
-            .then((packages: ReleasePackage[]) => {
-              ctx.releasePackages = packages;
-            }),
-        },
-        {
-          title: 'NPM Publish',
-          task: (ctx: any) => npmLogin(io, directory)(ctx.releasePackages),
-        },
-        {
-          title: 'Create git tags',
-          task: (ctx: any) => gitTags(directory, io)(ctx.releasePackages),
-        },
-        {
-          title: 'Generate Changelogs',
-          task: (ctx: any) => generateChangelogs(ctx.releasePackages),
-        },
-        {
-          title: 'Push to release branch',
-          task: () => gitPushToReleaseBranch(options.releaseBranch, directory, io),
-        },
-      ])
-      .run();
+      return runTests(directory, io)(affectedPackages)
+        .then(() => bumpPackageVersions(config, io, options)(affectedPackages))
+        .then(npmLogin(io, directory))
+        .then(gitTags(directory, io))
+        .then(generateChangelogs)
+        .then(() => gitPushToReleaseBranch(options.releaseBranch, directory, io));
     })
     .catch((e: Error) => io.stderr.write(e.message || e + EOL))
     .then(() => io.stdout.write(EOL));
