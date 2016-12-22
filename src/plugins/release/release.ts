@@ -108,9 +108,9 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
         .then(gitTags(directory, io))
         .then(stopWriteStart(io, 'Generating changelogs'))
         .then(generateChangelogs)
-        .then(stopWriteStart(io, 'Publishing to NPM'))
+        .then(stopWriteStart(io, 'Publishing to NPM', false))
         .then(npmPublish(io))
-        .then(stopWriteStart(io, 'Pushing to release branch'))
+        .then(stopWriteStart(io, 'Pushing to release branch...', false))
         .then(() => gitPushToReleaseBranch(options.releaseBranch, directory, io));
     })
     .catch((e: Error) => {
@@ -123,11 +123,16 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
     });
 });
 
-function stopWriteStart(io: Stdio, content: string) {
+function stopWriteStart(io: Stdio, content: string, bool = true) {
   return function (x: any) {
     stop();
     io.stdout.write(EOL + bold(content));
-    start();
+
+    if (bool)
+      start();
+    else
+      io.stdout.write(EOL);
+
     return x;
   };
 }
