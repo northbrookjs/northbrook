@@ -93,6 +93,8 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
         .then(stopWriteStart(io, 'Bumping package versions'))
         .then(() => bumpPackageVersions(config, io, options)(affectedPackages))
         .then(packages => {
+          stop();
+
           if (!options.skipLogin) {
             io.stdout.write('Logging in to NPM...' + EOL + EOL);
             return npmLogin(io, directory)(packages);
