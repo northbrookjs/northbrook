@@ -47,6 +47,7 @@ index.js.map
 index.d.ts
 !src/helpers
 !src/northbrook
+!src/northbrook/northbrook
 !src/plugins
 !src/types
 .tmp
