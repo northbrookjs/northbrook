@@ -1,80 +1,89 @@
 {
   "name": "northbrook",
-  "description": "A configurable tool for managing projects with NPM",
-  "version": "3.2.1",
-  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
-  "bin": {
-    "northbrook": "cli.js",
-    "nb": "cli.js"
+  "version": "3.3.0",
+  "description": "Manage your projects with the power of NPM",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc -P .config/tsconfig.json",
+    "changelog": "conventional-changelog --infile CHANGELOG.md --same-file --release-count 0 --preset angular",
+    "clean": "rimraf northbrook helpers plugins types index.js index.js.map index.d.ts",
+    "commit": "git-cz",
+    "postchangelog": "git add CHANGELOG.md && git commit -m 'docs(CHANGELOG): append to changelog'",
+    "postversion": "npm run changelog && git push origin master --tags && npm publish --access=public",
+    "preversion": "npm run build",
+    "release:minor": "npm version minor -m 'chore(package): v%s'",
+    "release:major": "npm version major -m 'chore(package): v%s'",
+    "test": "npm run test:lint && npm run test:unit",
+    "test:lint": "tslint src/**/*.ts src/*.ts",
+    "test:unit": "mocha -r ts-node/register src/**/*.test.ts src/**/**/*.test.ts src/**/**/**/*.test.ts"
   },
-  "bugs": {
-    "url": "https://github.com/northbrookjs/northbrook/issues"
-  },
-  "config": {
-    "ghooks": {
-      "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
-    },
-    "validate-commit-msg": {
-      "types": "@northbrook/commit-types"
-    }
-  },
-  "dependencies": {
-    "@northbrook/commit-types": "^1.1.0",
-    "colors": "^1.1.2",
-    "commander": "^2.9.0",
-    "concat-stream": "^1.5.1",
-    "conventional-commits-filter": "^1.0.0",
-    "conventional-commits-parser": "^1.3.0",
-    "find-config": "^1.0.0",
-    "fixpack": "^2.3.1",
-    "git-latest-semver-tag": "^1.0.2",
-    "git-raw-commits": "^1.1.2",
-    "inquirer": "^1.1.2",
-    "json-beautify": "^1.0.1",
-    "mkdirp": "^0.5.1",
-    "shelljs": "^0.7.3",
-    "simple-spinner": "0.0.5",
-    "symlink-or-copy": "^1.1.6"
-  },
-  "devDependencies": {
-    "babel-preset-power-assert": "^1.0.0",
-    "buba": "^2.0.4",
-    "eslint": "^3.5.0",
-    "eslint-config-standard": "^6.0.0",
-    "eslint-plugin-promise": "^2.0.1",
-    "eslint-plugin-standard": "^2.0.0",
-    "ghooks": "^1.3.2",
-    "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^3.0.2",
-    "power-assert": "^1.4.1",
-    "rimraf": "^2.5.4",
-    "sinon": "^1.17.5",
-    "validate-commit-msg": "^2.7.0"
-  },
-  "homepage": "https://github.com/northbrookjs/northbrook#readme",
-  "jsnext:main": "src/api.js",
-  "keywords": [
-    "lerna",
-    "management",
-    "monorepo",
-    "pluggable",
-    "project",
-    "reproducible",
-    "versionable"
-  ],
-  "license": "MIT",
-  "main": "lib/api.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/northbrookjs/northbrook.git"
   },
-  "scripts": {
-    "build": "rimraf lib && buba -i src -o lib",
-    "commit": "node cli.js run commit",
-    "postinstall": "node post-install.js",
-    "prerelease": "npm run build",
-    "preversion": "npm run build",
-    "release": "node cli.js release",
-    "test": "npm run build && node cli.js run test"
+  "keywords": [
+    "northbrook",
+    "lerna",
+    "monorepo",
+    "tooling",
+    "building",
+    "testing",
+    "scaffolding",
+    "package",
+    "management",
+    "versioning",
+    "git",
+    "release",
+    "semver",
+    "compatver",
+    "comver"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/northbrookjs/northbrook/issues"
+  },
+  "homepage": "https://github.com/northbrookjs/northbrook#readme",
+  "config": {
+    "ghooks": {
+      "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
+    }
+  },
+  "devDependencies": {
+    "@motorcycle/tslint": "^1.2.0",
+    "@types/findup-sync": "^0.3.29",
+    "@types/minimist": "^1.1.29",
+    "@types/mkdirp": "^0.3.29",
+    "@types/mocha": "^2.2.33",
+    "@types/node": "^6.0.52",
+    "@types/ramda": "0.0.2",
+    "@types/semver": "^5.3.30",
+    "commitizen": "^2.9.0",
+    "conventional-changelog-cli": "^1.2.0",
+    "cz-conventional-changelog": "^1.2.0",
+    "ghooks": "^1.3.2",
+    "mocha": "^3.2.0",
+    "rimraf": "^2.5.4",
+    "spawn-mock": "^1.0.0",
+    "ts-node": "^1.7.2",
+    "tslint": "^4.1.1",
+    "typed-prompts": "^1.5.0",
+    "typescript": "^2.1.4",
+    "validate-commit-msg": "^2.8.2",
+    "wallabify": "0.0.14"
+  },
+  "dependencies": {
+    "app-module-path": "^2.1.0",
+    "findup-sync": "^0.4.3",
+    "mkdirp": "^0.5.1",
+    "ramda": "^0.22.1",
+    "reginn": "^2.1.3",
+    "semver": "^5.3.0",
+    "stdio-mock": "^1.1.0",
+    "ts-node": "^1.7.2",
+    "typed-colors": "^1.0.0",
+    "typed-figures": "^1.0.0",
+    "typed-prompts": "^1.4.0"
   }
 }
