@@ -1,4 +1,5 @@
 import { spawn } from 'child_process';
+import { stdio } from 'stdio-mock';
 import { EOL } from 'os';
 import { join } from 'path';
 import { readFileSync, createWriteStream } from 'fs';
@@ -11,7 +12,7 @@ const commitMessage = 'docs(CHANGELOG): append to changelog';
 
 export function generateChangelog (
   releasePackage: ReleasePackage,
-  io: Stdio = defaultStdio,
+  io: Stdio = stdio(),
   _spawn = spawn,
   writeStream?: NodeJS.WritableStream): Promise<ReleasePackage>
 {
@@ -23,7 +24,7 @@ export function generateChangelog (
 
   const writeFileSream = writeStream || createWriteStream(CHANGELOG);
 
-  return writeChangelog(releasePackage, fileContents, io, writeFileSream)
+  return writeChangelog(releasePackage, fileContents, writeFileSream)
     .then(() => execute('git', ['add', 'CHANGELOG.md'], io, directory, _spawn))
     .then(() => execute('git', ['commit', '-m', commitMessage], io, directory), _spawn)
     .then(() => releasePackage);
@@ -32,13 +33,10 @@ export function generateChangelog (
 function writeChangelog(
   releasePackage: ReleasePackage,
   fileContents: string,
-  io: Stdio,
   changelog: NodeJS.WritableStream): Promise<any>
 {
   return new Promise((resolve, reject) => {
     const { directory, pkg } = releasePackage;
-
-    io.stdout.write(`${pkg.name}: Generating changelog...`);
 
     const sections: any = {
       breaks: [] as Commit[],

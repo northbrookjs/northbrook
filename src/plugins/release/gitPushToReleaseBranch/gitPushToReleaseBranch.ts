@@ -6,5 +6,5 @@ export function gitPushToReleaseBranch(
   cwd: string = process.cwd(),
   io: Stdio = defaultStdio,
 ) {
-  return execute('git', ['push', releaseBranch, '--tags'], io, cwd);
+  return execute('git', ['push', 'origin', releaseBranch, '--tags'], io, cwd);
 }

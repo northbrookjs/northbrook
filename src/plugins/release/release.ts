@@ -106,6 +106,8 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
         .then(gitTags(directory, io))
         .then(stopWriteStart(io, 'Generating changelogs'))
         .then(generateChangelogs)
+        .then(stopWriteStart(io, 'Publishing to NPM'))
+        .then(npmPublish(io))
         .then(stopWriteStart(io, 'Pushing to release branch'))
         .then(() => gitPushToReleaseBranch(options.releaseBranch, directory, io));
     })
