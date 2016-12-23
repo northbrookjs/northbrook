@@ -1,3 +1,11 @@
+# 4.1.2 (2016-12-23)
+---
+
+## Bug Fixes
+
+- fix(release): fix changelog generation [fc281f8e](git+https://github.com/northbrookjs/northbrook.git/commits/fc281f8ee63c49f949bf0cb5704f3f2b16da09d4)
+- fix(release): do not run tests in silent mode [0c69fdc4](git+https://github.com/northbrookjs/northbrook.git/commits/0c69fdc4dde39e7f3e5b00a2391a39a235bc31e5)
+
 # 4.1.1 (2016-12-23)
 ---
 
