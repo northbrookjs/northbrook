@@ -36,7 +36,7 @@ function writeChangelog(
   changelog: NodeJS.WritableStream): Promise<any>
 {
   return new Promise((resolve, reject) => {
-    const { pkg } = releasePackage;
+    const { pkg: { version, repository = { url: '' } } } = releasePackage;
 
     const sections: any = {
       breaks: [] as Commit[],
@@ -52,7 +52,7 @@ function writeChangelog(
       perf: `Performance Improvements`,
     };
 
-    changelog.write(`# ${pkg.version} (${currentDate()})${EOL}---${EOL}`);
+    changelog.write(`# ${version} (${currentDate()})${EOL}---${EOL}`);
 
     releasePackage.commits.forEach(function (commit: Commit) {
       const message = commit.message;
@@ -80,7 +80,7 @@ function writeChangelog(
           changelog.write(`${i + 1}. ` + commit.message.breakingChanges + EOL);
           changelog.write(
             `  - ${commit.message.raw.split(EOL)[0].trim()} ` +
-            `${linkToCommit(commit.hash, pkg.url)}`,
+            `${linkToCommit(commit.hash, repository.url)}`,
           );
           changelog.write(EOL);
         });
@@ -88,7 +88,7 @@ function writeChangelog(
         commits.forEach((commit: Commit) => {
           changelog.write(
             `- ${commit.message.raw.split(EOL)[0].trim()} ` +
-            `${linkToCommit(commit.hash, pkg.url)}`,
+            `${linkToCommit(commit.hash, repository.url)}`,
           );
           changelog.write(EOL);
         });
