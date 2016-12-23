@@ -24,7 +24,7 @@ export function displayFlags(flags: CommandFlags) {
 
   /* tslint:disable max-line-length */
   const strings = union(_strings, []).filter(Boolean)
-    .map(x => `--${x}${aliases && aliases[x] ? '-' + aliases[x] : ''}` +
+    .map(x => `--${x}${aliases && aliases[x] ? ' -' + aliases[x] : ''}` +
       `${(flags as any).description && (flags as any).description[x] ? '  :  ' + (flags as any).description[x] : ''}` + EOL);
 
   const booleanFlags = flags.boolean
