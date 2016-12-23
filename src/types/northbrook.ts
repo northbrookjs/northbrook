@@ -59,3 +59,5 @@ export type AffectedPackage =
 
 export type AffectedPackages =
   { [key: string]: AffectedPackage };
+
+export type Pkg = { path: string, name: string, config: any };
