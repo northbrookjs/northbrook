@@ -74,6 +74,7 @@
     "wallabify": "0.0.14"
   },
   "dependencies": {
+    "@typed/sequence": "^1.1.0",
     "app-module-path": "^2.1.0",
     "findup-sync": "^0.4.3",
     "mkdirp": "^0.5.1",
