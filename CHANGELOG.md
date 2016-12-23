@@ -1,3 +1,10 @@
+# 4.1.3 (2016-12-23)
+---
+
+## Bug Fixes
+
+- fix(release): use bugs url to generate links [81a1ab1a](https://github.com/northbrookjs/northbrook/commits/81a1ab1a05f33ef58ac43a965d3a3404658e34f3)
+
 # 4.1.2 (2016-12-23)
 ---
 
