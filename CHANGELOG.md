@@ -1,3 +1,10 @@
+# 4.1.4 (2016-12-23)
+---
+
+## Bug Fixes
+
+- fix(package): depend on types directly so users do not have to [0040260d](https://github.com/northbrookjs/northbrook/commits/0040260dc3709700bc8be3a22425375e325c646e)
+
 # 4.1.3 (2016-12-23)
 ---
 
