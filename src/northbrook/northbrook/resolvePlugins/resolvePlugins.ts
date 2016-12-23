@@ -21,7 +21,7 @@ const NORTHBROOK_PREFIXES = ['', '@northbrook/', 'northbrook-'];
 
 function resolvePlugin(cwd: string, stdio: Stdio, debug: boolean) {
   return function (pluginName: string | App | Command) {
-    if (isCommandOrApp(pluginName)) return pluginName;
+    if (isCommandOrApp(pluginName)) return { plugin: pluginName };
 
     let plugin = tryRequire(join(cwd, pluginName));
 
