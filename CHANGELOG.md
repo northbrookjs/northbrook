@@ -1,3 +1,11 @@
+# 4.1.0 (2016-12-22)
+---
+
+## Features
+
+- feat(helpers): extract and export packagesToExecute [e8e6fa42](undefined/commits/e8e6fa42aea6e551d58db55c5b84986af773aa6d)
+- feat(types): add Pkg type to exported types [edc13275](undefined/commits/edc132759aaecfe3a5a0fc8d75f798f1f91f4793)
+
 # 4.0.4 (2016-12-22)
 ---
 
