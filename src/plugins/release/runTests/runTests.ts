@@ -5,7 +5,7 @@ import { execute } from '../../../helpers';
 
 export function runTests(directory: string, io: Stdio = stdio(), _spawn = spawn) {
   return function (affectedPackages: AffectedPackages) {
-    return execute('npm', ['test', '--silent'], io, directory, _spawn)
+    return execute('npm', ['test'], io, directory, _spawn)
       .then(() => affectedPackages);
   };
 }

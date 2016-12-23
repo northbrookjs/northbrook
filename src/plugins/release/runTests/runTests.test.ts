@@ -10,9 +10,8 @@ describe('runTests', () => {
 
     const spawn = mockSpawn((cp: MockChildProcess) => {
       assert.strictEqual(cp.cmd, 'npm');
-      assert.strictEqual(cp.args.length, 2);
+      assert.strictEqual(cp.args.length, 1);
       assert.strictEqual(cp.args[0], 'test');
-      assert.strictEqual(cp.args[1], '--silent');
       done();
     });
 
@@ -25,9 +24,8 @@ describe('runTests', () => {
 
     const spawn = mockSpawn((cp: MockChildProcess) => {
       assert.strictEqual(cp.cmd, 'npm');
-      assert.strictEqual(cp.args.length, 2);
+      assert.strictEqual(cp.args.length, 1);
       assert.strictEqual(cp.args[0], 'test');
-      assert.strictEqual(cp.args[1], '--silent');
       cp.end();
     });
 
