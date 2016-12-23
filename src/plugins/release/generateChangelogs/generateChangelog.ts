@@ -36,7 +36,7 @@ function writeChangelog(
   changelog: NodeJS.WritableStream): Promise<any>
 {
   return new Promise((resolve, reject) => {
-    const { pkg: { version, repository = { url: '' } } } = releasePackage;
+    const { pkg: { version, bugs = { url: '' } } } = releasePackage;
 
     const sections: any = {
       breaks: [] as Commit[],
@@ -80,7 +80,7 @@ function writeChangelog(
           changelog.write(`${i + 1}. ` + commit.message.breakingChanges + EOL);
           changelog.write(
             `  - ${commit.message.raw.split(EOL)[0].trim()} ` +
-            `${linkToCommit(commit.hash, repository.url)}`,
+            `${linkToCommit(commit.hash, bugs.url)}`,
           );
           changelog.write(EOL);
         });
@@ -88,7 +88,7 @@ function writeChangelog(
         commits.forEach((commit: Commit) => {
           changelog.write(
             `- ${commit.message.raw.split(EOL)[0].trim()} ` +
-            `${linkToCommit(commit.hash, repository.url)}`,
+            `${linkToCommit(commit.hash, bugs.url)}`,
           );
           changelog.write(EOL);
         });
@@ -111,7 +111,7 @@ function writeChangelog(
 }
 
 function linkToCommit (hash: string, url: string) {
-  return `[${hash.substr(0, 8)}](${url}/commits/${hash}\)`;
+  return `[${hash.substr(0, 8)}](${url.replace('/issues', '')}/commits/${hash}\)`;
 }
 
 export function currentDate () {

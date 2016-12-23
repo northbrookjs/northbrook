@@ -96,7 +96,7 @@ describe('generateChangelog', () => {
         pkg: {
           name: 'name',
           version: '1.0.0',
-          repository: { url: 'example.com' },
+          bugs: { url: 'example.com' },
         },
         name: 'name',
         directory: dirname(process.env.HOME),
