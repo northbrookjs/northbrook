@@ -6,7 +6,6 @@
       "findup-sync",
       "minimist",
       "mkdirp",
-      "mocha",
       "node",
       "ramda",
       "semver"
