@@ -1,3 +1,10 @@
+# 4.0.4 (2016-12-22)
+---
+
+## Bug Fixes
+
+- fix(northbrook): correctly resolve already required plugins [f1c7e6bf](undefined/commits/f1c7e6bf15311c790ca9493a413e114825e8cb50)
+
 # 4.0.3 (2016-12-22)
 ---
 
