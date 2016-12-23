@@ -103,7 +103,7 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
           return packages;
         })
         .then(stopWriteStart(io, 'Creating git tags'))
-        .then(gitTags(directory, io))
+        .then(gitTags(config, io))
         .then(stopWriteStart(io, 'Generating changelogs'))
         .then(generateChangelogs)
         .then(stopWriteStart(io, 'Publishing to NPM', false))
