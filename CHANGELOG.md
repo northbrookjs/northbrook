@@ -1,3 +1,10 @@
+# 4.1.1 (2016-12-23)
+---
+
+## Bug Fixes
+
+- fix(release): create correct git tag for scoped packages [580931f6](undefined/commits/580931f6d864b32189b21a37ebdcc15cbf081d2e)
+
 # 4.1.0 (2016-12-22)
 ---
 
