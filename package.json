@@ -1,6 +1,6 @@
 {
   "name": "northbrook",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Manage your projects with the power of NPM",
   "main": "index.js",
   "typings": "index.d.ts",
