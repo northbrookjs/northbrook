@@ -1,3 +1,10 @@
+# 4.0.3 (2016-12-22)
+---
+
+## Bug Fixes
+
+- fix(northbrook): fix for displaying flags [44a4a30c](undefined/commits/44a4a30cc148ffc0a0e4281e34e78191cabd19cb)
+
 # 4.0.2 (2016-12-22)
 ---
 
