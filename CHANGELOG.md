@@ -1,3 +1,10 @@
+# 4.1.5 (2016-12-24)
+---
+
+## Bug Fixes
+
+- fix(northbrook): use app so that flags are inherited correctly [1b3c313f](https://github.com/northbrookjs/northbrook/commits/1b3c313f1b93b4ee28a1a9a685b77dc4bb74f7ac)
+
 # 4.1.4 (2016-12-23)
 ---
 
