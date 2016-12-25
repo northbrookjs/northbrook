@@ -1,6 +1,6 @@
 import { EOL } from 'os';
 import { join, delimiter } from 'path';
-import { app, command, Command, App, description, flag, alias, HandlerApp } from 'reginn';
+import { app, Command, App, description, flag, alias, HandlerApp } from 'reginn';
 import { prop, clone } from 'ramda';
 import { cyan } from 'typed-colors';
 import { resolvePlugins } from './resolvePlugins';
@@ -28,7 +28,7 @@ const debug =
   );
 
 // for display in help menu
-const nb = command(only, configPath, debug);
+const nb = app(only, configPath, debug);
 
 export function northbrook(
   config: NorthbrookConfig,
