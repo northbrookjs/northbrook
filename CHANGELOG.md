@@ -1,3 +1,10 @@
+# 4.1.6 (2016-12-28)
+---
+
+## Bug Fixes
+
+- fix(exec): exit with code 1 on errors [5ba26344](https://github.com/northbrookjs/northbrook/commits/5ba263445baf62b7280a20fa1ef5ad2a185df06b)
+
 # 4.1.5 (2016-12-24)
 ---
 
