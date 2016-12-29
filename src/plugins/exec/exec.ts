@@ -12,9 +12,6 @@ const m: {
 export const plugin: Command =
   command(alias('exec'), description('Execute commands in all managed packages'));
 
-const logError = (stderr: NodeJS.WritableStream) => (e: Error) =>
-  stderr.write(EOL + red(`ERROR`) + `: ${e.message}` + EOL + EOL);
-
 each(plugin, function ({ pkg, args }, io) {
   const { path } = pkg;
 
@@ -30,3 +27,11 @@ each(plugin, function ({ pkg, args }, io) {
       m.removePath(join(path, 'node_modules'));
     });
 });
+
+function logError(stderr: NodeJS.WritableStream) {
+  return function (error: Error) {
+    stderr.write(EOL + red(`ERROR`) + `: ${error.message}` + EOL + EOL);
+
+    process.exit(1);
+  };
+}
