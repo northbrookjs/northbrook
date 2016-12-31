@@ -1,3 +1,10 @@
+# 4.1.10 (2016-12-31)
+---
+
+## Bug Fixes
+
+- fix(exec): exit on exec failures [488567ca](https://github.com/northbrookjs/northbrook/commits/488567ca79cd84f15c2a6ea25aca2f20769c0247)
+
 # 4.1.9 (2016-12-30)
 ---
 
