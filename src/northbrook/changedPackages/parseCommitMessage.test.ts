@@ -33,8 +33,8 @@ describe('parseCommitMessage', () => {
 
     assert.strictEqual(commit.type, 'merge');
     assert.strictEqual(commit.scope, null);
-    assert.strictEqual(commit.subject, 'Merge master branch into working branch');
-    assert.strictEqual(commit.body, 'Merge commit message body');
+    assert.strictEqual(commit.subject, '');
+    assert.strictEqual(commit.body, '');
     assert.strictEqual(commit.affects, null);
     assert.strictEqual(commit.breakingChanges, null);
     assert.strictEqual(commit.issuesClosed, null);

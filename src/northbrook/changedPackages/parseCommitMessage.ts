@@ -7,8 +7,8 @@ export function parseCommitMessage(rawCommit: string): CommitMessage {
     return {
       type: 'merge',
       scope: null,
-      subject: rawCommit.split(EOL)[0].trim(),
-      body: rawCommit.split(EOL)[1].trim(),
+      subject: '',
+      body: '',
       affects: null,
       breakingChanges: null,
       issuesClosed: null,
