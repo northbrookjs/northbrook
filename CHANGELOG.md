@@ -1,3 +1,10 @@
+# 4.2.3 (2016-12-31)
+---
+
+## Bug Fixes
+
+- fix(changedPackages): fix for parsing merge commits [9e40651a](https://github.com/northbrookjs/northbrook/commits/9e40651af55d7f1e9c28527632eb194fd170d6d4)
+
 # 4.2.2 (2016-12-31)
 ---
 
