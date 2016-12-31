@@ -1,3 +1,10 @@
+# 4.1.7 (2016-12-30)
+---
+
+## Bug Fixes
+
+- fix(northbrook): exit with code 1 on errors with each callback [98144b7f](https://github.com/northbrookjs/northbrook/commits/98144b7f9258423db1caf6655eee1c023d6c4350)
+
 # 4.1.6 (2016-12-28)
 ---
 
