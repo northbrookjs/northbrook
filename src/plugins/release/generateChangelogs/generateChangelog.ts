@@ -26,7 +26,7 @@ export function generateChangelog (
 
   return writeChangelog(releasePackage, fileContents, writeFileSream)
     .then(() => execute('git', ['add', 'CHANGELOG.md'], io, directory, _spawn))
-    .then(() => execute('git', ['commit', '-m', commitMessage], io, directory), _spawn)
+    .then(() => execute('git', ['commit', '-m', commitMessage], io, directory, _spawn))
     .then(() => releasePackage);
 }
 
