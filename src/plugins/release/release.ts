@@ -47,6 +47,9 @@ const skipLoginFlag = flag('boolean', alias('skip-login'), description('Avoid lo
 const releaseBranch =
   flag('string', alias('release-branch'), description('Sets the git branch to push releases to'));
 
+const skipTestsFlag =
+  flag('boolean', alias('skip-tests'), description('Avoid re-running tests'));
+
 export const plugin: Command =
   command(
     alias('release'),
@@ -56,6 +59,7 @@ export const plugin: Command =
     semverFlag,
     skipLoginFlag,
     releaseBranch,
+    skipTestsFlag,
   );
 
 function isDirectoryClean (workingDir: string): boolean {
@@ -89,7 +93,7 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 
       start();
 
-      return runTests(directory)(affectedPackages)
+      return runTests(directory, options)(affectedPackages)
         .then(stopWriteStart(io, 'Bumping package versions'))
         .then(() => bumpPackageVersions(config, io, options)(affectedPackages))
         .then(packages => {

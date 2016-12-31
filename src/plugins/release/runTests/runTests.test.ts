@@ -15,7 +15,7 @@ describe('runTests', () => {
       done();
     });
 
-    runTests(directory, io, spawn)({});
+    runTests(directory, {}, io, spawn)({});
   });
 
   it('returns commits after running tests', () => {
@@ -31,8 +31,25 @@ describe('runTests', () => {
 
     const affectedPackages: any = {};
 
-    return runTests(directory, io, spawn)(affectedPackages).then((r: any) => {
+    return runTests(directory, {}, io, spawn)(affectedPackages).then((r: any) => {
       assert.strictEqual(r, affectedPackages);
+    });
+  });
+
+  it('skips tests with skipTests options', () => {
+    const directory = __dirname;
+    const io = stdio();
+
+    let called = 0;
+
+    const spawn = mockSpawn(() => {
+      ++called;
+    });
+
+    const affectedPackages: any = {};
+
+    return runTests(directory, { skipTests: true }, io, spawn)(affectedPackages).then(() => {
+      assert.strictEqual(called, 0);
     });
   });
 });
