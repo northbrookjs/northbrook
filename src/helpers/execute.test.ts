@@ -85,7 +85,7 @@ describe('execute', () => {
       });
     });
 
-    it('returns a promise with message array from stder if fails', () => {
+    it('returns a promise with message array from stderr if fails', () => {
       const io = stdio();
 
       const spawn = mockSpawn(function (cp: MockChildProcess) {
@@ -97,6 +97,22 @@ describe('execute', () => {
       return execute(command, args, io, cwd, spawn).catch(({stderr}) => {
         assert.strictEqual(stderr, 'Malfunction');
       });
+    });
+
+    it('rejects a promise if child process exits with non-zero code', (done) => {
+      const io = stdio();
+
+      const spawn = mockSpawn(function (cp: MockChildProcess) {
+        cp.emit('close', 1);
+      });
+
+      execute(command, args, io, cwd, spawn)
+        .then(() => {
+          done(new Error('Should not resolve promise'));
+        })
+        .catch(() => {
+          done();
+        });
     });
   });
 });

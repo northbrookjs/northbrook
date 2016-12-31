@@ -13,11 +13,7 @@ export function each(command: Command, callback: EachCallback): Promise<void> {
 
       const call = createCallback(callback, input, stdio);
 
-      return sequence<Pkg>(packagesToExec, call).then(resolve).catch(err => {
-        reject(err);
-
-        process.nextTick(() => process.exit(1));
-      });
+      return sequence<Pkg>(packagesToExec, call).then(resolve).catch(reject);
     };
   });
 }

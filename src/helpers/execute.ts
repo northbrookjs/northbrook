@@ -39,7 +39,13 @@ export function execute(
 
     const output = () => ({ stdout: successBuffer.join(''), stderr: errorBuffer.join('') });
 
-    const resolveWithBuffer = () => resolve(output());
+    function resolveWithBuffer (exitCode: number) {
+      if (typeof exitCode === 'number' && exitCode !== 0)
+        reject(output());
+
+      resolve(output());
+    };
+
     const rejectWithBuffer = () => reject(output());
 
     cp.on('close', writeAndEnd(io.stdout, resolveWithBuffer));
@@ -49,8 +55,8 @@ export function execute(
 }
 
 function writeAndEnd(writable: NodeJS.WritableStream, end: Function) {
-  return function () {
+  return function (exitCode: number) {
     writable.write(EOL);
-    end();
+    end(exitCode);
   };
 };

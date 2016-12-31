@@ -28,8 +28,6 @@ function logError(stderr: NodeJS.WritableStream) {
   return function (error: Error) {
     stderr.write(EOL + red(`ERROR`) + `: ${error.message}` + EOL + EOL);
 
-    process.exit(1);
-
     throw error;
   };
 }
