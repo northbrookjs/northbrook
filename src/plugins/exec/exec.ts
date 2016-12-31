@@ -22,7 +22,10 @@ each(plugin, function ({ pkg, args }, io) {
   return execute(cmd, args, io, path)
     .then(() => io.stdout.write(`complete!` + EOL))
     .catch(logError(io.stdout));
-});
+})
+  .catch(() => {
+    process.exit(1);
+  });
 
 function logError(stderr: NodeJS.WritableStream) {
   return function (error: Error) {
