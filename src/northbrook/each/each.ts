@@ -9,11 +9,15 @@ export function each(command: Command, callback: EachCallback): Promise<void> {
       const packagesToExec = packagesToExecute(input);
 
       if (packagesToExec.length === 0)
-        stdio.stderr.write(`No packages could be found`);
+        return stdio.stderr.write(`No packages could be found`);
 
       const call = createCallback(callback, input, stdio);
 
-      return sequence<Pkg>(packagesToExec, call).then(resolve).catch(reject);
+      return sequence<Pkg>(packagesToExec, call).then(resolve).catch(err => {
+        reject(err);
+
+        process.nextTick(() => process.exit(1));
+      });
     };
   });
 }
