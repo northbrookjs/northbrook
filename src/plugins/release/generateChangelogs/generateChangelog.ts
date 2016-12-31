@@ -8,7 +8,7 @@ import { execute, exists } from '../../../helpers';
 import { Stdio, Commit } from '../../../types';
 import { ReleasePackage } from '../types';
 
-const commitMessage = 'docs(CHANGELOG): append to changelog';
+const commitMessage = 'docs(CHANGELOG): append to changelog [skip ci]';
 
 export function generateChangelog (
   releasePackage: ReleasePackage,
