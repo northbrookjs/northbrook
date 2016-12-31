@@ -1,3 +1,10 @@
+# 4.2.0 (2016-12-31)
+---
+
+## Features
+
+- feat(release): allow skipping tests [8b5d5ace](https://github.com/northbrookjs/northbrook/commits/8b5d5ace87c5c1f958f0b004b458e73fb9748909)
+
 # 4.1.10 (2016-12-31)
 ---
 
