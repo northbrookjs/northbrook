@@ -1,3 +1,10 @@
+# 4.2.2 (2016-12-31)
+---
+
+## Bug Fixes
+
+- fix(release): skip ci on changelog generation commit [0164fd49](https://github.com/northbrookjs/northbrook/commits/0164fd494b58af029849b95ce3d7c56d2aa425d5)
+
 # 4.2.1 (2016-12-31)
 ---
 
