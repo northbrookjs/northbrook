@@ -1,3 +1,10 @@
+# 4.2.1 (2016-12-31)
+---
+
+## Bug Fixes
+
+- fix(release): watch pacman eat [d2d01c44](https://github.com/northbrookjs/northbrook/commits/d2d01c448fd1c4df1d2fe8d17f351d5b43203a1f)
+
 # 4.2.0 (2016-12-31)
 ---
 
