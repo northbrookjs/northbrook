@@ -31,7 +31,8 @@ function performVersionBump(
   io: Stdio,
   method: 'comver' | 'semver')
 {
-  return Promise.all<any>(packagesToUpdate.map(bumpVersion(affectedPackages, io, method)));
+  return Promise.all<any>(packagesToUpdate.map(bumpVersion(affectedPackages, io, method)))
+    .then(packages => packages.filter(Boolean));
 };
 
 function bumpVersion(affectedPackages: AffectedPackages, io: Stdio, method: 'comver' | 'semver') {
@@ -43,7 +44,8 @@ function bumpVersion(affectedPackages: AffectedPackages, io: Stdio, method: 'com
     const suggestedUpdate = getSuggestedUpdate(commits, method);
     const increment = incrementName(suggestedUpdate);
 
-    if (!increment) return Promise.resolve();
+    if (!increment)
+      return Promise.resolve(void 0);
 
     const newVersion = getNewVersion(splitVersion(pkg.version as string), suggestedUpdate);
 

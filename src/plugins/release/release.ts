@@ -4,7 +4,21 @@ import { cyan, bold, underline } from 'typed-colors';
 
 const { start, stop, change_sequence } = require('simple-spinner');
 
-change_sequence(['    ', '.   ', '..  ', '... ', '....', ' ...', '  ..', '   .']);
+change_sequence([
+  '    ',
+  '•   ',
+  '••  ',
+  '••• ',
+  '••••',
+  'ᗧ•••',
+  'ⵔ•••',
+  ' ᗧ••',
+  ' ⵔ••',
+  '  ᗧ•',
+  '  ⵔ•',
+  '   ᗧ',
+  '   ⵔ',
+]);
 
 import {
   Stdio,
@@ -89,9 +103,10 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 
       io.stdout.write(header);
 
-      io.stdout.write(EOL + bold(`Running tests`));
-
-      start();
+      if (!options.skipTests) {
+        io.stdout.write(EOL + bold(`Running tests`));
+        start();
+      }
 
       return runTests(directory, options)(affectedPackages)
         .then(stopWriteStart(io, 'Bumping package versions'))
@@ -186,12 +201,12 @@ function generateHeader(
 
 function reportHeaderPositive () {
   return '                                ' + underline(bold('RELEASES TO DO')) + EOL + EOL +
-      'We checked all packages and recent commits, and discovered that' + '\n' +
+      'We checked all packages and recent commits and discovered that' + '\n' +
       'you should release new versions for the following packages' + EOL + EOL;
 }
 
 function reportHeaderNegative () {
   return 'Nothing to release.' + EOL + EOL +
-      'We checked all packages and recent commits, and discovered that' + EOL +
+      'We checked all packages and recent commits and discovered that' + EOL +
       'you do not need to release any new version.';
 }
