@@ -1,3 +1,10 @@
+# 4.1.8 (2016-12-30)
+---
+
+## Bug Fixes
+
+- fix(execute): reject promise when child process exits with non-zero [90613f53](https://github.com/northbrookjs/northbrook/commits/90613f53e6a1f8329def74ddb832be19d2f0249a)
+
 # 4.1.7 (2016-12-30)
 ---
 
