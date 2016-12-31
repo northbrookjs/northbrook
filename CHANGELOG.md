@@ -1,3 +1,10 @@
+# 4.1.9 (2016-12-30)
+---
+
+## Bug Fixes
+
+- fix(northbrook): commit execute fixes [e5d02189](https://github.com/northbrookjs/northbrook/commits/e5d021890f835086b280a6fe7cd1249d86015388)
+
 # 4.1.8 (2016-12-30)
 ---
 
