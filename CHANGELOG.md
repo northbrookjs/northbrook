@@ -1,3 +1,14 @@
+# 4.3.0 (2017-01-03)
+---
+
+## Features
+
+- feat(northbrook): add global changed flag and implementation for each [fe687903](https://github.com/northbrookjs/northbrook/commits/fe68790361a5e3114e886f532d6457fb90cdf2fa)
+
+## Bug Fixes
+
+- fix(northbrook): fix displaying northbrook flags in --help menu [a9cf2495](https://github.com/northbrookjs/northbrook/commits/a9cf24955e6fe67c385a2d2e3c0c131da2376760)
+
 # 4.2.3 (2016-12-31)
 ---
 
