@@ -9,7 +9,7 @@ import { forEach, ifElse } from 'ramda';
 import { red, white, yellow, green, bold } from 'typed-colors';
 import { cross } from 'typed-figures';
 import { deepMerge } from '../../../helpers';
-import { display } from './display';
+import { display, displayFlags } from './display';
 import { callCommand } from './callCommand';
 import { NorthbrookConfig, Stdio } from '../../../types';
 
@@ -61,6 +61,7 @@ function execute(
 
   if ((parsedArguments as any).help === true) {
     stdout.write(green(bold(`Northbrook`)) + EOL + EOL +
+      `${displayFlags(app.flags).replace(/,--/, '--')}` + EOL + EOL +
       `${app.commands.map(display)}`
         .replace(new RegExp(`${EOL},`, 'g'), EOL)
         .replace(new RegExp(`${EOL}{3,}`, 'g'), EOL + EOL)

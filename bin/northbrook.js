@@ -5,7 +5,7 @@ var join = require('path').join;
 var dirname = require('path').dirname;
 var isAbsolute = require('path').isAbsolute;
 
-var defaultPlugins = join(__dirname, '../plugins');
+var defaultPlugins = require('../plugins').plugin;
 
 (function (northbrook, argv) {
   var config;
