@@ -15,6 +15,12 @@ const only =
     description('Execute plugins in only specific packages'),
   );
 
+const changed =
+  flag('boolean',
+    alias('changed', 'c'),
+    description('Execute plugins in only packages that have changed since last release'),
+  );
+
 const configPath =
   flag('string',
     alias('config', 'c'),
@@ -28,7 +34,7 @@ const debug =
   );
 
 // for display in help menu
-const nb = app(only, configPath, debug);
+const nb = app(only, changed, configPath, debug);
 
 export function northbrook(
   config: NorthbrookConfig,

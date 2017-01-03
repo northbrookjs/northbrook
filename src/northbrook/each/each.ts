@@ -1,19 +1,29 @@
+import { EOL } from 'os';
 import { Command, HandlerApp, HandlerOptions } from 'reginn';
 import { Stdio, Pkg } from '../../types';
-import { packagesToExecute } from '../../helpers';
+import { packagesToExecute, getChangedPackages } from '../../helpers';
 import { sequence } from '@typed/sequence';
 
 export function each(command: Command, callback: EachCallback): Promise<void> {
   return new Promise<void>((resolve, reject) => {
-    command.handler = function (input: HandlerOptions, stdio: Stdio) {
-      const packagesToExec = packagesToExecute(input);
+    command.handler = function (input: HandlerOptions, io: Stdio) {
+      const { config, options } = input;
 
-      if (packagesToExec.length === 0)
-        return stdio.stderr.write(`No packages could be found`);
+      const call = createCallback(callback, input, io);
 
-      const call = createCallback(callback, input, stdio);
+      const packagesToExec = options.changed
+        ? getChangedPackages(config.packages as Array<string>)
+        : Promise.resolve(packagesToExecute(input));
 
-      return sequence<Pkg>(packagesToExec, call).then(resolve).catch(reject);
+      return packagesToExec
+        .then(packages => {
+          if (packages.length === 0)
+            return io.stdout.write(`No packages could be found` + EOL);
+
+          return sequence(packages, call);
+        })
+        .then(resolve)
+        .catch(reject);
     };
   });
 }
