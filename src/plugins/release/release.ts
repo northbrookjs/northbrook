@@ -113,7 +113,7 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
       }
 
       return runTests(directory, options)
-        .then(() => stop())
+        .then(() => { stop(); io.stdout.write(EOL + EOL); } )
         .then(() => bumpPackageVersions(config, io, options, affectedPackages))
         .then((packages: Array<ReleasePackage>) => {
 

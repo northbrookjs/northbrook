@@ -12,7 +12,7 @@ export function npmPublish(io: Stdio) {
 
 function publish(io: Stdio) {
   return function (pkg: ReleasePackage) {
-    io.stdout.write(`Publishing new v${pkg.pkg.version} of ${pkg.name}...` + EOL + EOL);
+    io.stdout.write(`Publishing v${pkg.pkg.version} of ${pkg.name}...` + EOL + EOL);
     return execute('npm', ['publish', '--access=public'], io, pkg.directory);
   };
 }
