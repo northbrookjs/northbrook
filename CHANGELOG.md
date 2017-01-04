@@ -1,3 +1,10 @@
+# 4.3.2 (2017-01-03)
+---
+
+## Bug Fixes
+
+- fix(release): small wording changes [47aa949c](https://github.com/northbrookjs/northbrook/commits/47aa949cba8079c6603bd878f7abc293e3fa7c01)
+
 # 4.3.1 (2017-01-03)
 ---
 
