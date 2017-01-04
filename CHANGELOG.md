@@ -1,3 +1,10 @@
+# 4.3.4 (2017-01-04)
+---
+
+## Bug Fixes
+
+- fix(release): associate git tags to commit hashes [e622423e](https://github.com/northbrookjs/northbrook/commits/e622423e20fcc20d1fa6a1876e3941398a2aa07c)
+
 # 4.3.3 (2017-01-03)
 ---
 
