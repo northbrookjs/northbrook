@@ -1,3 +1,10 @@
+# 4.3.3 (2017-01-03)
+---
+
+## Bug Fixes
+
+- fix(release): log when pushing to release branch [2172aa8b](https://github.com/northbrookjs/northbrook/commits/2172aa8ba0c1a60c98b7bc24d8a0164fb7c7c47e)
+
 # 4.3.2 (2017-01-03)
 ---
 
