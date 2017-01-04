@@ -16,7 +16,7 @@ export function generateChangelog (
   _spawn = spawn,
   writeStream?: NodeJS.WritableStream): Promise<ReleasePackage>
 {
-  const { directory } = releasePackage;
+  const { directory, name } = releasePackage;
 
   const CHANGELOG = join(directory, 'CHANGELOG.md');
 
@@ -24,10 +24,11 @@ export function generateChangelog (
 
   const writeFileSream = writeStream || createWriteStream(CHANGELOG);
 
+  io.stdout.write(`Generating changelog for ${name}...` + EOL + EOL);
+
   return writeChangelog(releasePackage, fileContents, writeFileSream)
     .then(() => execute('git', ['add', 'CHANGELOG.md'], io, directory, _spawn))
-    .then(() => execute('git', ['commit', '-m', commitMessage], io, directory, _spawn))
-    .then(() => releasePackage);
+    .then(() => execute('git', ['commit', '-m', commitMessage], io, directory, _spawn));
 }
 
 function writeChangelog(

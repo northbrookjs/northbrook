@@ -1,7 +1,7 @@
-import { map } from 'ramda';
 import { ReleasePackage } from '../types';
 import { generateChangelog } from './generateChangelog';
+import { sequence } from '@typed/sequence';
 
 export function generateChangelogs(packages: ReleasePackage[]) {
-  return Promise.all(map(generateChangelog, packages));
+  return sequence(packages, generateChangelog).then(() => packages);
 }

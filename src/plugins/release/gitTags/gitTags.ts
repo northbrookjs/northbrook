@@ -1,3 +1,5 @@
+import { EOL } from 'os';
+import { sequence } from '@typed/sequence';
 import { Stdio, NorthbrookConfig } from '../../../types';
 import { execute } from '../../../helpers';
 import { ReleasePackage } from '../types';
@@ -5,7 +7,7 @@ import { filterScope } from './filterScope';
 
 export function gitTags(config: NorthbrookConfig, io: Stdio) {
   return function (releasePackages: Array<ReleasePackage>) {
-    return Promise.all<ReleasePackage>(releasePackages.map(generateGitTag(config, io)));
+    return sequence(releasePackages, generateGitTag(config, io)).then(() => releasePackages);
   };
 }
 
@@ -18,6 +20,8 @@ function generateGitTag(config: NorthbrookConfig, io: Stdio) {
     if ((config.packages as Array<string>).length > 1)
       releaseVersion = releaseVersion + `-${filterScope(name)}`;
 
+    io.stdout.write(`Generating git tag v${releaseVersion} for ${name}...` + EOL + EOL);
+
     return execute(
       'git',
       [
@@ -26,7 +30,6 @@ function generateGitTag(config: NorthbrookConfig, io: Stdio) {
       ],
       io,
       directory,
-    )
-      .then(() => releasePackage);
+    );
   };
 }

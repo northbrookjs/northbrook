@@ -15,25 +15,7 @@ describe('runTests', () => {
       done();
     });
 
-    runTests(directory, {}, io, spawn)({});
-  });
-
-  it('returns commits after running tests', () => {
-    const directory = __dirname;
-    const io = stdio();
-
-    const spawn = mockSpawn((cp: MockChildProcess) => {
-      assert.strictEqual(cp.cmd, 'npm');
-      assert.strictEqual(cp.args.length, 1);
-      assert.strictEqual(cp.args[0], 'test');
-      cp.end();
-    });
-
-    const affectedPackages: any = {};
-
-    return runTests(directory, {}, io, spawn)(affectedPackages).then((r: any) => {
-      assert.strictEqual(r, affectedPackages);
-    });
+    runTests(directory, {}, io, spawn);
   });
 
   it('skips tests with skipTests options', () => {
@@ -46,9 +28,7 @@ describe('runTests', () => {
       ++called;
     });
 
-    const affectedPackages: any = {};
-
-    return runTests(directory, { skipTests: true }, io, spawn)(affectedPackages).then(() => {
+    return runTests(directory, { skipTests: true }, io, spawn).then(() => {
       assert.strictEqual(called, 0);
     });
   });

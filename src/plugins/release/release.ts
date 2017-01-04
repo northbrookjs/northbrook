@@ -88,8 +88,12 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
   if (!isDirectoryClean(directory))
     return io.stdout.write(`Git Directory is not clean` + EOL + EOL);
 
-  return switchToReleaseBranch(options.releaseBranch, void 0, directory)
-    .then(() => changedPackages(directory))
+  const begin = options.check
+    ? changedPackages(directory)
+    : switchToReleaseBranch(options.releaseBranch, void 0, directory)
+        .then(() => changedPackages(directory));
+
+  return begin
     .then(affectedPackages => {
       if (Object.keys(affectedPackages).length === 0)
         throw `No packages currently require a new release`;
@@ -108,51 +112,39 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
         start();
       }
 
-      return runTests(directory, options)(affectedPackages)
-        .then(stopWriteStart(io, 'Bumping package versions'))
-        .then(() => bumpPackageVersions(config, io, options)(affectedPackages))
-        .then(packages => {
-          stop();
+      return runTests(directory, options)
+        .then(() => stop())
+        .then(() => bumpPackageVersions(config, io, options, affectedPackages))
+        .then((packages: Array<ReleasePackage>) => {
 
           if (!options.skipLogin) {
             io.stdout.write('Logging in to NPM...' + EOL + EOL);
-            return npmLogin(io, directory)(packages);
+            return npmLogin(io, directory).then(() => packages);
           }
 
           return packages;
         })
-        .then(stopWriteStart(io, 'Creating git tags'))
         .then(gitTags(config, io))
-        .then(stopWriteStart(io, 'Generating changelogs'))
         .then(generateChangelogs)
-        .then(stopWriteStart(io, 'Publishing to NPM', false))
         .then(npmPublish(io))
-        .then(stopWriteStart(io, 'Pushing to release branch...', false))
         .then(() => gitPushToReleaseBranch(options.releaseBranch, directory, io));
-    })
-    .catch((e: Error) => {
-      stop();
-      io.stderr.write(e.message || e + EOL);
     })
     .then(() => {
       stop();
       io.stdout.write(EOL);
+    })
+    .catch((e: any) => {
+      stop();
+
+      if (e.stderr) {
+        io.stderr.write(e.stderr + EOL);
+      } else {
+        io.stderr.write((e.message || e) + EOL);
+      }
+
+      process.exit(1);
     });
 });
-
-function stopWriteStart(io: Stdio, content: string, bool = true) {
-  return function (x: any) {
-    stop();
-    io.stdout.write(EOL + bold(content));
-
-    if (bool)
-      start();
-    else
-      io.stdout.write(EOL);
-
-    return x;
-  };
-}
 
 const separator =
   '##----------------------------------------------------------------------------##';
