@@ -1,3 +1,10 @@
+# 4.3.1 (2017-01-03)
+---
+
+## Bug Fixes
+
+- fix(release): provide sequential releases for reliability [d6a4f0e7](https://github.com/northbrookjs/northbrook/commits/d6a4f0e785569ed675631e7d1de913d37ad5927c)
+
 # 4.3.0 (2017-01-03)
 ---
 
