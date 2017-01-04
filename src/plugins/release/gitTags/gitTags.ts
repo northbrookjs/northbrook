@@ -13,7 +13,7 @@ export function gitTags(config: NorthbrookConfig, io: Stdio) {
 
 function generateGitTag(config: NorthbrookConfig, io: Stdio) {
   return function (releasePackage: ReleasePackage) {
-    const { pkg, name, directory } = releasePackage;
+    const { pkg, name, directory, commits } = releasePackage;
 
     let releaseVersion = `${pkg.version}`;
 
@@ -27,6 +27,7 @@ function generateGitTag(config: NorthbrookConfig, io: Stdio) {
       [
         'tag',
         `v${releaseVersion}`,
+        `${commits[0].hash}`,
       ],
       io,
       directory,
