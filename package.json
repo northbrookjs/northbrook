@@ -79,7 +79,7 @@
     "findup-sync": "^0.4.3",
     "mkdirp": "^0.5.1",
     "ramda": "^0.22.1",
-    "reginn": "^2.1.4",
+    "reginn": "^2.1.5",
     "semver": "^5.3.0",
     "simple-spinner": "0.0.5",
     "stdio-mock": "^1.1.0",
