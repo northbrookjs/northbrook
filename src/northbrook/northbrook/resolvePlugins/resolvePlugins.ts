@@ -50,7 +50,7 @@ function isPlugin(plugin: any): boolean {
   return isCommandOrApp(plugin.plugin);
 }
 
-function isCommandOrApp(x: any) {
+function isCommandOrApp(x: any): x is (App | Command) {
   if (x.type === 'command' || x.type === 'app') return true;
 
   return false;
