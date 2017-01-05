@@ -144,7 +144,7 @@ useful for writing plugins.
 
 #### Each Handler
 
-Wait just a while longer for this to be documented, [see it in action](https://github.com/northbrookjs/northbrookjs/blob/master/src/plugins/exec/index.ts#L16),
+Wait just a while longer for this to be documented, [see it in action](https://github.com/northbrookjs/northbrook/blob/master/src/plugins/exec/index.ts#L16),
 or submit a pull request to help us better document this feature!
 
 #### Changed Packages

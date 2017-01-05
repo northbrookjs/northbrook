@@ -1,4 +1,4 @@
-# Northbrook ![](https://img.shields.io/badge/license-MIT-blue.svg) [![ComVer](https://img.shields.io/badge/ComVer-compliant-brightgreen.svg)](https://github.com/staltz/comver)
+# Northbrook ![](https://img.shields.io/badge/license-MIT-blue.svg)
 
 > Reproducible tooling & configuration
 
@@ -38,8 +38,8 @@ yarn add --dev northbrook
 
 ## Additional Documentation
 
-- [Default Plugins and Plugin API](https://github.com/northbrookjs/northbrookjs/tree/master/PLUGINS.md)
-- [Using Northbrook Programatically](https://github.com/northbrookjs/northbrookjs/tree/master/NORTHBROOK_API.md)
+- [Default Plugins and Plugin API](https://github.com/northbrookjs/northbrook/tree/master/PLUGINS.md)
+- [Using Northbrook Programatically](https://github.com/northbrookjs/northbrook/tree/master/NORTHBROOK_API.md)
 
 ---
 
@@ -180,7 +180,7 @@ Plugins can either be a `require()`-able string or in the form of a Reginn
 
 By default `northbrook/plugins` will be used if no configuration is applied.
 For information about the default plugins or creating plugins please see
-[PLUGINS.md](https://github.com/northbrookjs/northbrookjs/tree/master/PLUGINS.md).
+[PLUGINS.md](https://github.com/northbrookjs/northbrook/tree/master/PLUGINS.md).
 
 ---
 
