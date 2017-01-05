@@ -1,3 +1,10 @@
+# 4.3.5 (2017-01-05)
+---
+
+## Bug Fixes
+
+- fix(resolvePlugins): fix failing tests with newer versions of dependencies [7247acf2](https://github.com/northbrookjs/northbrook/commits/7247acf22454c70389b4d6f47ebd410dc90f9316)
+
 # 4.3.4 (2017-01-04)
 ---
 
