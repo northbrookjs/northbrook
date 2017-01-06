@@ -61,7 +61,7 @@
     "rimraf": "^2.5.4",
     "spawn-mock": "^1.0.0",
     "ts-node": "^1.7.2",
-    "tslint": "^4.1.1",
+    "tslint": "^4.3.0",
     "typed-prompts": "^1.5.0",
     "typescript": "^2.1.4",
     "validate-commit-msg": "^2.8.2",
