@@ -23,6 +23,10 @@ npm install --save-dev northbrook
 yarn add --dev northbrook
 ```
 
+## Have more questions than answers or want to help?
+
+Join us on gitter at https://gitter.im/northbrookjs!
+
 ---
 
 ## Table of Contents
