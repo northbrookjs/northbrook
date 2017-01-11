@@ -1,3 +1,10 @@
+# 4.3.6 (2017-01-11)
+---
+
+## Bug Fixes
+
+- fix(run): fix regex for windows [100bf889](https://github.com/northbrookjs/northbrook/commits/100bf88936b0682d3da04c91df28560e2dc0364b)
+
 # 4.3.5 (2017-01-05)
 ---
 
