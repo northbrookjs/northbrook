@@ -1,17 +1,18 @@
-import { EOL } from 'os';
 import { App, Command, HandlerApp } from 'reginn';
+import { NorthbrookConfig, Stdio } from '../../../types';
+import { bold, green, red, white, yellow } from 'typed-colors';
+import { display, displayFlags } from './display';
+import { forEach, ifElse } from 'ramda';
 // avoid reimplementing everything
 import { parseArguments, splitArguments } from 'reginn/lib/commonjs/run/parseArguments';
-import { matchCommands } from 'reginn/lib/commonjs/run/matchCommands';
-import { getCommandFlags } from 'reginn/lib/commonjs/run/getCommandFlags';
-import { filterOptions } from 'reginn/lib/commonjs/run/filterOptions';
-import { forEach, ifElse } from 'ramda';
-import { red, white, yellow, green, bold } from 'typed-colors';
+
+import { EOL } from 'os';
+import { callCommand } from './callCommand';
 import { cross } from 'typed-figures';
 import { deepMerge } from '../../../helpers';
-import { display, displayFlags } from './display';
-import { callCommand } from './callCommand';
-import { NorthbrookConfig, Stdio } from '../../../types';
+import { filterOptions } from 'reginn/lib/commonjs/run/filterOptions';
+import { getCommandFlags } from 'reginn/lib/commonjs/run/getCommandFlags';
+import { matchCommands } from 'reginn/lib/commonjs/run/matchCommands';
 
 export function northrookRun(config: NorthbrookConfig, directory: string, stdio: Stdio) {
   return function run(
@@ -64,7 +65,7 @@ function execute(
       `${displayFlags(app.flags).replace(/,--/, '--')}` + EOL + EOL +
       `${app.commands.map(display)}`
         .replace(new RegExp(`${EOL},`, 'g'), EOL)
-        .replace(new RegExp(`${EOL}{3,}`, 'g'), EOL + EOL)
+        .replace(new RegExp(`[${EOL}]{3,}`, 'g'), EOL + EOL)
         .trim() + EOL + EOL);
   } else {
     // call all matched commands
