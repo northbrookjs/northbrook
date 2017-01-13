@@ -45,9 +45,6 @@ change_sequence([
   '   ⵔ',
 ]);
 
-
-
-
 const releaseDescription = description('Automated package releases');
 const checkFlag = flag('boolean', alias('check'), description('Calculate releases to make'));
 
