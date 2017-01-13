@@ -1,7 +1,8 @@
-import { EOL } from 'os';
 import { Command, HandlerApp, HandlerOptions } from 'reginn';
-import { Stdio, Pkg } from '../../types';
-import { packagesToExecute, getChangedPackages } from '../../helpers';
+import { Pkg, Stdio } from '../../types';
+import { getChangedPackages, packagesToExecute } from '../../helpers';
+
+import { EOL } from 'os';
 import { sequence } from '@typed/sequence';
 
 export function each(command: Command, callback: EachCallback): Promise<void> {
@@ -25,6 +26,14 @@ export function each(command: Command, callback: EachCallback): Promise<void> {
         .then(resolve)
         .catch(reject);
     };
+  }).catch((e: any) => {
+    if (e.stderr) {
+      process.stderr.write(e.stderr + EOL);
+    } else {
+      process.stderr.write((e.message || e) + EOL);
+    }
+
+    process.exit(1);
   });
 }
 
