@@ -1,9 +1,9 @@
-import { spawn } from 'child_process';
-import { stdio } from 'stdio-mock';
+import { AffectedPackages, Commit, Stdio } from '../../types';
+
 import { gitLatestTag } from './gitLatestTag';
 import { gitRawCommits } from './gitRawCommits';
-
-import { AffectedPackages, Commit, Stdio } from '../../types';
+import { spawn } from 'child_process';
+import { stdio } from 'stdio-mock';
 
 export function changedPackages (
   cwd: string = process.cwd(),
@@ -25,7 +25,7 @@ function getAffectedPackages(commits: Array<Commit>) {
     .forEach(function (commit: Commit) {
       const affects = commit.message.affects;
 
-      if (!affects) return;
+      if (!affects || commit.message.scope === 'release') return;
 
       affects.forEach(name => {
         if (!affectedCommits[name]) {
