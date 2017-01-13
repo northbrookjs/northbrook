@@ -1,6 +1,31 @@
+import {
+  AffectedPackages,
+  Command,
+  NorthbrookConfig,
+  Stdio,
+  alias,
+  changedPackages,
+  command,
+  description,
+  flag,
+  withCallback,
+} from '../../';
+import { bold, cyan, underline } from 'typed-colors';
+
 import { EOL } from 'os';
+import { ReleasePackage } from './types';
+import { bumpPackageVersions } from './bumpPackageVersions';
+import { generateChangelogs } from './generateChangelogs';
+import { getPackagesToUpdate } from './bumpPackageVersions/getPackagesToUpdate';
+import { getSuggestedUpdate } from '../../helpers';
+import { gitPushToReleaseBranch } from './gitPushToReleaseBranch';
+import { gitTags } from './gitTags';
+import { incrementName } from './bumpPackageVersions/incrementName';
+import { npmLogin } from './npmLogin';
+import { npmPublish } from './npmPublish';
+import { runTests } from './runTests';
 import { spawnSync } from 'child_process';
-import { cyan, bold, underline } from 'typed-colors';
+import { switchToReleaseBranch } from './switchToReleaseBranch';
 
 const { start, stop, change_sequence } = require('simple-spinner');
 
@@ -20,32 +45,8 @@ change_sequence([
   '   ⵔ',
 ]);
 
-import {
-  Stdio,
-  command,
-  Command,
-  alias,
-  description,
-  flag,
-  withCallback,
-  changedPackages,
-  NorthbrookConfig,
-  AffectedPackages,
-} from '../../';
 
-import { switchToReleaseBranch } from './switchToReleaseBranch';
-import { runTests } from './runTests';
-import { bumpPackageVersions } from './bumpPackageVersions';
-import { npmLogin } from './npmLogin';
-import { npmPublish } from './npmPublish';
-import { gitTags } from './gitTags';
-import { generateChangelogs } from './generateChangelogs';
-import { gitPushToReleaseBranch } from './gitPushToReleaseBranch';
 
-import { ReleasePackage } from './types';
-import { getSuggestedUpdate } from '../../helpers';
-import { getPackagesToUpdate } from './bumpPackageVersions/getPackagesToUpdate';
-import { incrementName } from './bumpPackageVersions/incrementName';
 
 const releaseDescription = description('Automated package releases');
 const checkFlag = flag('boolean', alias('check'), description('Calculate releases to make'));
@@ -102,8 +103,11 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
 
       const header = generateHeader(config, affectedPackages, method);
 
-      if (options.check)
-        throw header;
+      if (options.check) {
+        stop();
+        io.stdout.write(header + EOL + EOL);
+        process.exit(0);
+      }
 
       io.stdout.write(header);
 
