@@ -1,3 +1,11 @@
+# 4.3.7 (2017-01-13)
+---
+
+## Bug Fixes
+
+- fix(each): attempt to print error messages and exit on 1 [2db07c04](https://github.com/northbrookjs/northbrook/commits/2db07c043a5efe0cb0d9c44373de8da84b268c06)
+- fix(changedPackages): do not use release commits [df73ce88](https://github.com/northbrookjs/northbrook/commits/df73ce88d7704730e36b2e35662974f0dbf35a79)
+
 # 4.3.6 (2017-01-11)
 ---
 
