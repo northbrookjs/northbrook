@@ -1,3 +1,10 @@
+# 4.4.0 (2017-01-13)
+---
+
+## Features
+
+- feat(northbrook): load @northbrook/ and northbrook- prefixed plugins by default [1964268d](https://github.com/northbrookjs/northbrook/commits/1964268deca2a47179c238fa07c1a24d02e0744a)
+
 # 4.3.7 (2017-01-13)
 ---
 
