@@ -1,3 +1,10 @@
+# 4.4.1 (2017-01-14)
+---
+
+## Bug Fixes
+
+- fix(link): fix mutation issues [1baa80cf](https://github.com/northbrookjs/northbrook/commits/1baa80cfc6978b5d0eec07bfc1effa8b131e3b5c)
+
 # 4.4.0 (2017-01-13)
 ---
 
