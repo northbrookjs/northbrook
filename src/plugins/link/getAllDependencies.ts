@@ -1,6 +1,7 @@
-import { join } from 'path';
-import { union, forEach } from 'ramda';
+import { forEach, union } from 'ramda';
+
 import { NorthbrookConfig } from '../../';
+import { join } from 'path';
 
 export function getAllDependencies(nbConfig: NorthbrookConfig, packageJson: any) {
   const packages = new Map<string, any>();
@@ -28,7 +29,7 @@ export function getAllDependencies(nbConfig: NorthbrookConfig, packageJson: any)
 function getPackageName(packageMap: Map<string, any>) {
   return function (name: string) {
     const pkg = require(join(name, 'package.json'));
-    packageMap.set(pkg.name, { pkg, path: name });
+    packageMap.set(pkg.name, { pkg: Object.assign({}, pkg), path: name });
   };
 }
 

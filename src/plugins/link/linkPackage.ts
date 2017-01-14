@@ -1,7 +1,8 @@
 import * as mkdirp from 'mkdirp';
+
+import { Stdio } from '../../';
 import { modifyPackageJson } from './modifyPackageJson';
 import { writePackage } from './writePackage';
-import { Stdio } from '../../';
 
 export function linkPackage(
   destination: string,
@@ -16,7 +17,7 @@ export function linkPackage(
       const dep: { pkg: any, path: string } = packages.get(packageName);
 
       io.stdout.write(`  linking ${dep.pkg.name}... `);
-      const depPackage = JSON.stringify(modifyPackageJson(dep.pkg, dep.path));
+      const depPackage = JSON.stringify(modifyPackageJson(Object.assign({}, dep.pkg), dep.path));
 
       writePackage(destination, depPackage, io)(resolve, reject);
     });
