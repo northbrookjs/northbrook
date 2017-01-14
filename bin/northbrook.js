@@ -4,8 +4,9 @@ var EOL = require('os').EOL;
 var join = require('path').join;
 var dirname = require('path').dirname;
 var isAbsolute = require('path').isAbsolute;
+var fs = require('fs');
 
-var defaultPlugins = require('../plugins').plugin;
+var defaultPlugins = require('../plugins');
 
 (function (northbrook, argv) {
   var config;
@@ -38,15 +39,43 @@ var defaultPlugins = require('../plugins').plugin;
   if (!path || !nbConfig) {
     path = process.cwd();
 
-    nbConfig = {
-      packages: ['.'],
-      plugins: [defaultPlugins]
-    };
+    nbConfig = { };
   }
+
+  var additionalPlugins = !nbConfig.plugins
+    ? findAdditionalPlugins(path)
+    : [];
 
   var debug = argv.indexOf('--debug') > -1 || argv.indexOf('-d') > -1;
 
-  var start = northbrook.northbrook(nbConfig, [], path, {}, debug).start;
+  var start = northbrook.northbrook(nbConfig, additionalPlugins, path, {}, debug).start;
 
   start(argv);
 })(require('../northbrook'), process.argv.slice(2));
+
+function findAdditionalPlugins(path) {
+  var additionalPlugins = scopedPlugins(path).concat(prefixedPlugins(path))
+
+  return [ defaultPlugins ]
+    .concat(additionalPlugins)
+    .filter(plugin => !!plugin.plugin);
+}
+
+function scopedPlugins(path) {
+  try {
+    return fs.readdirSync(join(path, 'node_modules/@northbrook'))
+     .map(plugin => require(join(path, 'node_modules/@northbrook', plugin)))
+  } catch (e) {
+    return [];
+  }
+}
+
+function prefixedPlugins(path) {
+  try {
+    return fs.readdirSync(join(path, 'node_modules'))
+      .filter(folder => folder.startsWith('northbrook-'))
+      .map(plugin => require(join(path, 'node_modules', plugin)));
+  } catch (e) {
+    return [];
+  }
+}
