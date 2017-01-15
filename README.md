@@ -161,7 +161,7 @@ const typescriptPlugin = require('some-typescript-plugin');
 
 module.exports = {
   plugins: [
-    'northrbook/plugins', // leave it to northbrook to do the require()ing
+    'northbrook/plugins', // leave it to northbrook to do the require()ing
     typescriptPlugin, // a plugin can be user-required
     'tslint'
   ]
