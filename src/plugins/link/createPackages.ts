@@ -13,15 +13,15 @@ export function createPackages(
   packages: Map<string, any>,
   io: Stdio)
 {
-  return function (resolve: Function, reject: Function) {
+  return function (resolve: any, reject: any) {
     mkdirp(join(path, 'node_modules'), (err: Error) => {
       if (err) reject(err);
 
       io.stdout.write(EOL + pointer + ` ${name} ` + EOL);
 
-      const link = linkDependencies(path, packages, io, resolve, reject);
+      const link = linkDependencies(path, packages, io);
 
-      forEach(link, dependencies);
+      Promise.all<any>(dependencies.map(link)).then(resolve).catch(reject);
     });
   };
 }
@@ -29,13 +29,13 @@ export function createPackages(
 function linkDependencies(
   path: string,
   packages: Map<string, any>,
-  io: Stdio,
-  resolve: Function,
-  reject: Function)
+  io: Stdio)
 {
   return function (depName: string) {
     const destination = join(path, 'node_modules', depName);
 
-    linkPackage(destination, packages, depName, io)(resolve, reject);
+    return new Promise((resolve, reject) => {
+      linkPackage(destination, packages, depName, io)(resolve, reject);
+    });
   };
 }

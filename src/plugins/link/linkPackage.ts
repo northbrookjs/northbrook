@@ -1,4 +1,6 @@
+import { EOL } from 'os';
 import * as mkdirp from 'mkdirp';
+import * as rimraf from 'rimraf';
 
 import { Stdio } from '../../';
 import { modifyPackageJson } from './modifyPackageJson';
@@ -11,15 +13,19 @@ export function linkPackage(
   io: Stdio)
 {
   return function (resolve: Function, reject: Function) {
-    mkdirp(destination, (err: Error) => {
-      if (err) reject(err);
+    rimraf(destination, (error: Error) => {
+      if (error) reject(error);
 
-      const dep: { pkg: any, path: string } = packages.get(packageName);
+      mkdirp(destination, (err: Error) => {
+        if (err) reject(err);
 
-      io.stdout.write(`  linking ${dep.pkg.name}... `);
-      const depPackage = JSON.stringify(modifyPackageJson(Object.assign({}, dep.pkg), dep.path));
+        const dep: { pkg: any, path: string } = packages.get(packageName);
 
-      writePackage(destination, depPackage, io)(resolve, reject);
+        io.stdout.write(`  linking ${dep.pkg.name}... ` + EOL);
+        const depPackage = JSON.stringify(modifyPackageJson(Object.assign({}, dep.pkg), dep.path));
+
+        writePackage(destination, depPackage)(resolve, reject);
+      });
     });
   };
 }
