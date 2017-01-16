@@ -17,35 +17,49 @@ export function parseCommitMessage(rawCommit: string): CommitMessage {
     };
   }
 
-  const type = rawCommit.split('(')[0].trim();
-  const scope = rawCommit.split('(')[1].split('):')[0].trim();
-  const subject = rawCommit.split('):')[1].split(EOL)[0];
+  try {
+    const type = rawCommit.split('(')[0].trim();
+    const scope = (rawCommit.split('(')[1] || '').split('):')[0].trim();
+    const subject = (rawCommit.split('):') || '')[1].split(EOL)[0];
 
-  const messageBody = rawCommit.split(subject)[1];
+    const messageBody = rawCommit.split(subject)[1] || '';
 
-  const body = messageBody
-    .split('AFFECTS')[0] // ensure doesn't contain affects
-    .split('BREAKING')[0] // ensure doesn't contain breaking changes
-    .split('ISSUES')[0] // ensure doesn't contain the issues closed
-    .replace(new RegExp(`${EOL}{2,}`, 'g'), EOL).trim();
+    const body = messageBody
+      .split('AFFECTS')[0] // ensure doesn't contain affects
+      .split('BREAKING')[0] // ensure doesn't contain breaking changes
+      .split('ISSUES')[0] // ensure doesn't contain the issues closed
+      .replace(new RegExp(`[${EOL}]{2,}`, 'g'), EOL).trim();
 
-  const affects = getAffects(messageBody);
-  const breakingChanges = getBreakingChanges(messageBody);
-  const issuesClosed = getIssuesClosed(messageBody);
+    const affects = getAffects(messageBody);
+    const breakingChanges = getBreakingChanges(messageBody);
+    const issuesClosed = getIssuesClosed(messageBody);
 
-  const suggestedUpdate = getSuggestedUpdate(type, breakingChanges);
+    const suggestedUpdate = getSuggestedUpdate(type, breakingChanges);
 
-  return {
-    type,
-    scope,
-    subject: subject.trim(),
-    body,
-    affects,
-    breakingChanges,
-    issuesClosed,
-    suggestedUpdate,
-    raw: rawCommit,
-  };
+    return {
+      type,
+      scope,
+      subject: subject.trim(),
+      body,
+      affects,
+      breakingChanges,
+      issuesClosed,
+      suggestedUpdate,
+      raw: rawCommit,
+    };
+  } catch (e) {
+    return {
+      type: '',
+      scope: '',
+      subject: '',
+      body: '',
+      affects: null,
+      breakingChanges: null,
+      issuesClosed: null,
+      suggestedUpdate: 0,
+      raw: rawCommit,
+    };
+  }
 }
 
 function getAffects(messageBody: string) {
