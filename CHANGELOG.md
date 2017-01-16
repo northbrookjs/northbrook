@@ -1,3 +1,10 @@
+# 4.5.0 (2017-01-16)
+---
+
+## Features
+
+- feat(northbrook): build a dependency graph for more correct tooling [c2ed7e3a](https://github.com/northbrookjs/northbrook/commits/c2ed7e3a23186d987d9fa00c282b3311c6e0b8e0)
+
 # 4.4.6 (2017-01-16)
 ---
 
