@@ -1,0 +1,7 @@
+{
+  "name": "e-testpackage",
+  "version": "0.0.0",
+  "dependencies": {
+    "f-testpackage": "latest"
+  }
+}

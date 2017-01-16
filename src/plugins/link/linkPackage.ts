@@ -2,13 +2,13 @@ import { EOL } from 'os';
 import * as mkdirp from 'mkdirp';
 import * as rimraf from 'rimraf';
 
-import { Stdio } from '../../';
+import { Stdio, DepGraph } from '../../';
 import { modifyPackageJson } from './modifyPackageJson';
 import { writePackage } from './writePackage';
 
 export function linkPackage(
   destination: string,
-  packages: Map<string, any>,
+  depGraph: DepGraph,
   packageName: string,
   io: Stdio)
 {
@@ -19,10 +19,10 @@ export function linkPackage(
       mkdirp(destination, (err: Error) => {
         if (err) reject(err);
 
-        const dep: { pkg: any, path: string } = packages.get(packageName);
+        const pkg = depGraph.configOf(packageName);
 
-        io.stdout.write(`  linking ${dep.pkg.name}... ` + EOL);
-        const depPackage = JSON.stringify(modifyPackageJson(Object.assign({}, dep.pkg), dep.path));
+        io.stdout.write(`  linking ${pkg.name}... ` + EOL);
+        const depPackage = JSON.stringify(modifyPackageJson(pkg.config, pkg.path));
 
         writePackage(destination, depPackage)(resolve, reject);
       });

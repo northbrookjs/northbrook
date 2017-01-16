@@ -3,6 +3,7 @@ import { Command, App } from '../';
 export interface NorthbrookConfig extends Object<any> {
   plugins?: Array<string | App | Command>;
   packages?: Array<string>;
+  circular?: Array<string>;
 }
 
 export interface Plugin {

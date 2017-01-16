@@ -14,14 +14,14 @@ each(plugin, function ({ pkg, args }, io) {
 
   const cmd = args.shift() as string;
 
-  io.stdout.write(`Running '${cmd} ${args.join(' ')}' in ${pkg.name}...`);
+  io.stdout.write(`Running '${`${cmd} ${args.join(' ')}`.trim()}' in ${pkg.name}...`);
 
   m.addPath(path);
   m.addPath(join(path, 'node_modules'));
 
   return execute(cmd, args, io, path)
     .then(() => io.stdout.write(
-      `Completed running '${cmd} ${args.join(' ')}' in ${pkg.name}` + EOL))
+      `Completed running '${`${cmd} ${args.join(' ')}`.trim()}' in ${pkg.name}` + EOL))
     .catch(logError(io.stdout, io.stderr));
 })
   .catch(() => {

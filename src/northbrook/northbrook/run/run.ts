@@ -7,6 +7,7 @@ import { forEach, ifElse } from 'ramda';
 import { parseArguments, splitArguments } from 'reginn/lib/commonjs/run/parseArguments';
 
 import { EOL } from 'os';
+import { DepGraph } from '../buildDependencyGraph';
 import { callCommand } from './callCommand';
 import { cross } from 'typed-figures';
 import { deepMerge } from '../../../helpers';
@@ -14,7 +15,12 @@ import { filterOptions } from 'reginn/lib/commonjs/run/filterOptions';
 import { getCommandFlags } from 'reginn/lib/commonjs/run/getCommandFlags';
 import { matchCommands } from 'reginn/lib/commonjs/run/matchCommands';
 
-export function northrookRun(config: NorthbrookConfig, directory: string, stdio: Stdio) {
+export function northrookRun(
+  config: NorthbrookConfig,
+  depGraph: DepGraph,
+  directory: string,
+  stdio: Stdio)
+{
   return function run(
     argv: Array<string>, app: App): Promise<HandlerApp>
   {
@@ -37,7 +43,7 @@ export function northrookRun(config: NorthbrookConfig, directory: string, stdio:
         (parsedArguments._[0] ? red(bold(`${parsedArguments._[0]}`)) : ''));
     }
 
-    return execute(argv, app, config, directory, stdio, matchedCommands, parsedArguments);
+    return execute(argv, app, config, depGraph, directory, stdio, matchedCommands, parsedArguments);
   };
 }
 
@@ -45,6 +51,7 @@ function execute(
   argv: string[],
   app: App,
   config: NorthbrookConfig,
+  depGraph: DepGraph,
   directory: string,
   stdio: Stdio,
   matchedCommands: Array<Command>,
@@ -58,7 +65,7 @@ function execute(
 
   const filterCommandOptions = filterOptions(options, app.flags, argv);
   const commandCall =
-    callCommand(argv, args, commandFlags, filterCommandOptions, config, directory, stdio);
+    callCommand(argv, args, commandFlags, filterCommandOptions, config, directory, stdio, depGraph);
 
   if ((parsedArguments as any).help === true) {
     stdout.write(green(bold(`Northbrook`)) + EOL + EOL +
@@ -74,6 +81,7 @@ function execute(
 
   return Promise.resolve<HandlerApp>({
     config,
+    depGraph,
     directory,
     type: 'app',
     flags: commandFlags,

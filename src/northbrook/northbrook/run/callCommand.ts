@@ -3,6 +3,7 @@ import { getCommandFlags } from 'reginn/lib/commonjs/run/getCommandFlags';
 import { tail } from 'ramda';
 import { deepMerge } from '../../../helpers';
 import { NorthbrookConfig, Stdio } from '../../../types';
+import { DepGraph } from '../buildDependencyGraph';
 
 export function callCommand(
   argv: string[],
@@ -12,6 +13,7 @@ export function callCommand(
   config: NorthbrookConfig,
   directory: string,
   stdio: Stdio,
+  depGraph: DepGraph,
 ) {
   return function (command: Command) {
     if (!command.handler) return;
@@ -27,6 +29,7 @@ export function callCommand(
           filter,
           config,
           directory,
+          depGraph,
         ),
         stdio,
       );
@@ -34,6 +37,7 @@ export function callCommand(
       command.handler({
         config,
         directory,
+        depGraph,
         args: tail(parsedArgs),
         options: optionsToCamelCase(filter(command)),
       }, stdio);
@@ -41,6 +45,7 @@ export function callCommand(
       command.handler({
         config,
         directory,
+        depGraph,
         args: parsedArgs,
         options: optionsToCamelCase(filter(command)),
       }, stdio);
@@ -68,7 +73,8 @@ function createSubApplication(
   commandFlags: CommandFlags, command: Command,
   filter: (command: Command) => CommandFlags,
   config: NorthbrookConfig,
-  directory: string): HandlerApp
+  directory: string,
+  depGraph: DepGraph): HandlerApp
 {
   const flags = argv.filter(arg => parsedArgs.indexOf(arg) === -1);
   const args = tail(parsedArgs).concat(flags);
@@ -81,5 +87,6 @@ function createSubApplication(
     flags: commandFlags,
     config,
     directory,
+    depGraph,
   };
 }

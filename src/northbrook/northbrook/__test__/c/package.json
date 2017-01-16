@@ -1,0 +1,7 @@
+{
+  "name": "c-testpackage",
+  "version": "0.0.0",
+  "dependencies": {
+    "a-testpackage": "latest"
+  }
+}

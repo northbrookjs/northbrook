@@ -3,13 +3,13 @@ import { join } from 'path';
 import * as mkdirp from 'mkdirp';
 import { pointer } from 'typed-figures';
 import { linkPackage } from './linkPackage';
-import { Stdio } from '../../';
+import { Stdio, DepGraph } from '../../';
 
 export function createPackages(
   dependencies: Array<string>,
   path: string,
   name: string,
-  packages: Map<string, any>,
+  depGraph: DepGraph,
   io: Stdio)
 {
   return function (resolve: any, reject: any) {
@@ -18,7 +18,7 @@ export function createPackages(
 
       io.stdout.write(EOL + pointer + ` ${name} ` + EOL);
 
-      const link = linkDependencies(path, packages, io);
+      const link = linkDependencies(path, depGraph, io);
 
       Promise.all<any>(dependencies.map(link)).then(resolve).catch(reject);
     });
@@ -27,14 +27,14 @@ export function createPackages(
 
 function linkDependencies(
   path: string,
-  packages: Map<string, any>,
+  depGraph: DepGraph,
   io: Stdio)
 {
   return function (depName: string) {
     const destination = join(path, 'node_modules', depName);
 
     return new Promise((resolve, reject) => {
-      linkPackage(destination, packages, depName, io)(resolve, reject);
+      linkPackage(destination, depGraph, depName, io)(resolve, reject);
     });
   };
 }

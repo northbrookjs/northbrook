@@ -6,6 +6,7 @@ import { cyan } from 'typed-colors';
 import { resolvePlugins } from './resolvePlugins';
 import { resolvePackages } from './resolvePackages';
 import { northrookRun } from './run';
+import { buildDependencyGraph } from './buildDependencyGraph';
 import { isFile, defaultStdio } from '../../helpers';
 import { NorthbrookConfig, STDIO, Stdio, Plugin } from '../../types';
 
@@ -59,9 +60,11 @@ export function northbrook(
   if (packages.length === 0)
     packages = isFile(join(cwd, 'package.json')) ? [cwd] : [];
 
-  config.packages = packages;
+  const dependencyGraph = buildDependencyGraph(packages, config.circular);
 
-  const run = northrookRun(clone(config), cwd, stdio as Stdio);
+  config.packages = dependencyGraph.paths();
+
+  const run = northrookRun(clone(config), dependencyGraph, cwd, stdio as Stdio);
 
   return {
     plugins: plugins.slice(0),

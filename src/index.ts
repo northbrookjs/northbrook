@@ -1,4 +1,5 @@
 import { NorthbrookConfig, Stdio } from './types';
+import { DepGraph } from './northbrook';
 
 import {
   CommandFlags,
@@ -13,6 +14,7 @@ declare module 'reginn' {
     args: Array<string>;
     options: any;
     config: NorthbrookConfig;
+    depGraph: DepGraph;
     directory: string;
   }
 
