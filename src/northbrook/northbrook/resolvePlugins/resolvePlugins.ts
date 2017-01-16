@@ -29,8 +29,6 @@ function resolvePlugin(cwd: string, stdio: Stdio, debug: boolean) {
     for (let i = 0; i < NORTHBROOK_PREFIXES.length; ++i) {
       plugin = tryRequire(NORTHBROOK_PREFIXES[i] + pluginName, cwd, true);
 
-      console.log((module as any).paths);
-
       if (isPlugin(plugin)) {
         if (debug)
           stdio.stdout.write(cyan('DEBUG') + `: Resolved plugin ${pluginName}` + EOL);
