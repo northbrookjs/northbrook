@@ -1,3 +1,10 @@
+# 4.4.6 (2017-01-16)
+---
+
+## Bug Fixes
+
+- fix(resolvePlugins): make debug conditional again [063082cc](https://github.com/northbrookjs/northbrook/commits/063082cc8733b29a4b83d658b97d223309be7a1d)
+
 # 4.4.5 (2017-01-16)
 ---
 
