@@ -27,7 +27,7 @@ function resolvePlugin(cwd: string, stdio: Stdio, debug: boolean) {
     if (isPlugin(plugin)) return plugin;
 
     for (let i = 0; i < NORTHBROOK_PREFIXES.length; ++i) {
-      plugin = tryRequire(NORTHBROOK_PREFIXES[i] + pluginName, cwd, true);
+      plugin = tryRequire(NORTHBROOK_PREFIXES[i] + pluginName, cwd, debug);
 
       if (isPlugin(plugin)) {
         if (debug)
