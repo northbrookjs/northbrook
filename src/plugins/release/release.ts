@@ -144,7 +144,7 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
         io.stderr.write((e.message || e) + EOL);
       }
 
-      process.exit(1)
+      process.exit(1);
     });
 });
 

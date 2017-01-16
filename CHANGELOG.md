@@ -1,3 +1,12 @@
+# 4.4.2 (2017-01-16)
+---
+
+## Bug Fixes
+
+- fix(errors): attempt to handle error messages more clearly [62f55010](https://github.com/northbrookjs/northbrook/commits/62f550103035ece4af9a70128229b7920940555e)
+- fix(changedPackages): ensure no failures occur with poorly formatted commit messages [65e7883d](https://github.com/northbrookjs/northbrook/commits/65e7883d3b5bb5fde610e989dea24bfafd2c9fe2)
+- fix(link): clean up destination before linking [4e16ba3d](https://github.com/northbrookjs/northbrook/commits/4e16ba3d71a511961026b0aff9d649189e73e3fc)
+
 # 4.4.1 (2017-01-14)
 ---
 
