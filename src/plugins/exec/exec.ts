@@ -20,16 +20,22 @@ each(plugin, function ({ pkg, args }, io) {
   m.addPath(join(path, 'node_modules'));
 
   return execute(cmd, args, io, path)
-    .then(() => io.stdout.write(`complete!` + EOL))
-    .catch(logError(io.stdout));
+    .then(() => io.stdout.write(
+      `Completed running '${cmd} ${args.join(' ')}' in ${pkg.name}` + EOL))
+    .catch(logError(io.stdout, io.stderr));
 })
   .catch(() => {
     process.exit(1);
   });
 
-function logError(stderr: NodeJS.WritableStream) {
-  return function (error: Error) {
-    stderr.write(EOL + red(`ERROR`) + `: ${error.message}` + EOL + EOL);
+function logError(stdout: NodeJS.WritableStream, stderr: NodeJS.WritableStream) {
+  return function (error: any) {
+    if (typeof error.stderr === 'string') {
+      stdout.write(error.stdout + EOL);
+      stderr.write(error.stderr + EOL);
+    } else {
+      stderr.write(EOL + red(`ERROR`) + `: ${error.message || error}` + EOL + EOL);
+    }
 
     throw error;
   };

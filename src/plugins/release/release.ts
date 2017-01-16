@@ -137,13 +137,14 @@ withCallback(plugin, function ({ config, directory, options }, io: Stdio) {
     .catch((e: any) => {
       stop();
 
-      if (e.stderr) {
+      if (typeof e.stderr === 'string') {
+        io.stdout.write(e.stdout + EOL);
         io.stderr.write(e.stderr + EOL);
       } else {
         io.stderr.write((e.message || e) + EOL);
       }
 
-      process.exit(1);
+      process.exit(1)
     });
 });
 

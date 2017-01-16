@@ -2,7 +2,6 @@ import { EOL } from 'os';
 import { join } from 'path';
 import * as mkdirp from 'mkdirp';
 import { pointer } from 'typed-figures';
-import { forEach } from 'ramda';
 import { linkPackage } from './linkPackage';
 import { Stdio } from '../../';
 
