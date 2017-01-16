@@ -3,7 +3,7 @@ import { tryRequire } from './tryRequire';
 
 describe('tryRequire', () => {
   it('should return a required package', () => {
-    const Mocha = tryRequire('mocha');
+    const Mocha = tryRequire('mocha', __dirname);
 
     assert.notStrictEqual(Mocha, null);
 
@@ -14,7 +14,7 @@ describe('tryRequire', () => {
   });
 
   it('should return null if a package cannot be found', () => {
-    const pkg = tryRequire('asddfasdfasdfasdfasdfadf');
+    const pkg = tryRequire('asddfasdfasdfasdfasdfadf', __dirname);
     assert.strictEqual(pkg instanceof Error, true);
   });
 });
