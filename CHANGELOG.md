@@ -1,3 +1,10 @@
+# 4.4.4 (2017-01-16)
+---
+
+## Bug Fixes
+
+- fix(npmLogin): allow retrying NPM login [7b1d8db3](https://github.com/northbrookjs/northbrook/commits/7b1d8db38c263231a067b7497ca139abe34a9855)
+
 # 4.4.3 (2017-01-16)
 ---
 
