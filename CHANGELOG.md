@@ -1,3 +1,10 @@
+# 4.4.5 (2017-01-16)
+---
+
+## Bug Fixes
+
+- fix(resolvePlugins): remove console.log [00ce5408](https://github.com/northbrookjs/northbrook/commits/00ce5408dd689caf1bca0a6262d0504c18b36321)
+
 # 4.4.4 (2017-01-16)
 ---
 
