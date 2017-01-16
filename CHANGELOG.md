@@ -1,3 +1,10 @@
+# 4.4.3 (2017-01-16)
+---
+
+## Bug Fixes
+
+- fix(northbrook): solve weird require() issues [e9545430](https://github.com/northbrookjs/northbrook/commits/e95454309ccbde894a8dae1639f8645a4e7263c9)
+
 # 4.4.2 (2017-01-16)
 ---
 
