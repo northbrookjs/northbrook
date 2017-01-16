@@ -22,9 +22,6 @@ export type PathConfig =
 export function findNorthbrookConfig(
   stdio: STDIO = {}, options?: { cwd?: string, case?: boolean }): PathConfig
 {
-  // require ts-node to be able to load `northbrook.ts`
-  require('ts-node/register');
-
   const { stdout = process.stdout } = stdio;
 
   const northbrookFilePath: string = findup(NORTHBROOK_CONFIG, options);

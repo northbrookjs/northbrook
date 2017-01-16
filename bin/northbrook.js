@@ -15,6 +15,14 @@ var defaultPlugins = require('../plugins');
 
   var index = argv.indexOf('--config');
 
+  try {
+    require('ts-node/register');
+  } catch (e) {}
+
+  try {
+    require('buba/register');
+  } catch (e) {}
+
   if (index === -1)
     index = argv.indexOf('-c');
 
@@ -24,9 +32,6 @@ var defaultPlugins = require('../plugins');
     var configPath = isAbsolute(path)
       ? path
       : join(process.cwd(), argv[index + 1]);
-
-    if (configPath.endsWith('.ts'))
-      require('ts-node/register');
 
     config = { path: process.cwd(), config: require(configPath) };
   } else {

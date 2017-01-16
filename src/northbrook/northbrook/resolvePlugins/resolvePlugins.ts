@@ -13,7 +13,6 @@ export function resolvePlugins(
   stdio: Stdio,
   debug = false): Array<Plugin>
 {
-  require('ts-node/register'); // allow writing local plugins in TypeScript
   return filter(Boolean, flatten(map(resolvePlugin(cwd, stdio, debug), plugins)));
 }
 
@@ -23,12 +22,14 @@ function resolvePlugin(cwd: string, stdio: Stdio, debug: boolean) {
   return function (pluginName: string | App | Command) {
     if (isCommandOrApp(pluginName)) return { plugin: pluginName };
 
-    let plugin = tryRequire(join(cwd, pluginName));
+    let plugin = tryRequire(join(cwd, pluginName), cwd, debug);
 
     if (isPlugin(plugin)) return plugin;
 
     for (let i = 0; i < NORTHBROOK_PREFIXES.length; ++i) {
-      plugin = tryRequire(NORTHBROOK_PREFIXES[i] + pluginName);
+      plugin = tryRequire(NORTHBROOK_PREFIXES[i] + pluginName, cwd, true);
+
+      console.log((module as any).paths);
 
       if (isPlugin(plugin)) {
         if (debug)
@@ -45,6 +46,7 @@ function resolvePlugin(cwd: string, stdio: Stdio, debug: boolean) {
 }
 
 function isPlugin(plugin: any): boolean {
+  if (plugin instanceof Error) return false;
   if (!plugin || !plugin.plugin) return false;
 
   return isCommandOrApp(plugin.plugin);
