@@ -1,3 +1,10 @@
+# 4.5.1 (2017-01-16)
+---
+
+## Bug Fixes
+
+- fix(commit): Use neither/nor (#87) [1e935b5e](https://github.com/northbrookjs/northbrook/commits/1e935b5e5dd6172482b8c39fe5fafc541769cc45)
+
 # 4.5.0 (2017-01-16)
 ---
 
