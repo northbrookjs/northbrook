@@ -13,7 +13,7 @@ export const types =
       'description': 'Changes that do not affect the meaning of the code',
     },
     'refactor': {
-      'description': 'A code change that neither fixes a bug or adds a feature',
+      'description': 'A code change that neither fixes a bug nor adds a feature',
     },
     'perf': {
       'description': 'A code change that improves performance',
