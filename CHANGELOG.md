@@ -1,3 +1,12 @@
+# 4.5.2 (2017-01-21)
+---
+
+## Bug Fixes
+
+- fix(northbrook): only display northbrook config warning in debug mode [2b0620be](https://github.com/northbrookjs/northbrook/commits/2b0620bea7d0f119205498dc81f87c64dae0c216)
+- fix(changedPackages): allow getting changed packages without previous git tag [a4770de0](https://github.com/northbrookjs/northbrook/commits/a4770de0c88cc4c865c7c07165dd459e8ccfee94)
+- fix(commit): only ask questions if there are changes staged [93f19f19](https://github.com/northbrookjs/northbrook/commits/93f19f195e807512df7187d28b86db048c4cded5)
+
 # 4.5.1 (2017-01-16)
 ---
 
