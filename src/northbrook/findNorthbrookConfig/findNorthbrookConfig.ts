@@ -20,6 +20,7 @@ export type PathConfig =
  * @returns {({ path: string, config: NorthbrookConfig } | null)}
  */
 export function findNorthbrookConfig(
+  debug = false,
   stdio: STDIO = {}, options?: { cwd?: string, case?: boolean }): PathConfig
 {
   const { stdout = process.stdout } = stdio;
@@ -27,10 +28,11 @@ export function findNorthbrookConfig(
   const northbrookFilePath: string = findup(NORTHBROOK_CONFIG, options);
 
   if (!northbrookFilePath) {
-    stdout.write(yellow(bold(`WARNING`)) + `: `
-      + bold(`Failed to find a Northbrook configuration file`)
-      + EOL,
-    );
+    if (debug)
+      stdout.write(yellow(bold(`WARNING`)) + `: `
+        + bold(`Failed to find a Northbrook configuration file`)
+        + EOL,
+      );
 
     return { path: null, config: null };
   }

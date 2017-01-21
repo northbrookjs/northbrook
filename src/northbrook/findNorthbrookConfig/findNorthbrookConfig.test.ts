@@ -9,7 +9,7 @@ describe('findNorthbrookConfig', () => {
     const cwd = join(__dirname, '__test__');
 
     const { path, config } =
-      findNorthbrookConfig(stdio(), { cwd, case: false });
+      findNorthbrookConfig(false, stdio(), { cwd, case: false });
 
     assert.strictEqual(typeof path, 'string');
     assert.strictEqual(typeof config, 'object');
@@ -18,7 +18,9 @@ describe('findNorthbrookConfig', () => {
   });
 
   it('returns null if it can not find a northbrook config', () => {
-    const { path, config } = findNorthbrookConfig(stdio(), { cwd: dirname(process.env.HOME) });
+    const { path, config } =
+      findNorthbrookConfig(false, stdio(), { cwd: dirname(process.env.HOME) });
+
     assert.strictEqual(path, null);
     assert.strictEqual(config, null);
   });

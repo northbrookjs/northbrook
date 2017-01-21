@@ -15,6 +15,8 @@ var defaultPlugins = require('../plugins');
 
   var index = argv.indexOf('--config');
 
+  var debug = argv.indexOf('--debug') > -1 || argv.indexOf('-d') > -1;
+
   try {
     require('ts-node/register');
   } catch (e) {}
@@ -35,7 +37,7 @@ var defaultPlugins = require('../plugins');
 
     config = { path: process.cwd(), config: require(configPath) };
   } else {
-    config = northbrook.findNorthbrookConfig();
+    config = northbrook.findNorthbrookConfig(debug);
   }
 
   var path = config.path;
@@ -51,7 +53,6 @@ var defaultPlugins = require('../plugins');
     ? findAdditionalPlugins(path)
     : [];
 
-  var debug = argv.indexOf('--debug') > -1 || argv.indexOf('-d') > -1;
 
   var start = northbrook.northbrook(nbConfig, additionalPlugins, path, {}, debug).start;
 
