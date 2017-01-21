@@ -25,7 +25,7 @@ export function gitRawCommits(
     `log`,
     `--format=${format}`,
     fromCommitHash !== void 0 ? `${fromCommitHash}..HEAD` : ``,
-  ];
+  ].filter(Boolean);
 
   return execute(cmd, args, io, cwd, _spawn).then(({ stdout }) => {
     const hashesAndMessages = stdout.split(separator);

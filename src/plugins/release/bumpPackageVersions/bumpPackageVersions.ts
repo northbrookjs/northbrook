@@ -1,6 +1,9 @@
 import { EOL } from 'os';
+import { stdio } from 'stdio-mock';
 import { sequence } from '@typed/sequence';
-import { NorthbrookConfig, AffectedPackages, Stdio } from '../../../types';
+import { prompt, list } from 'typed-prompts';
+import { green, bold } from 'typed-colors';
+import { NorthbrookConfig, AffectedPackages, Stdio, Commit } from '../../../types';
 import { execute, getSuggestedUpdate } from '../../../helpers';
 
 import { ReleasePackage } from '../types';
@@ -37,6 +40,8 @@ function performVersionBump(
     .then(() => newPackages.filter(Boolean));
 };
 
+const choices = [`1.0.0`, `0.1.0`, `0.0.1`];
+
 function bumpVersion(
   affectedPackages: AffectedPackages,
   io: Stdio,
@@ -54,28 +59,72 @@ function bumpVersion(
     if (!increment)
       return Promise.resolve(void 0);
 
-    const newVersion = getNewVersion(splitVersion(pkg.version as string), suggestedUpdate);
+    const args = ['version', '--no-git-tag-version'];
 
-    io.stdout.write(`Bumping ${name} version from ${pkg.version} to ${newVersion}...` + EOL + EOL);
+    const versionQuestion = list(
+      `version`,
+      `What version would you like to start with? `,
+      choices,
+      {
+        default: `1.0.0`,
+      },
+    );
 
-    const message = `chore(release): v${newVersion} [ci skip]` + EOL + EOL +
-      `AFFECTS: ${name}`;
+    return execute('npm', ['dist-tag', 'ls', name], stdio(), directory)
+      .then(() => {
+        const newVersion = getSuggestedVersion(pkg.version as string, suggestedUpdate);
 
-    const newPackage = { pkg: { ...pkg, version: newVersion }, name, directory, commits };
+        logUpdate(pkg.version as string, newVersion, name, io);
+        generateNewPkg(pkg, newVersion, name, directory, commits, newPackages);
 
-    newPackages.push(newPackage);
+        const message = generateCommitMessage(newVersion, name);
 
-    return execute(
-      'npm',
-      [
-        'version',
-        '--no-git-tag-version',
-        increment,
-      ],
-      io,
-      directory,
-    )
-      .then(() => execute('git', ['add', 'package.json'], io, directory))
-      .then(() => execute('git', ['commit', '-m', message], io, directory));
+        return execute('npm', args.concat(increment), io, directory)
+          .then(() => execute('git', ['add', 'package.json'], io, directory))
+          .then(() => execute('git', ['commit', '-m', message], io, directory));
+      })
+      .catch(() => {
+        io.stdout.write(bold(green(`No previous versions for ${name} could be found...`)) + EOL);
+
+        return prompt<{ version: string }>([ versionQuestion ])
+          .then(({ version: newVersion }) => {
+            if (pkg.version === newVersion) return Promise.resolve(void 0);
+
+            generateNewPkg(pkg, newVersion, name, directory, commits, newPackages);
+
+            const message = generateCommitMessage(newVersion, name);
+
+            return execute('npm', args.concat(newVersion), io, directory)
+              .then(() => execute('git', ['add', 'package.json'], io, directory))
+              .then(() => execute('git', ['commit', '-m', message], io, directory));
+          });
+      });
   };
 };
+
+function logUpdate(previousVersion: string, newVersion: string, name: string, io: Stdio) {
+  io.stdout.write(
+    `Bumping ${name} version from ${previousVersion} to ${newVersion}...` + EOL + EOL);
+}
+
+function getSuggestedVersion(version: string, suggestedUpdate: number) {
+  return getNewVersion(splitVersion(version), suggestedUpdate);
+}
+
+function generateCommitMessage(version: string, name: string) {
+  return `chore(release): v${version} [ci skip]` + EOL + EOL + `AFFECTS: ${name}`;
+}
+
+function generateNewPkg(
+  pkg: ReleasePackage,
+  newVersion: string,
+  name: string,
+  directory: string,
+  commits: Commit[],
+  newPackages: Array<ReleasePackage>)
+{
+  const newPackage: ReleasePackage =
+    Object.assign({}, { name, directory, commits, pkg: { ...pkg, version: newVersion } });
+
+  newPackages.push(newPackage);
+}
