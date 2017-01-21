@@ -21,7 +21,11 @@ export function gitRawCommits(
   _spawn = spawn): Promise<Array<Commit>>
 {
   const cmd = `git`;
-  const args = [`log`, `--format=${format}`, `${fromCommitHash}..HEAD`];
+  const args = [
+    `log`,
+    `--format=${format}`,
+    fromCommitHash !== void 0 ? `${fromCommitHash}..HEAD` : ``,
+  ];
 
   return execute(cmd, args, io, cwd, _spawn).then(({ stdout }) => {
     const hashesAndMessages = stdout.split(separator);

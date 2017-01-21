@@ -13,7 +13,8 @@ export function changedPackages (
 {
   const rawCommits: Promise<Array<Commit>> =
     gitLatestTag(cwd, io, latestTagSpawn)
-      .then(commitHash => gitRawCommits(commitHash, io, cwd, rawCommitsSpawn));
+      .then(commitHash => gitRawCommits(commitHash, io, cwd, rawCommitsSpawn))
+      .catch(() => gitRawCommits(void 0, io, cwd, rawCommitsSpawn));
 
   return rawCommits.then(getAffectedPackages);
 }
