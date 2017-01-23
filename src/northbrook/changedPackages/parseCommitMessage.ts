@@ -67,7 +67,10 @@ function getAffects(messageBody: string) {
 
   if (!affects) return null;
 
-  return affects.split(EOL + EOL)[0]
+  return affects
+    .split('BREAKING')[0] // ensure doesn't contain breaking changes
+    .split('ISSUES')[0] // ensure doesn't contain the issues closed
+    .split(EOL + EOL)[0]
     .trim()
     .split(',')
     .map(str => str.trim());
