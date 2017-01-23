@@ -1,3 +1,10 @@
+# 4.5.3 (2017-01-22)
+---
+
+## Bug Fixes
+
+- fix(parseCommitMessage): hotfix for commit parsing [73e8a035](https://github.com/northbrookjs/northbrook/commits/73e8a035d269521915ef5b4a377f77a2d4543188)
+
 # 4.5.2 (2017-01-21)
 ---
 
