@@ -73,7 +73,7 @@ function getAffects(messageBody: string) {
     .split(EOL + EOL)[0]
     .trim()
     .split(',')
-    .map(str => str.trim());
+    .map(str => str.trim().split(EOL + EOL)[0]);
 }
 
 function getBreakingChanges(messageBody: string) {
