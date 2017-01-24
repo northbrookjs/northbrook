@@ -63,7 +63,12 @@ export function parseCommitMessage(rawCommit: string): CommitMessage {
 }
 
 function splitEndOfLine(str: string): string {
-  return str.trim().split(EOL + EOL)[0].split(`\r\n`)[0];
+  str = str.trim();
+
+  if (str.indexOf(`\r\n`))
+    return str.split(`\r\n` + `\r\n`)[0];
+
+  return str.split(EOL + EOL)[0];
 }
 
 function getAffects(messageBody: string) {
