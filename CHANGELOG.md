@@ -1,3 +1,10 @@
+# 4.5.5 (2017-01-23)
+---
+
+## Bug Fixes
+
+- fix(northbrook): fix for releasing [726cf9d1](https://github.com/northbrookjs/northbrook/commits/726cf9d14202e452842fa2b8799db37a5b767111)
+
 # 4.5.4 (2017-01-23)
 ---
 
