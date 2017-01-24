@@ -1,3 +1,14 @@
+# 4.6.0 (2017-01-23)
+---
+
+## Features
+
+- feat(northbrook): show version number during release [5c5bc16f](https://github.com/northbrookjs/northbrook/commits/5c5bc16f274190a2d24cb0b0c0ba5bf4cfcce641)
+
+## Bug Fixes
+
+- fix(changedPackages): conditionally split affects string [bf066986](https://github.com/northbrookjs/northbrook/commits/bf066986d52bfcb2a78ee39e3f1a28c6c6278484)
+
 # 4.5.5 (2017-01-23)
 ---
 
