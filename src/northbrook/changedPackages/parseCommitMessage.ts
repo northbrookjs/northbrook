@@ -62,6 +62,10 @@ export function parseCommitMessage(rawCommit: string): CommitMessage {
   }
 }
 
+function splitEndOfLine(str: string): string {
+  return str.trim().split(EOL + EOL)[0].split(`\r\n`)[0];
+}
+
 function getAffects(messageBody: string) {
   const affects = messageBody.split('AFFECTS:')[1];
 
@@ -73,7 +77,7 @@ function getAffects(messageBody: string) {
     .split(EOL + EOL)[0]
     .trim()
     .split(',')
-    .map(str => str.trim().split(EOL + EOL)[0]);
+    .map(splitEndOfLine);
 }
 
 function getBreakingChanges(messageBody: string) {
