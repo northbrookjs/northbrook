@@ -17,6 +17,8 @@ import { ReleasePackage } from './types';
 import { bumpPackageVersions } from './bumpPackageVersions';
 import { generateChangelogs } from './generateChangelogs';
 import { getPackagesToUpdate } from './bumpPackageVersions/getPackagesToUpdate';
+import { getNewVersion } from './bumpPackageVersions/getNewVersion';
+import { splitVersion } from './bumpPackageVersions/splitVersion';
 import { getSuggestedUpdate } from '../../helpers';
 import { gitPushToReleaseBranch } from './gitPushToReleaseBranch';
 import { gitTags } from './gitTags';
@@ -167,7 +169,7 @@ function generateHeader(
   let message = separator + EOL + reportHeaderPositive();
 
   packagesToUpdate.forEach((releasePackage: ReleasePackage) => {
-    const { name } = releasePackage;
+    const { name, pkg } = releasePackage;
 
     const commits = affectedPackages[name].commits;
 
@@ -178,7 +180,8 @@ function generateHeader(
     if (!increment) return;
 
     message += `${cyan(bold(name))} ` +
-      `needs a new ${bold(increment.toUpperCase())} version released:` + EOL;
+      `needs a new ${bold(increment.toUpperCase())} version released: ` +
+      getSuggestedVersion(pkg.version, suggestedUpdate) + EOL;
 
     commits.forEach(commit => {
       const { type, scope, subject, breakingChanges } = commit.message;
@@ -203,4 +206,8 @@ function reportHeaderNegative () {
   return 'Nothing to release.' + EOL + EOL +
       'We checked all packages and recent commits and discovered that' + EOL +
       'you do not need to release any new version.';
+}
+
+function getSuggestedVersion(version: string, suggestedUpdate: number) {
+  return getNewVersion(splitVersion(version), suggestedUpdate);
 }
