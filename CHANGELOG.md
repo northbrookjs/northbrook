@@ -1,3 +1,10 @@
+# 4.5.4 (2017-01-23)
+---
+
+## Bug Fixes
+
+- fix(changedPackages): fix for the affects field [5bcddf03](https://github.com/northbrookjs/northbrook/commits/5bcddf03d884fcd992093d4551744aaccc073b9a)
+
 # 4.5.3 (2017-01-22)
 ---
 
