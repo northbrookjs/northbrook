@@ -79,7 +79,7 @@
     "dependency-graph": "^0.5.0",
     "findup-sync": "^0.4.3",
     "mkdirp": "^0.5.1",
-    "ramda": "^0.22.1",
+    "ramda": "^0.23.0",
     "reginn": "^2.1.4",
     "rimraf": "^2.5.4",
     "semver": "^5.3.0",
