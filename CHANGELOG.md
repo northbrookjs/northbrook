@@ -1,3 +1,10 @@
+# 4.6.2 (2017-01-30)
+---
+
+## Bug Fixes
+
+- fix(yarn): update yarn.lock [8e0dd907](https://github.com/northbrookjs/northbrook/commits/8e0dd907ca2c3654a7cf050c31c50a84787ce657)
+
 # 4.6.1 (2017-01-30)
 ---
 
