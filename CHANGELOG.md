@@ -1,3 +1,10 @@
+# 4.6.1 (2017-01-30)
+---
+
+## Bug Fixes
+
+- fix(package): update dependencies [1c9bdeaf](https://github.com/northbrookjs/northbrook/commits/1c9bdeaf97e00c866765ffd7e90bf365daa56b88)
+
 # 4.6.0 (2017-01-23)
 ---
 
