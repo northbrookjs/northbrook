@@ -1,3 +1,10 @@
+# 4.6.3 (2017-01-30)
+---
+
+## Bug Fixes
+
+- fix(each): some plugins can reject with void [8856e0e7](https://github.com/northbrookjs/northbrook/commits/8856e0e7460b10b5dda91cad199555d58cfa1029)
+
 # 4.6.2 (2017-01-30)
 ---
 
