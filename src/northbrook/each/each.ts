@@ -27,10 +27,10 @@ export function each(command: Command, callback: EachCallback): Promise<void> {
         .catch(reject);
     };
   }).catch((e: any) => {
-    if (e.stderr) {
+    if (e && e.stderr) {
       process.stderr.write(e.stderr + EOL);
     } else {
-      process.stderr.write((e.message || e) + EOL);
+      process.stderr.write((e && e.message || e) + EOL);
     }
 
     process.exit(1);
