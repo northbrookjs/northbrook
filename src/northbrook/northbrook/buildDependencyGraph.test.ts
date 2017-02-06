@@ -21,6 +21,25 @@ describe('buildDependencyGraph', () => {
       assert.deepEqual(graph.paths(), [packageA, packageC, packageB, packageD]);
     });
 
+    it('returns all dependants of a package', () => {
+      const packages = [ packageA, packageB, packageC, packageD ];
+
+      const graph = buildDependencyGraph(packages);
+
+      assert.deepEqual(
+          graph.dependantsOf('a-testpackage').sort(),
+          [ 'b-testpackage', 'c-testpackage', 'd-testpackage' ],
+      );
+    });
+
+    it('returns empty dependants when a package lacks dependants', () => {
+      const packages = [ packageA, packageB, packageC, packageD ];
+
+      const graph = buildDependencyGraph(packages);
+
+      assert.deepEqual(graph.dependantsOf('d-testpackage'), []);
+    });
+
     it('throws an error when there is a circular dependency', () => {
       const packages = [ packageE, packageF ];
       const graph = buildDependencyGraph(packages);
