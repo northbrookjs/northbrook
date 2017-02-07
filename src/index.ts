@@ -48,3 +48,4 @@ declare module 'reginn' {
 export * from 'reginn';
 export * from './types';
 export * from './northbrook';
+export {execute} from './helpers';
