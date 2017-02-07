@@ -57,6 +57,10 @@ export class DepGraph {
     return this.depGraph.dependenciesOf(packageName);
   }
 
+  public dependantsOf (packageName: string): Array<string> {
+    return this.depGraph.dependantsOf(packageName);
+  }
+
   public configOf(packageName: string): Pkg {
     return clone(this.depGraph.getNodeData(packageName));
   }
