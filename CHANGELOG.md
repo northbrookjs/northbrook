@@ -1,346 +1,514 @@
-# 4.6.3 (2017-01-30)
----
+<a name="4.6.3"></a>
+## [4.6.3](https://github.com/northbrookjs/northbrook/compare/v4.6.2...v4.6.3) (2017-01-30)
 
-## Bug Fixes
 
-- fix(each): some plugins can reject with void [8856e0e7](https://github.com/northbrookjs/northbrook/commits/8856e0e7460b10b5dda91cad199555d58cfa1029)
+### Bug Fixes
 
-# 4.6.2 (2017-01-30)
----
+* **each:** some plugins can reject with void ([8856e0e](https://github.com/northbrookjs/northbrook/commit/8856e0e))
 
-## Bug Fixes
 
-- fix(yarn): update yarn.lock [8e0dd907](https://github.com/northbrookjs/northbrook/commits/8e0dd907ca2c3654a7cf050c31c50a84787ce657)
 
-# 4.6.1 (2017-01-30)
----
+<a name="4.6.2"></a>
+## [4.6.2](https://github.com/northbrookjs/northbrook/compare/v4.6.1...v4.6.2) (2017-01-30)
 
-## Bug Fixes
 
-- fix(package): update dependencies [1c9bdeaf](https://github.com/northbrookjs/northbrook/commits/1c9bdeaf97e00c866765ffd7e90bf365daa56b88)
+### Bug Fixes
 
-# 4.6.0 (2017-01-23)
----
+* **yarn:** update yarn.lock ([8e0dd90](https://github.com/northbrookjs/northbrook/commit/8e0dd90))
 
-## Features
 
-- feat(northbrook): show version number during release [5c5bc16f](https://github.com/northbrookjs/northbrook/commits/5c5bc16f274190a2d24cb0b0c0ba5bf4cfcce641)
 
-## Bug Fixes
+<a name="4.6.1"></a>
+## [4.6.1](https://github.com/northbrookjs/northbrook/compare/v4.6.0...v4.6.1) (2017-01-30)
 
-- fix(changedPackages): conditionally split affects string [bf066986](https://github.com/northbrookjs/northbrook/commits/bf066986d52bfcb2a78ee39e3f1a28c6c6278484)
 
-# 4.5.5 (2017-01-23)
----
+### Bug Fixes
 
-## Bug Fixes
+* **package:** update dependencies ([1c9bdea](https://github.com/northbrookjs/northbrook/commit/1c9bdea))
 
-- fix(northbrook): fix for releasing [726cf9d1](https://github.com/northbrookjs/northbrook/commits/726cf9d14202e452842fa2b8799db37a5b767111)
 
-# 4.5.4 (2017-01-23)
----
 
-## Bug Fixes
+<a name="4.6.0"></a>
+# [4.6.0](https://github.com/northbrookjs/northbrook/compare/v4.5.5...v4.6.0) (2017-01-24)
 
-- fix(changedPackages): fix for the affects field [5bcddf03](https://github.com/northbrookjs/northbrook/commits/5bcddf03d884fcd992093d4551744aaccc073b9a)
 
-# 4.5.3 (2017-01-22)
----
+### Bug Fixes
 
-## Bug Fixes
+* **changedPackages:** conditionally split affects string ([bf06698](https://github.com/northbrookjs/northbrook/commit/bf06698))
 
-- fix(parseCommitMessage): hotfix for commit parsing [73e8a035](https://github.com/northbrookjs/northbrook/commits/73e8a035d269521915ef5b4a377f77a2d4543188)
 
-# 4.5.2 (2017-01-21)
----
+### Features
 
-## Bug Fixes
+* **northbrook:** show version number during release ([5c5bc16](https://github.com/northbrookjs/northbrook/commit/5c5bc16))
 
-- fix(northbrook): only display northbrook config warning in debug mode [2b0620be](https://github.com/northbrookjs/northbrook/commits/2b0620bea7d0f119205498dc81f87c64dae0c216)
-- fix(changedPackages): allow getting changed packages without previous git tag [a4770de0](https://github.com/northbrookjs/northbrook/commits/a4770de0c88cc4c865c7c07165dd459e8ccfee94)
-- fix(commit): only ask questions if there are changes staged [93f19f19](https://github.com/northbrookjs/northbrook/commits/93f19f195e807512df7187d28b86db048c4cded5)
 
-# 4.5.1 (2017-01-16)
----
 
-## Bug Fixes
+<a name="4.5.5"></a>
+## [4.5.5](https://github.com/northbrookjs/northbrook/compare/v4.5.4...v4.5.5) (2017-01-24)
 
-- fix(commit): Use neither/nor (#87) [1e935b5e](https://github.com/northbrookjs/northbrook/commits/1e935b5e5dd6172482b8c39fe5fafc541769cc45)
 
-# 4.5.0 (2017-01-16)
----
+### Bug Fixes
 
-## Features
+* **northbrook:** fix for releasing ([726cf9d](https://github.com/northbrookjs/northbrook/commit/726cf9d))
 
-- feat(northbrook): build a dependency graph for more correct tooling [c2ed7e3a](https://github.com/northbrookjs/northbrook/commits/c2ed7e3a23186d987d9fa00c282b3311c6e0b8e0)
 
-# 4.4.6 (2017-01-16)
----
 
-## Bug Fixes
+<a name="4.5.4"></a>
+## [4.5.4](https://github.com/northbrookjs/northbrook/compare/v4.5.3...v4.5.4) (2017-01-24)
 
-- fix(resolvePlugins): make debug conditional again [063082cc](https://github.com/northbrookjs/northbrook/commits/063082cc8733b29a4b83d658b97d223309be7a1d)
 
-# 4.4.5 (2017-01-16)
----
+### Bug Fixes
 
-## Bug Fixes
+* **changedPackages:** fix for the affects field ([5bcddf0](https://github.com/northbrookjs/northbrook/commit/5bcddf0))
 
-- fix(resolvePlugins): remove console.log [00ce5408](https://github.com/northbrookjs/northbrook/commits/00ce5408dd689caf1bca0a6262d0504c18b36321)
 
-# 4.4.4 (2017-01-16)
----
 
-## Bug Fixes
+<a name="4.5.3"></a>
+## [4.5.3](https://github.com/northbrookjs/northbrook/compare/v4.5.2...v4.5.3) (2017-01-23)
 
-- fix(npmLogin): allow retrying NPM login [7b1d8db3](https://github.com/northbrookjs/northbrook/commits/7b1d8db38c263231a067b7497ca139abe34a9855)
 
-# 4.4.3 (2017-01-16)
----
+### Bug Fixes
 
-## Bug Fixes
+* **parseCommitMessage:** hotfix for commit parsing ([73e8a03](https://github.com/northbrookjs/northbrook/commit/73e8a03))
 
-- fix(northbrook): solve weird require() issues [e9545430](https://github.com/northbrookjs/northbrook/commits/e95454309ccbde894a8dae1639f8645a4e7263c9)
 
-# 4.4.2 (2017-01-16)
----
+### Features
 
-## Bug Fixes
+* **release:** allow releasing previously unreleased packages ([fcbaef8](https://github.com/northbrookjs/northbrook/commit/fcbaef8))
 
-- fix(errors): attempt to handle error messages more clearly [62f55010](https://github.com/northbrookjs/northbrook/commits/62f550103035ece4af9a70128229b7920940555e)
-- fix(changedPackages): ensure no failures occur with poorly formatted commit messages [65e7883d](https://github.com/northbrookjs/northbrook/commits/65e7883d3b5bb5fde610e989dea24bfafd2c9fe2)
-- fix(link): clean up destination before linking [4e16ba3d](https://github.com/northbrookjs/northbrook/commits/4e16ba3d71a511961026b0aff9d649189e73e3fc)
 
-# 4.4.1 (2017-01-14)
----
 
-## Bug Fixes
+<a name="4.5.2"></a>
+## [4.5.2](https://github.com/northbrookjs/northbrook/compare/v4.5.1...v4.5.2) (2017-01-21)
 
-- fix(link): fix mutation issues [1baa80cf](https://github.com/northbrookjs/northbrook/commits/1baa80cfc6978b5d0eec07bfc1effa8b131e3b5c)
 
-# 4.4.0 (2017-01-13)
----
+### Bug Fixes
 
-## Features
+* **changedPackages:** allow getting changed packages without previous git tag ([a4770de](https://github.com/northbrookjs/northbrook/commit/a4770de))
+* **commit:** only ask questions if there are changes staged ([93f19f1](https://github.com/northbrookjs/northbrook/commit/93f19f1))
+* **northbrook:** only display northbrook config warning in debug mode ([2b0620b](https://github.com/northbrookjs/northbrook/commit/2b0620b))
 
-- feat(northbrook): load @northbrook/ and northbrook- prefixed plugins by default [1964268d](https://github.com/northbrookjs/northbrook/commits/1964268deca2a47179c238fa07c1a24d02e0744a)
 
-# 4.3.7 (2017-01-13)
----
 
-## Bug Fixes
+<a name="4.5.1"></a>
+## [4.5.1](https://github.com/northbrookjs/northbrook/compare/v4.5.0...v4.5.1) (2017-01-17)
 
-- fix(each): attempt to print error messages and exit on 1 [2db07c04](https://github.com/northbrookjs/northbrook/commits/2db07c043a5efe0cb0d9c44373de8da84b268c06)
-- fix(changedPackages): do not use release commits [df73ce88](https://github.com/northbrookjs/northbrook/commits/df73ce88d7704730e36b2e35662974f0dbf35a79)
 
-# 4.3.6 (2017-01-11)
----
+### Bug Fixes
 
-## Bug Fixes
+* **commit:** Use neither/nor ([#87](https://github.com/northbrookjs/northbrook/issues/87)) ([1e935b5](https://github.com/northbrookjs/northbrook/commit/1e935b5))
 
-- fix(run): fix regex for windows [100bf889](https://github.com/northbrookjs/northbrook/commits/100bf88936b0682d3da04c91df28560e2dc0364b)
 
-# 4.3.5 (2017-01-05)
----
 
-## Bug Fixes
+<a name="4.5.0"></a>
+# [4.5.0](https://github.com/northbrookjs/northbrook/compare/v4.4.6...v4.5.0) (2017-01-16)
 
-- fix(resolvePlugins): fix failing tests with newer versions of dependencies [7247acf2](https://github.com/northbrookjs/northbrook/commits/7247acf22454c70389b4d6f47ebd410dc90f9316)
 
-# 4.3.4 (2017-01-04)
----
+### Features
 
-## Bug Fixes
+* **northbrook:** build a dependency graph for more correct tooling ([c2ed7e3](https://github.com/northbrookjs/northbrook/commit/c2ed7e3))
 
-- fix(release): associate git tags to commit hashes [e622423e](https://github.com/northbrookjs/northbrook/commits/e622423e20fcc20d1fa6a1876e3941398a2aa07c)
 
-# 4.3.3 (2017-01-03)
----
 
-## Bug Fixes
+<a name="4.4.6"></a>
+## [4.4.6](https://github.com/northbrookjs/northbrook/compare/v4.4.5...v4.4.6) (2017-01-16)
 
-- fix(release): log when pushing to release branch [2172aa8b](https://github.com/northbrookjs/northbrook/commits/2172aa8ba0c1a60c98b7bc24d8a0164fb7c7c47e)
 
-# 4.3.2 (2017-01-03)
----
+### Bug Fixes
 
-## Bug Fixes
+* **resolvePlugins:** make debug conditional again ([063082c](https://github.com/northbrookjs/northbrook/commit/063082c))
 
-- fix(release): small wording changes [47aa949c](https://github.com/northbrookjs/northbrook/commits/47aa949cba8079c6603bd878f7abc293e3fa7c01)
 
-# 4.3.1 (2017-01-03)
----
 
-## Bug Fixes
+<a name="4.4.5"></a>
+## [4.4.5](https://github.com/northbrookjs/northbrook/compare/v4.4.4...v4.4.5) (2017-01-16)
 
-- fix(release): provide sequential releases for reliability [d6a4f0e7](https://github.com/northbrookjs/northbrook/commits/d6a4f0e785569ed675631e7d1de913d37ad5927c)
 
-# 4.3.0 (2017-01-03)
----
+### Bug Fixes
 
-## Features
+* **resolvePlugins:** remove console.log ([00ce540](https://github.com/northbrookjs/northbrook/commit/00ce540))
 
-- feat(northbrook): add global changed flag and implementation for each [fe687903](https://github.com/northbrookjs/northbrook/commits/fe68790361a5e3114e886f532d6457fb90cdf2fa)
 
-## Bug Fixes
 
-- fix(northbrook): fix displaying northbrook flags in --help menu [a9cf2495](https://github.com/northbrookjs/northbrook/commits/a9cf24955e6fe67c385a2d2e3c0c131da2376760)
+<a name="4.4.4"></a>
+## [4.4.4](https://github.com/northbrookjs/northbrook/compare/v4.4.3...v4.4.4) (2017-01-16)
 
-# 4.2.3 (2016-12-31)
----
 
-## Bug Fixes
+### Bug Fixes
 
-- fix(changedPackages): fix for parsing merge commits [9e40651a](https://github.com/northbrookjs/northbrook/commits/9e40651af55d7f1e9c28527632eb194fd170d6d4)
+* **npmLogin:** allow retrying NPM login ([7b1d8db](https://github.com/northbrookjs/northbrook/commit/7b1d8db))
+* **tryRequire:** fix test usage ([e9f0884](https://github.com/northbrookjs/northbrook/commit/e9f0884))
 
-# 4.2.2 (2016-12-31)
----
 
-## Bug Fixes
 
-- fix(release): skip ci on changelog generation commit [0164fd49](https://github.com/northbrookjs/northbrook/commits/0164fd494b58af029849b95ce3d7c56d2aa425d5)
+<a name="4.4.3"></a>
+## [4.4.3](https://github.com/northbrookjs/northbrook/compare/v4.4.2...v4.4.3) (2017-01-16)
 
-# 4.2.1 (2016-12-31)
----
 
-## Bug Fixes
+### Bug Fixes
 
-- fix(release): watch pacman eat [d2d01c44](https://github.com/northbrookjs/northbrook/commits/d2d01c448fd1c4df1d2fe8d17f351d5b43203a1f)
+* **northbrook:** solve weird require() issues ([e954543](https://github.com/northbrookjs/northbrook/commit/e954543))
 
-# 4.2.0 (2016-12-31)
----
 
-## Features
 
-- feat(release): allow skipping tests [8b5d5ace](https://github.com/northbrookjs/northbrook/commits/8b5d5ace87c5c1f958f0b004b458e73fb9748909)
+<a name="4.4.2"></a>
+## [4.4.2](https://github.com/northbrookjs/northbrook/compare/v4.4.1...v4.4.2) (2017-01-16)
 
-# 4.1.10 (2016-12-31)
----
 
-## Bug Fixes
+### Bug Fixes
 
-- fix(exec): exit on exec failures [488567ca](https://github.com/northbrookjs/northbrook/commits/488567ca79cd84f15c2a6ea25aca2f20769c0247)
+* **changedPackages:** ensure no failures occur with poorly formatted commit messages ([65e7883](https://github.com/northbrookjs/northbrook/commit/65e7883))
+* **errors:** attempt to handle error messages more clearly ([62f5501](https://github.com/northbrookjs/northbrook/commit/62f5501))
+* **link:** clean up destination before linking ([4e16ba3](https://github.com/northbrookjs/northbrook/commit/4e16ba3))
 
-# 4.1.9 (2016-12-30)
----
 
-## Bug Fixes
 
-- fix(northbrook): commit execute fixes [e5d02189](https://github.com/northbrookjs/northbrook/commits/e5d021890f835086b280a6fe7cd1249d86015388)
+<a name="4.4.1"></a>
+## [4.4.1](https://github.com/northbrookjs/northbrook/compare/v4.4.0...v4.4.1) (2017-01-14)
 
-# 4.1.8 (2016-12-30)
----
 
-## Bug Fixes
+### Bug Fixes
 
-- fix(execute): reject promise when child process exits with non-zero [90613f53](https://github.com/northbrookjs/northbrook/commits/90613f53e6a1f8329def74ddb832be19d2f0249a)
+* **link:** fix mutation issues ([1baa80c](https://github.com/northbrookjs/northbrook/commit/1baa80c))
 
-# 4.1.7 (2016-12-30)
----
 
-## Bug Fixes
 
-- fix(northbrook): exit with code 1 on errors with each callback [98144b7f](https://github.com/northbrookjs/northbrook/commits/98144b7f9258423db1caf6655eee1c023d6c4350)
+<a name="4.4.0"></a>
+# [4.4.0](https://github.com/northbrookjs/northbrook/compare/v4.3.7...v4.4.0) (2017-01-14)
 
-# 4.1.6 (2016-12-28)
----
 
-## Bug Fixes
+### Bug Fixes
 
-- fix(exec): exit with code 1 on errors [5ba26344](https://github.com/northbrookjs/northbrook/commits/5ba263445baf62b7280a20fa1ef5ad2a185df06b)
+* **release:** fix tslint errors ([57f0ca0](https://github.com/northbrookjs/northbrook/commit/57f0ca0))
 
-# 4.1.5 (2016-12-24)
----
 
-## Bug Fixes
+### Features
 
-- fix(northbrook): use app so that flags are inherited correctly [1b3c313f](https://github.com/northbrookjs/northbrook/commits/1b3c313f1b93b4ee28a1a9a685b77dc4bb74f7ac)
+* **northbrook:** load [@northbrook](https://github.com/northbrook)/ and northbrook- prefixed plugins by default ([1964268](https://github.com/northbrookjs/northbrook/commit/1964268))
 
-# 4.1.4 (2016-12-23)
----
 
-## Bug Fixes
 
-- fix(package): depend on types directly so users do not have to [0040260d](https://github.com/northbrookjs/northbrook/commits/0040260dc3709700bc8be3a22425375e325c646e)
+<a name="4.3.7"></a>
+## [4.3.7](https://github.com/northbrookjs/northbrook/compare/v4.3.6...v4.3.7) (2017-01-13)
 
-# 4.1.3 (2016-12-23)
----
 
-## Bug Fixes
+### Bug Fixes
 
-- fix(release): use bugs url to generate links [81a1ab1a](https://github.com/northbrookjs/northbrook/commits/81a1ab1a05f33ef58ac43a965d3a3404658e34f3)
+* **changedPackages:** do not use release commits ([df73ce8](https://github.com/northbrookjs/northbrook/commit/df73ce8))
+* **each:** attempt to print error messages and exit on 1 ([2db07c0](https://github.com/northbrookjs/northbrook/commit/2db07c0))
+* **release:** exit on 0 for --check ([1f64771](https://github.com/northbrookjs/northbrook/commit/1f64771))
 
-# 4.1.2 (2016-12-23)
----
 
-## Bug Fixes
 
-- fix(release): fix changelog generation [fc281f8e](git+https://github.com/northbrookjs/northbrook.git/commits/fc281f8ee63c49f949bf0cb5704f3f2b16da09d4)
-- fix(release): do not run tests in silent mode [0c69fdc4](git+https://github.com/northbrookjs/northbrook.git/commits/0c69fdc4dde39e7f3e5b00a2391a39a235bc31e5)
+<a name="4.3.6"></a>
+## [4.3.6](https://github.com/northbrookjs/northbrook/compare/v4.3.5...v4.3.6) (2017-01-11)
 
-# 4.1.1 (2016-12-23)
----
 
-## Bug Fixes
+### Bug Fixes
 
-- fix(release): create correct git tag for scoped packages [580931f6](undefined/commits/580931f6d864b32189b21a37ebdcc15cbf081d2e)
+* **run:** fix regex for windows ([100bf88](https://github.com/northbrookjs/northbrook/commit/100bf88))
 
-# 4.1.0 (2016-12-22)
----
 
-## Features
 
-- feat(helpers): extract and export packagesToExecute [e8e6fa42](undefined/commits/e8e6fa42aea6e551d58db55c5b84986af773aa6d)
-- feat(types): add Pkg type to exported types [edc13275](undefined/commits/edc132759aaecfe3a5a0fc8d75f798f1f91f4793)
+<a name="4.3.5"></a>
+## [4.3.5](https://github.com/northbrookjs/northbrook/compare/v4.3.4...v4.3.5) (2017-01-05)
 
-# 4.0.4 (2016-12-22)
----
 
-## Bug Fixes
+### Bug Fixes
 
-- fix(northbrook): correctly resolve already required plugins [f1c7e6bf](undefined/commits/f1c7e6bf15311c790ca9493a413e114825e8cb50)
+* **resolvePlugins:** fix failing tests with newer versions of dependencies ([7247acf](https://github.com/northbrookjs/northbrook/commit/7247acf))
 
-# 4.0.3 (2016-12-22)
----
 
-## Bug Fixes
 
-- fix(northbrook): fix for displaying flags [44a4a30c](undefined/commits/44a4a30cc148ffc0a0e4281e34e78191cabd19cb)
+<a name="4.3.4"></a>
+## [4.3.4](https://github.com/northbrookjs/northbrook/compare/v4.3.3...v4.3.4) (2017-01-04)
 
-# 4.0.2 (2016-12-22)
----
 
-## Bug Fixes
+### Bug Fixes
 
-- fix(release): improve logging [886312bb](undefined/commits/886312bb66533d13568009f567e2fb5fae0ace24)
-- fix(release): use standard git message type [42d2106e](undefined/commits/42d2106edcddc8f004b8ce7c7e18295d55c675b4)
+* **release:** associate git tags to commit hashes ([e622423](https://github.com/northbrookjs/northbrook/commit/e622423))
 
-# 4.0.1 (2016-12-22)
----
 
-## Bug Fixes
 
-- fix(release): allow using comver for release --check [19e623a0](undefined/commits/19e623a0a63f01b8f4c1d6c0de0e60622d4c2d11)
-- fix(release): include package.json in commits [d75fa2e3](undefined/commits/d75fa2e3898a236bd024f5bf9e5487b09f3e2820)
+<a name="4.3.3"></a>
+## [4.3.3](https://github.com/northbrookjs/northbrook/compare/v4.3.2...v4.3.3) (2017-01-04)
 
-# 4.0.0 (2016-12-22)
----
 
-## Breaking Changes
+### Bug Fixes
 
-1. northbrook.json is now northbrook.js or northbrook.ts. `packages` and `plugins` are the only config options left.
-  - feat(northbrook): from-scratch reimplementation [e8f3657a](undefined/commits/e8f3657a29e8ba592bff7efe84127b317466568d)
+* **release:** log when pushing to release branch ([2172aa8](https://github.com/northbrookjs/northbrook/commit/2172aa8))
 
-## Features
 
-- feat(northbrook): include northbrook folder [482db740](undefined/commits/482db74086716b88b6d666b90d6d6e4a7751f318)
-- feat(northbrook): make check output prettier [60642576](undefined/commits/60642576ba6eccbdd5edc3c0034282560eb20a7a)
-- feat(release): format release header [dedac289](undefined/commits/dedac289a4ad20988c40c24c11458999eafe302c)
-- feat(release): allow usage of comver and semver [18e692b6](undefined/commits/18e692b618f8746dd3351d68a98368244414746c)
 
-## Bug Fixes
+<a name="4.3.2"></a>
+## [4.3.2](https://github.com/northbrookjs/northbrook/compare/v4.3.1...v4.3.2) (2017-01-04)
 
-- fix(commit): remove unneeded checkForStagedCommits [7a78b0ea](undefined/commits/7a78b0eab946fbc459fec889e043853920866811)
+
+### Bug Fixes
+
+* **release:** small wording changes ([47aa949](https://github.com/northbrookjs/northbrook/commit/47aa949))
+
+
+
+<a name="4.3.1"></a>
+## [4.3.1](https://github.com/northbrookjs/northbrook/compare/v4.3.0...v4.3.1) (2017-01-04)
+
+
+### Bug Fixes
+
+* **release:** provide sequential releases for reliability ([d6a4f0e](https://github.com/northbrookjs/northbrook/commit/d6a4f0e))
+
+
+
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/northbrookjs/northbrook/compare/v4.2.3...v4.3.0) (2017-01-03)
+
+
+### Bug Fixes
+
+* **northbrook:** fix displaying northbrook flags in --help menu ([a9cf249](https://github.com/northbrookjs/northbrook/commit/a9cf249))
+
+
+### Features
+
+* **northbrook:** add global changed flag and implementation for each ([fe68790](https://github.com/northbrookjs/northbrook/commit/fe68790))
+
+
+
+<a name="4.2.3"></a>
+## [4.2.3](https://github.com/northbrookjs/northbrook/compare/v4.2.2...v4.2.3) (2016-12-31)
+
+
+### Bug Fixes
+
+* **changedPackages:** fix for parsing merge commits ([9e40651](https://github.com/northbrookjs/northbrook/commit/9e40651))
+
+
+
+<a name="4.2.2"></a>
+## [4.2.2](https://github.com/northbrookjs/northbrook/compare/v4.2.1...v4.2.2) (2016-12-31)
+
+
+### Bug Fixes
+
+* **release:** skip ci on changelog generation commit ([0164fd4](https://github.com/northbrookjs/northbrook/commit/0164fd4))
+
+
+
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/northbrookjs/northbrook/compare/v4.2.0...v4.2.1) (2016-12-31)
+
+
+### Bug Fixes
+
+* **release:** watch pacman eat ([d2d01c4](https://github.com/northbrookjs/northbrook/commit/d2d01c4))
+
+
+
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/northbrookjs/northbrook/compare/v4.1.10...v4.2.0) (2016-12-31)
+
+
+### Features
+
+* **release:** allow skipping tests ([8b5d5ac](https://github.com/northbrookjs/northbrook/commit/8b5d5ac))
+
+
+
+<a name="4.1.10"></a>
+## [4.1.10](https://github.com/northbrookjs/northbrook/compare/v4.1.9...v4.1.10) (2016-12-31)
+
+
+### Bug Fixes
+
+* **exec:** exit on exec failures ([488567c](https://github.com/northbrookjs/northbrook/commit/488567c))
+
+
+
+<a name="4.1.9"></a>
+## [4.1.9](https://github.com/northbrookjs/northbrook/compare/v4.1.8...v4.1.9) (2016-12-31)
+
+
+### Bug Fixes
+
+* **northbrook:** commit execute fixes ([e5d0218](https://github.com/northbrookjs/northbrook/commit/e5d0218))
+
+
+
+<a name="4.1.8"></a>
+## [4.1.8](https://github.com/northbrookjs/northbrook/compare/v4.1.7...v4.1.8) (2016-12-31)
+
+
+### Bug Fixes
+
+* **execute:** reject promise when child process exits with non-zero ([90613f5](https://github.com/northbrookjs/northbrook/commit/90613f5))
+
+
+
+<a name="4.1.7"></a>
+## [4.1.7](https://github.com/northbrookjs/northbrook/compare/v4.1.6...v4.1.7) (2016-12-31)
+
+
+### Bug Fixes
+
+* **northbrook:** exit with code 1 on errors with each callback ([98144b7](https://github.com/northbrookjs/northbrook/commit/98144b7))
+
+
+
+<a name="4.1.6"></a>
+## [4.1.6](https://github.com/northbrookjs/northbrook/compare/v4.1.5...v4.1.6) (2016-12-29)
+
+
+### Bug Fixes
+
+* **exec:** exit with code 1 on errors ([5ba2634](https://github.com/northbrookjs/northbrook/commit/5ba2634))
+
+
+
+<a name="4.1.5"></a>
+## [4.1.5](https://github.com/northbrookjs/northbrook/compare/v4.1.4...v4.1.5) (2016-12-25)
+
+
+### Bug Fixes
+
+* **northbrook:** use app so that flags are inherited correctly ([1b3c313](https://github.com/northbrookjs/northbrook/commit/1b3c313))
+
+
+
+<a name="4.1.4"></a>
+## [4.1.4](https://github.com/northbrookjs/northbrook/compare/v4.1.3...v4.1.4) (2016-12-23)
+
+
+### Bug Fixes
+
+* **package:** depend on types directly so users do not have to ([0040260](https://github.com/northbrookjs/northbrook/commit/0040260))
+
+
+
+<a name="4.1.3"></a>
+## [4.1.3](https://github.com/northbrookjs/northbrook/compare/v4.1.2...v4.1.3) (2016-12-23)
+
+
+### Bug Fixes
+
+* **release:** use bugs url to generate links ([81a1ab1](https://github.com/northbrookjs/northbrook/commit/81a1ab1))
+
+
+
+<a name="4.1.2"></a>
+## [4.1.2](https://github.com/northbrookjs/northbrook/compare/v4.1.1...v4.1.2) (2016-12-23)
+
+
+### Bug Fixes
+
+* **release:** do not run tests in silent mode ([0c69fdc](https://github.com/northbrookjs/northbrook/commit/0c69fdc))
+* **release:** fix changelog generation ([fc281f8](https://github.com/northbrookjs/northbrook/commit/fc281f8))
+
+
+
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/northbrookjs/northbrook/compare/v4.1.0-northbrook...v4.1.1) (2016-12-23)
+
+
+### Bug Fixes
+
+* **release:** create correct git tag for scoped packages ([580931f](https://github.com/northbrookjs/northbrook/commit/580931f))
+
+
+
+<a name="4.1.0-northbrook"></a>
+# [4.1.0-northbrook](https://github.com/northbrookjs/northbrook/compare/v4.0.4-northbrook...v4.1.0-northbrook) (2016-12-23)
+
+
+### Features
+
+* **helpers:** extract and export packagesToExecute ([e8e6fa4](https://github.com/northbrookjs/northbrook/commit/e8e6fa4))
+* **types:** add Pkg type to exported types ([edc1327](https://github.com/northbrookjs/northbrook/commit/edc1327))
+
+
+
+<a name="4.0.4-northbrook"></a>
+## [4.0.4-northbrook](https://github.com/northbrookjs/northbrook/compare/v4.0.3-northbrook...v4.0.4-northbrook) (2016-12-23)
+
+
+### Bug Fixes
+
+* **northbrook:** correctly resolve already required plugins ([f1c7e6b](https://github.com/northbrookjs/northbrook/commit/f1c7e6b))
+
+
+
+<a name="4.0.3-northbrook"></a>
+## [4.0.3-northbrook](https://github.com/northbrookjs/northbrook/compare/v4.0.2-northbrook...v4.0.3-northbrook) (2016-12-23)
+
+
+### Bug Fixes
+
+* **northbrook:** fix for displaying flags ([44a4a30](https://github.com/northbrookjs/northbrook/commit/44a4a30))
+
+
+
+<a name="4.0.2-northbrook"></a>
+## [4.0.2-northbrook](https://github.com/northbrookjs/northbrook/compare/v4.0.1-northbrook...v4.0.2-northbrook) (2016-12-22)
+
+
+### Bug Fixes
+
+* **release:** improve logging ([886312b](https://github.com/northbrookjs/northbrook/commit/886312b))
+* **release:** use standard git message type ([42d2106](https://github.com/northbrookjs/northbrook/commit/42d2106))
+
+
+
+<a name="4.0.1-northbrook"></a>
+## [4.0.1-northbrook](https://github.com/northbrookjs/northbrook/compare/v4.0.0-northbrook...v4.0.1-northbrook) (2016-12-22)
+
+
+### Bug Fixes
+
+* **release:** allow using comver for release --check ([19e623a](https://github.com/northbrookjs/northbrook/commit/19e623a))
+* **release:** include package.json in commits ([d75fa2e](https://github.com/northbrookjs/northbrook/commit/d75fa2e))
+
+
+
+<a name="4.0.0-northbrook"></a>
+# [4.0.0-northbrook](https://github.com/northbrookjs/northbrook/compare/v3.2.1-northbrook...v4.0.0-northbrook) (2016-12-22)
+
+
+### Bug Fixes
+
+* **bin:** switch back to join ([94b0586](https://github.com/northbrookjs/northbrook/commit/94b0586))
+* **bin:** use require instead of join ([462a34b](https://github.com/northbrookjs/northbrook/commit/462a34b))
+* **commit:** remove unneeded checkForStagedCommits ([7a78b0e](https://github.com/northbrookjs/northbrook/commit/7a78b0e))
+* **commit:** use arrows to show placement ([e3a22ab](https://github.com/northbrookjs/northbrook/commit/e3a22ab))
+* **plugin:** fix imports of plugins ([cb95524](https://github.com/northbrookjs/northbrook/commit/cb95524))
+* **release:** add newline ([d4c7ecd](https://github.com/northbrookjs/northbrook/commit/d4c7ecd))
+* **release:** add the final touches ([88f62ac](https://github.com/northbrookjs/northbrook/commit/88f62ac))
+* **release:** correctly reassign new version ([b8d4e30](https://github.com/northbrookjs/northbrook/commit/b8d4e30))
+* **release:** do not show progress before npm login ([d17a2f2](https://github.com/northbrookjs/northbrook/commit/d17a2f2))
+* **release:** getting closer to a working release ([b3e9462](https://github.com/northbrookjs/northbrook/commit/b3e9462))
+* **release:** improved flow ([3f74466](https://github.com/northbrookjs/northbrook/commit/3f74466))
+* **release:** remove extra log message ([9bfe73c](https://github.com/northbrookjs/northbrook/commit/9bfe73c))
+* **release:** remove listr ([73043ca](https://github.com/northbrookjs/northbrook/commit/73043ca))
+* **release:** remove unused import ([ea270fc](https://github.com/northbrookjs/northbrook/commit/ea270fc))
+* **release:** silence switchToReleaseBranch ([d98ed46](https://github.com/northbrookjs/northbrook/commit/d98ed46))
+* **release:** stop spinner ([20e126f](https://github.com/northbrookjs/northbrook/commit/20e126f))
+
+
+### Features
+
+* **northbrook:** from-scratch reimplementation ([e8f3657](https://github.com/northbrookjs/northbrook/commit/e8f3657))
+* **northbrook:** include northbrook folder ([482db74](https://github.com/northbrookjs/northbrook/commit/482db74))
+* **northbrook:** make check output prettier ([6064257](https://github.com/northbrookjs/northbrook/commit/6064257))
+* **release:** allow usage of comver and semver ([18e692b](https://github.com/northbrookjs/northbrook/commit/18e692b))
+* **release:** format release header ([dedac28](https://github.com/northbrookjs/northbrook/commit/dedac28))
+* **release:** use bold text ([faf9e3c](https://github.com/northbrookjs/northbrook/commit/faf9e3c))
+* **release:** use listr for task list ([b381732](https://github.com/northbrookjs/northbrook/commit/b381732))
+
+
+### BREAKING CHANGES
+
+* northbrook: northbrook.json is now northbrook.js or northbrook.ts. `packages` and `plugins` are the only config options left.
+
+
 
 <a name="3.2.1-northbrook"></a>
 ## [3.2.1-northbrook](https://github.com/northbrookjs/northbrook/compare/v3.2.0-northbrook...v3.2.1-northbrook) (2016-09-21)
