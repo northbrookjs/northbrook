@@ -1,1 +1,0 @@
-export = { name: 'a-testpackage' };
