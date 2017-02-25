@@ -59,7 +59,7 @@
     "tslint": "^4.4.2",
     "typescript": "^2.1.5",
     "validate-commit-msg": "^2.11.1",
-    "wallabify": "0.0.14"
+    "wallabify": "0.0.15"
   },
   "dependencies": {
     "@typed/sequence": "^1.1.0",
