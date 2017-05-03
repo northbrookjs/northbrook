@@ -81,7 +81,7 @@
     "semver": "^5.3.0",
     "simple-spinner": "0.0.5",
     "stdio-mock": "^1.1.0",
-    "ts-node": "^2.0.0",
+    "ts-node": "^3.0.3",
     "typed-colors": "^1.0.0",
     "typed-figures": "^1.0.0",
     "typed-prompts": "^1.5.0"
