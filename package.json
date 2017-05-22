@@ -57,7 +57,7 @@
     "mocha": "^3.2.0",
     "spawn-mock": "^1.0.0",
     "tslint": "^4.4.2",
-    "typescript": "^2.1.5",
+    "typescript": "^2.3.3",
     "validate-commit-msg": "^2.11.1",
     "wallabify": "0.0.14"
   },
